@@ -86,7 +86,7 @@ const Register = () => {
   };
   return (
     <div className="login">
-      <div className="login-sidebar">
+      {/* <div className="login-sidebar">
         <div className="login-sidebar-content">
           <div className="title">
             <Link href={PAGE_HOME}>
@@ -117,19 +117,27 @@ const Register = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div className="login-form">
+      </div> */}
+      <div className="login-form container">
         <AuthCard>
           <div className="login-form-content">
             <div>{/* <h1>1</h1> */}</div>
             <div>
-              <div className="d-flex align-items-center justify-content-end signin-link">
+              <div className="d-flex align-items-center justify-content-between signin-link">
+                <div>
+                <Link href={PAGE_HOME}>
+              <h3 className="headerLogo">Business Directory</h3>
+            </Link>
+                </div>
+                <div>
                 <span>Already have an account?</span>
                 <Link href={PAGE_LOGIN}>
                   <motion.a whileHover={{ scale: 1.1, duration: 0.5 }}>
                     SignIn
                   </motion.a>
                 </Link>
+
+                </div>
               </div>
               <div className="form-content mt-3">
                 <h1>
@@ -268,7 +276,7 @@ const Register = () => {
                     </div>
                   </Form>
                 </div>
-                <Divider>or</Divider>
+                {/* <Divider>or</Divider>
                 <div className="row mt-4">
                   <div className="col-lg-12 OauthBtn">
                     <motion.button
@@ -291,8 +299,8 @@ const Register = () => {
                       <span> Sign up with Facebook</span>
                     </motion.button>
                 </Link>
-                  </div>
                 </div>
+                  </div> */}
               </div>
             </div>
           </div>

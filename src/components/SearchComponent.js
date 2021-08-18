@@ -156,7 +156,7 @@ const SearchComponent = () => {
       onSelect={onSelect}
       onSearch={handleSearch}
     >
-      <Input.Search loading={isloading } size="large" placeholder="input here" enterButton />
+      <Input.Search loading={isloading } size="large" placeholder="Search by companies name" enterButton />
     </AutoComplete>
     </div>
   )

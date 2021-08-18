@@ -38,24 +38,24 @@ const MapComponent = (props) => {
 
 
 
-const setMapSize = (index) => {
+  const setMapSize = (index) => {
 
 
-  try {
+    try {
 
 
-  
 
-    if(typeof window != 'undefined' && index != null){
-          return new window.google.maps.Size( getSize(index),getSize(index))
+    
+      if (typeof window != 'undefined' && index != null) {
+        return new window.google.maps.Size(getSize(index), getSize(index))
+      }
+      return null
+    } catch (error) {
+      console.log(error)
     }
-    return null
-  } catch (error) {
-    console.log(error)
-  }
 
-  
-}
+
+  }
 
   const getSize = (index) => (checkIsIndex(index) == true ? 70 : 40);
 
@@ -69,50 +69,50 @@ const setMapSize = (index) => {
         zoom={14}
         options={defaultOptions}
       >
-        { /* Child components, such as markers, info windows, etc. */ }
+        { /* Child components, such as markers, info windows, etc. */}
         <>
-        {props?.businessList &&
-        props?.businessList.length > 0 &&
-        props?.businessList.map((data, index) => {
-          // console.log(checkIsIndex(index))
-          // console.log(getSize(index))
-          return (
-            <Marker
-              key={index}
-              position={{
-                lat: data.geometry.location.lat,
-                lng: data.geometry.location.lng,
-              }}
-              onClick={(event) => {
-                setSelectedCompany(data);
-              }}
-              animation={2}
-              icon={{
-                url: "/assets/marker.png",
+          {props?.businessList &&
+            props?.businessList.length > 0 &&
+            props?.businessList.map((data, index) => {
+              // console.log(checkIsIndex(index))
+              // console.log(getSize(index))
+              return (
+                <Marker
+                  key={index}
+                  position={{
+                    lat: data.geometry.location.lat,
+                    lng: data.geometry.location.lng,
+                  }}
+                  onClick={(event) => {
+                    setSelectedCompany(data);
+                  }}
+                  animation={2}
+                  icon={{
+                    url: "/assets/marker.png",
 
-                scaledSize:setMapSize(index)
+                    scaledSize: setMapSize(index)
+                  }}
+                />
+              );
+            })}
+          {selectedCompany && (
+            <InfoWindow
+              position={{
+                lat: selectedCompany.geometry.location.lat,
+                lng: selectedCompany.geometry.location.lng,
               }}
-            />
-          );
-        })}
-         {selectedCompany && (
-        <InfoWindow
-          position={{
-            lat: selectedCompany.geometry.location.lat,
-            lng: selectedCompany.geometry.location.lng,
-          }}
-          onCloseClick={() => setSelectedCompany(null)}
-        >
-          <div>
-            <img src={selectedCompany.image} width="100%" height="100" />
-            <Link href={DIRECTORIES_PAGE + "/" + selectedCompany.place_id}>
-              <h5 className="mt-3">{selectedCompany.name}</h5>
-            </Link>
-            <p>{selectedCompany.formatted_address}</p>
-            <p>{selectedCompany.category}</p>
-          </div>
-        </InfoWindow>
-      )}
+              onCloseClick={() => setSelectedCompany(null)}
+            >
+              <div>
+                <img src={selectedCompany.image} width="100%" height="100" />
+                <Link href={DIRECTORIES_PAGE + "/" + selectedCompany.place_id}>
+                  <h5 className="mt-3">{selectedCompany.name}</h5>
+                </Link>
+                <p>{selectedCompany.formatted_address}</p>
+                <p>{selectedCompany.category}</p>
+              </div>
+            </InfoWindow>
+          )}
         </>
       </GoogleMap>
     </LoadScript>

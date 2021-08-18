@@ -4,7 +4,7 @@
     top: 0;
     left: 0;
     height: 100vh;
-    width: 600px;
+    width: 340px;
     background: linear-gradient(
       rgba(0, 64, 143, 0.9),
       rgba(131, 208, 203, 0.7)
@@ -17,21 +17,24 @@
 
     &-content {
       position: absolute;
-      top: 20%;
-      left: 50%;
+      top: 10%;
+      left: 40%;
       color: #fff;
+      padding-right: 5px;
+     
+     
 
       .text-content{
-          margin-top: 50px;
+          margin-top: 30px;
           h4 {
-              font-size: 1rem;
+              font-size: .8rem;
               font-weight: 700;
               color: #fff;
               margin-top: 8px;
           }
     
           p {
-              font-size: .9rem;
+              font-size: .7rem;
               font-weight: 500;
               padding-right: 20px;
           }
@@ -46,10 +49,19 @@
     left: 50%;
     transform: translate(-50%, -50%) !important;
 
+
+
     &-content {
       padding: 50px;
-      display: grid;
-      grid-template-columns: 380px 1fr;
+      // display: grid;
+      // grid-template-columns: 200px 1fr;
+
+      h3 {
+        font-family: "Pacifico", cursive !important;
+        font-size: .9rem;
+        color: #004ba8;
+        cursor: pointer;
+      }
 
       .signin-link {
         span {
@@ -74,12 +86,12 @@
         h1 {
           text-align: center;
           margin: 0 0 16px 0;
-          font-size: 2rem;
+          font-size: 1rem;
           line-height: 1.22;
           font-weight: 700;
           letter-spacing: -0.9px;
           color: #000;
-          margin-bottom: 50px;
+          // margin-bottom: 50px;
         }
 
         h5 {

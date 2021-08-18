@@ -118,7 +118,7 @@ const index = () => {
       <main className="content">
         <section className="content__wrapper">
           <div className="overlay"></div>
-          <div className="banner__text max-width-container px-4">
+          <div className="banner__text container px-4">
             <h2>
               Find Any <strong>Private Company</strong> within Accra Central
               with Ease
@@ -135,7 +135,7 @@ const index = () => {
         </section>
         {/* Categories */}
         <section className="companies ">
-          <div className="max-width-container px-4">
+          <div className="container px-4">
             <div className="companies__title">
               <h5>Private Companies within Accra Central, Ghana</h5>
             </div>
@@ -148,14 +148,14 @@ const index = () => {
               <CardComponent url={`assets/logos/logo6.png`} />
               <CardComponent url={`assets/logos/logo7.png`} />
               <CardComponent url={`assets/logos/logo8.png`} />
-              <CardComponent url={`assets/logos/logo9.png`} />
-              <CardComponent url={`assets/logos/logo10.png`} />
+              {/* <CardComponent url={`assets/logos/logo9.png`} />
+              <CardComponent url={`assets/logos/logo10.png`} /> */}
             </div>
           </div>
         </section>
         {/* How It works */}
         {/* <section>
-          <div className="connection max-width-container px-4">
+          <div className="connection container px-4">
             <div className="connection__text">
              <h5>Connect with your clients</h5>
              <p>Be visible! Obtain new customers and <br /> generate more traffic </p>
@@ -214,13 +214,13 @@ const index = () => {
           </div>
         </section>
         <section className="categories">
-          <div className="categories-title max-width-container d-flex justify-content-between align-items-center px-4">
+          <div className="categories-title container d-flex justify-content-between align-items-center px-4">
             <h5>
               Explore Various Private Businesses <br /> category
             </h5>
             <NavLink href={DIRECTORIES_PAGE} name="View All" isBrowse />
           </div>
-          <div className="categories-buttons max-width-container mt-4">
+          <div className="categories-buttons container mt-4">
             <Categories>
               <a
                 className="activeClass"
@@ -279,7 +279,7 @@ const index = () => {
               </a>
             </Categories>
           </div>
-          <div className=" max-width-container px-5 mt-5">
+          <div className=" max-container px-5 mt-5">
             <BusinessCategories
               currentPage={currentPage}
               onPageChange={onPageChange}

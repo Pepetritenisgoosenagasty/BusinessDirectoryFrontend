@@ -14,21 +14,20 @@ import { BsArrow90DegRight } from "react-icons/bs";
 const DirectionCardWrapper = styled.div`
   position: fixed;
   top: 100px;
-  width: 400px;
+  width: 300px;
   left: 20px;
-  height: 700px;
+  height: 70vh;
   background: #fff;
   overflow: hidden;
   overflow-y: auto;
   z-index: 1;
   padding: 9px 16px;
   border-radius: 6px;
-  -webkit-box-shadow: 0 0 6px rgb(0 0 0 / 20%);
-  box-shadow: 0 0 6px rgb(0 0 0 / 20%);
+  box-shadow: rgb(0 0 0 / 15%) 0px 16px 32px, rgb(0 0 0 / 10%) 0px 3px 8px !important;
 
   h1 {
     color: #053c5e !important;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 700;
   }
 
@@ -57,7 +56,7 @@ const DirectionCardWrapper = styled.div`
   .startingRoute {
     h5 {
       color: #053c5e !important;
-      font-size: 1rem;
+      font-size: .8rem;
       font-weight: 600;
     }
     .start {
@@ -77,7 +76,7 @@ const DirectionCardWrapper = styled.div`
   .endRoute {
     h5 {
       color: #8c2f39 !important;
-      font-size: 1rem;
+      font-size: .8rem;
       font-weight: 600;
     }
 
