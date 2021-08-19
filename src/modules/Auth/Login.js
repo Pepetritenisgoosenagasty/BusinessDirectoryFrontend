@@ -89,7 +89,7 @@ const Login = () => {
 
   return (
     <div className="login">
-      <div className="login-sidebar">
+      {/* <div className="login-sidebar">
         <div className="login-sidebar-content">
           <div className="title">
             <Link href={PAGE_HOME}>
@@ -110,7 +110,7 @@ const Login = () => {
               <p></p>
             </div> */}
 
-            <div className="text-content">
+            {/* <div className="text-content">
               <IoEarthOutline style={{ fontSize: 30 }} />
               <h4>
                 Become known by millions of individuals who are eager to
@@ -128,20 +128,28 @@ const Login = () => {
               </p>
             </div>
           </div>
-        </div>
-      </div>
+      </div> 
+        </div> */}
       <div className="login-form">
         <AuthCard>
           <div className="login-form-content">
             <div>{/* <h1>1</h1> */}</div>
             <div>
-              <div className="d-flex align-items-center justify-content-end signin-link">
+              <div className="d-flex align-items-center justify-content-between signin-link">
+              <div>
+                <Link href={PAGE_HOME}>
+              <h3 className="headerLogo mr-5">Business Directory</h3>
+            </Link>
+                </div>
+                <div>
+
                 <span>Don`t have an account yet?</span>
                 <Link href={PAGE_REGISTER}>
                   <motion.a whileHover={{ scale: 1.1, duration: 0.5 }}>
                     SignUp
                   </motion.a>
                 </Link>
+                </div>
               </div>
               <div className="form-content mt-3">
                 <h1>Login to your account</h1>
@@ -156,7 +164,7 @@ const Login = () => {
                     onFinish={submitForm}
                   >
                     <div className="row">
-                      <div className="col-lg-6 mx-auto">
+                      <div className="col-lg-12 mx-auto">
                         <label>Email</label>
                         <Form.Item
                           name="email"
@@ -173,7 +181,7 @@ const Login = () => {
                     </div>
 
                     <div className="row">
-                      <div className="col-lg-6 mx-auto">
+                      <div className="col-lg-12 mx-auto">
                         <label>Password</label>
                         <Form.Item
                           name="password"
@@ -190,7 +198,7 @@ const Login = () => {
                     </div>
 
                     <div className="row">
-                      <div className="col-lg-6 mx-auto d-flex justify-content-between">
+                      <div className="col-lg-12 mx-auto d-flex justify-content-between">
                         <div>
                           <Form.Item name="remember" valuePropName="checked">
                             <Checkbox>Remember me</Checkbox>
@@ -205,7 +213,7 @@ const Login = () => {
                     </div>
 
                     <div className="row">
-                      <div className="col-lg-6 mx-auto">
+                      <div className="col-lg-12 mx-auto">
                         <Form.Item>
                           <Button  loading={isSubmitting} type="primary" htmlType="submit">
                             SignIn
@@ -215,8 +223,8 @@ const Login = () => {
                     </div>
                   </Form>
                 </div>
-                <div className="row">
-                  <div className="col-lg-6 mx-auto">
+                {/* <div className="row">
+                  <div className="col-lg-12 mx-auto">
                     <Divider>or</Divider>
                   </div>
                 </div>
@@ -247,7 +255,7 @@ const Login = () => {
                     </motion.button>
                    </Link>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

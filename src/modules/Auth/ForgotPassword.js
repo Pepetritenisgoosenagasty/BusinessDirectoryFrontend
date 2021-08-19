@@ -26,7 +26,7 @@ const ForgotPassword = () => {
   }
         return (
             <div className="login">
-              <div className="login-sidebar">
+              {/* <div className="login-sidebar">
                 <div className="login-sidebar-content">
                   <div className="title mt-5 py-5">
                     <Link href={PAGE_HOME}>
@@ -40,17 +40,26 @@ const ForgotPassword = () => {
             </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="login-form">
                 <AuthCard>
                   <div className="login-form-content py-5">
                     <div>{/* <h1>1</h1> */}</div>
                     <div>
-                      <div className="d-flex align-items-center justify-content-end signin-link">
+                      <div className="d-flex align-items-center justify-content-between signin-link">
+                      <div>
+                <Link href={PAGE_HOME}>
+              <h3 className="headerLogo">Business Directory</h3>
+            </Link>
+                </div>
+
+                <div>
+
                         <span>Return to</span>
                         <Link href={PAGE_LOGIN}>
                         <motion.a   whileHover={{ scale: 1.1, duration: 0.5 }}>SignIn</motion.a>
                         </Link>
+                </div>
                       </div>
                       <div className="form-content mt-3">
                         <h5>Reset Your Password</h5>
@@ -58,7 +67,7 @@ const ForgotPassword = () => {
                         <div>
 
                             <div className="row">
-                              <div className="col-lg-6 mx-auto">
+                              <div className="col-lg-12 mx-auto">
                               <p>Please make sure you enter a valid email so you recieve an email with instruction on how to reset your password
 
 </p>
@@ -72,7 +81,7 @@ const ForgotPassword = () => {
                             onFinish={onSubmit}
                           >
                             <div className="row">
-                              <div className="col-lg-6 mx-auto">
+                              <div className="col-lg-12 mx-auto">
                               <label>Email</label>
                                 <Form.Item
                                   name="email"
@@ -89,7 +98,7 @@ const ForgotPassword = () => {
                             </div>
         
                             <div className="row">
-                              <div className="col-lg-6 mx-auto">
+                              <div className="col-lg-12 mx-auto">
                               <p>We`ll send password reset link to your email
 
 </p>
@@ -97,7 +106,7 @@ const ForgotPassword = () => {
                             </div>
         
                             <div className="row">
-                             <div className="col-lg-6 mx-auto">
+                             <div className="col-lg-12 mx-auto">
                              <Form.Item
                              
                             >

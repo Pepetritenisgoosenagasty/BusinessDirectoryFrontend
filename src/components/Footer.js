@@ -4,6 +4,7 @@ const Wrapper = styled.footer`
 text-align: center;
 background: #004ba8;
 color: #fff;
+font-size: .7rem;
 padding: 20px;
 // box-shadow: rgb(0 0 0 / 8%) 0px 1px 12px;
 `

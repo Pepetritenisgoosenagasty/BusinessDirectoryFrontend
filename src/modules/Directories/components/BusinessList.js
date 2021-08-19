@@ -65,7 +65,7 @@ const onSearch = async value => {
             <IoIosArrowBack /> Go Back
           </a>
         </div>
-        <h1>Explore All 300+ Companies</h1>
+        <h1>Explore All 300+ Private Companies</h1>
       </div>
       <div className="row">
      <div className="container px-5 businessSearch">
@@ -93,7 +93,7 @@ const onSearch = async value => {
           />
         ))}
       </div>
-     <div className="text-center py-5">
+     <div className="text-center py-5" style={{ width: '60vw'}}>
       <Pagination current={props.currentPage} onChange={props.onPageChange} pageSize={props.pageSize} showSizeChanger={false} size="small" total={props.list.length} defaultPageSize="10"  hideOnSinglePage={true}  defaultCurrent="1"  />
      </div>
     </div>

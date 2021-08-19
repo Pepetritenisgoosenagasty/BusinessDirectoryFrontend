@@ -33,7 +33,7 @@ const Reviews = (props) => {
                       count={5}
                       // onChange={ratingChanged}
                       value={item.rating}
-                      size={30}
+                      size={20}
                       isHalf={true}
                       emptyIcon={<i className="far fa-star"></i>}
                       halfIcon={<i className="fa fa-star-half-alt"></i>}

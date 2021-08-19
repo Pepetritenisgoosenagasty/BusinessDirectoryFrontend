@@ -1,7 +1,7 @@
 import { DIRECTORIES_PAGE, PAGE_HOME, PAGE_LOGIN, PAGE_REGISTER } from "@/constants/routes";
 import Link from "next/link";
 import { BiGridAlt } from "react-icons/bi";
-import { GoLocation } from "react-icons/go";
+import { GoLocation, GoPlus } from "react-icons/go";
 import { NavLink } from "./ButtonComponent";
 import SearchComponent from "./SearchComponent";
 
@@ -9,7 +9,7 @@ const NavigationMenu = (props) => {
   return (
     <div className={`navigation ${props.show && "nav-white"} ${props.directory && "nav-bar"}`}>
       {/* Navigation Bar */}
-      <section className="navigation__content max-width-container">
+      {/* <section className="navigation__content max-width-container">
         <div className="navigation__content-nav">
           <ul>
             <li>
@@ -64,6 +64,30 @@ const NavigationMenu = (props) => {
             </li>
           </ul>
         </div>
+      </section> */}
+      <section className=" navigation">
+       <div className="navigation__content container">
+       <div className="navigation__brand">
+           <Link href={PAGE_HOME}>
+             <a>Business Directory</a>
+           </Link>
+        </div>
+        <div className="navigation__list">
+          <ul >
+            <li><Link href={PAGE_HOME}><a>Home</a></Link></li>
+            <li><Link href={DIRECTORIES_PAGE}><a>Business Listings</a></Link></li>
+            {/* <li><Link href={PAGE_HOME}><a>Job Careers</a></Link></li> */}
+            <li><Link href={PAGE_HOME}><a>Terms & Conditions</a></Link></li>
+            {/* <li><Link href={PAGE_REGISTER}><a>Contact Us</a></Link></li> */}
+          </ul>
+        </div>
+
+        <div className="navigation__btn">
+         <Link href={PAGE_REGISTER}>
+         <a><GoPlus/> Add Business</a>
+         </Link>
+        </div>
+       </div>
       </section>
     </div>
   );

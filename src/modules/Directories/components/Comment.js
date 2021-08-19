@@ -10,15 +10,15 @@ const { TextArea } = Input;
 const Editor = ({ onChange, onSubmit, submitting, value }) => (
   <>
    <Form.Item name="name">
-       <label>Name</label>
+       <label className="label">Name</label>
       <Input  onChange={onChange} value={value} />
     </Form.Item>
     <Form.Item>
-    <label>Rating</label>   
+    <label className="label">Rating</label>   
     <ReactStars
         count={5}
         // onChange={ratingChanged}
-        size={50}
+        size={20}
         isHalf={true}
         emptyIcon={<i className="far fa-star"></i>}
         halfIcon={<i className="fa fa-star-half-alt"></i>}
@@ -27,7 +27,7 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
         /> 
     </Form.Item>
     <Form.Item name="message">
-    <label>Message</label>
+    <label className="label">Message</label>
       <TextArea  rows={4} onChange={onChange} value={value} />
     </Form.Item>
     <Form.Item>
@@ -83,9 +83,9 @@ const CommentComponent = () => {
 
   return (
     <div>
+
       {comments.length > 0 && <CommentList comments={comments} />}
       <Comment
-       
         content={
           <Editor
             onChange={handleChange}
@@ -95,6 +95,13 @@ const CommentComponent = () => {
           />
         }
       />
+
+<style jsx>{`
+        label  {
+          font-size: .7rem;
+          font-weight: 600;
+        }
+      `}</style>
     </div>
   );
 };

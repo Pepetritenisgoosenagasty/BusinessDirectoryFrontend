@@ -8,6 +8,9 @@ import { FiPhoneCall } from "react-icons/fi";
 import ReactStars from "react-rating-stars-component";
 
 import {  AiOutlineMail } from "react-icons/ai";
+import { Collapse } from 'antd';
+
+const { Panel } = Collapse;
 
 
 
@@ -33,10 +36,14 @@ export const CardComponent = ({ url }) => {
 const Wrapper = styled.div`
   background-color: #fff;
   padding: 30px 40px;
+  width: 350px;
+
+
 
   h5 {
-    font-size: 1.3rem;
+    font-size: 1rem;
     font-weight: 700;
+    color: #000;
   }
 
   h6 {
@@ -45,7 +52,7 @@ const Wrapper = styled.div`
   }
 
   h4 {
-    font-size: 1rem;
+    font-size: .8rem;
     font-weight: 600;
   }
 
@@ -138,6 +145,7 @@ const OverviewWrapper = styled.div`
   // height: 190px ;
   cursor: pointer;
   background: transparent;
+  width: 60vw;
   border-top: 1px solid #eef1f7;
   // border-bottom: 1px solid #EEF1F7;
   padding: 30px 40px;
@@ -153,7 +161,7 @@ const OverviewWrapper = styled.div`
 `;
 
 const ImageContainer = styled.div`
-  width: 300px;
+  width: 400px;
   height: 200px;
 
   img {
@@ -163,8 +171,8 @@ const ImageContainer = styled.div`
   }
 `;
 const ContentContainer = styled.div`
-  width: 300px;
-  margin-left: 20px;
+  width: 100%;
+  margin-left: 10px;
   h5 {
     font-size: 1rem;
     font-weight: 600;
@@ -212,6 +220,20 @@ export const BusinessListCard = ({
           />
         </ImageContainer>
         <ContentContainer>
+            <div className="mr-3" style={{ color: "#1B998B" }}>
+               <ReactStars
+                      count={5}
+                      // onChange={ratingChanged}
+                      value={star}
+                      size={15}
+                      isHalf={true}
+                      emptyIcon={<i className="far fa-star"></i>}
+                      halfIcon={<i className="fa fa-star-half-alt"></i>}
+                      fullIcon={<i className="fa fa-star"></i>}
+                      activeColor="#ffd700"
+                      edit={false}
+                    />
+            </div>
           <h5>
             {name}
             <span className="ml-1">
@@ -219,11 +241,7 @@ export const BusinessListCard = ({
             </span>
           </h5>
           <div className="d-flex align-items-center">
-            <img src="/assets/star-on.png" alt="Picture of rating" width="20" height="20" />
-            <span className="mr-3" style={{ color: "#1B998B" }}>
-              {" "}
-              {star ? star : 0} Rating
-            </span>
+            {/* <img src="/assets/star-on.png" alt="Picture of rating" width="20" height="20" /> */}
             <span>
               <strong>Users Ratings</strong>:{" "}
               {total_ratings ? total_ratings : 0}
@@ -269,14 +287,27 @@ export const BusinessListCard = ({
 
 const AuthCardWrapper = styled.div`
   background: #fff;
-  width: 1400px;
+  max-width: 800px;
+  margin-inline: auto;
   //  height: 700px;
   border-radius: 50px;
   //  box-shadow: 10px 10px 10px rgb(46 54 68 / 3%);
+  box-shadow: rgb(0 0 0 / 15%) 0px 16px 32px, rgb(0 0 0 / 10%) 0px 3px 8px !important;
 `;
 
 // Authentication Page
 export const AuthCard = ({ children }) => {
   return <AuthCardWrapper>{children}</AuthCardWrapper>;
 };
+
+
+export const InfomationCard = ({children, title}) => {
+  return (
+    <Collapse defaultActiveKey={['1']} expandIconPosition="right">
+    <Panel header={title} key="1">
+      {children}
+    </Panel>
+  </Collapse>
+  )
+}
 
