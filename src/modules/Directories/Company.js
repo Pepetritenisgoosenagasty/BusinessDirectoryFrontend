@@ -27,10 +27,12 @@ import { BiPhoneCall } from "react-icons/bi";
 import Reviews from "./components/Reviews";
 import DetailsSidebar from "./components/DetailsSidebar";
 import CommentComponent from "./components/Comment";
-import { Spin } from "antd";
+import { Spinner } from "@/components/Spinner";
 import { useData } from "../../hooks/useDetails";
 import { InfomationCard } from "@/components/CardComponent";
 import Footer from "@/components/Footer";
+import { Results } from "@/components/Result";
+import { PAGE_HOME } from "@/constants/routes";
 
 const Company = () => {
   const router = useRouter();
@@ -48,10 +50,10 @@ const Company = () => {
   //   }
   // };
 
-  if (isLoading) return <Spin size="large" />;
-  if (isError) return <div>Error</div>;
+  if (isLoading) return <Spinner />;
+  if (isError) return  <Results status="500" title="500" subTitle="Sorry, something went wrong." url={PAGE_HOME}/>;
 
-  console.log(details);
+  // console.log(details);
 
   // useEffect(() => {
 

@@ -314,3 +314,18 @@ export const InfomationCard = ({children, title}) => {
   )
 }
 
+const DashboardWrapper = styled.div`
+background: #fff;
+border-radius: 10px;
+height: 200px;
+box-shadow: rgb(0 0 0 / 15%) 0px 16px 32px, rgb(0 0 0 / 10%) 0px 3px 8px !important;
+`
+
+export const DashboardCustomCard = ({children}) => {
+  return(
+    <DashboardWrapper>
+    {children}
+    </DashboardWrapper>
+  )
+}
+

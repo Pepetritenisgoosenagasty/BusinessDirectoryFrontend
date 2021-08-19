@@ -46,9 +46,9 @@ const onSearch = async value => {
 };
 
 
-  function showTotal(total) {
-    return `Total ${total} items`;
-  }
+  // function showTotal(total) {
+  //   return `Total ${total} items`;
+  // }
 
   return (
     <div className="">

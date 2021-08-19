@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import authServices from "src/services/auth.services";
+import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 
 const DashboardLayout = ({ children }) => {
@@ -19,6 +20,7 @@ const DashboardLayout = ({ children }) => {
 
   return (
     <div className="grid-container">
+      <Navbar className="header"/>
       <Sidebar className="sidebar"/>  
       <section className="main">
       {children}
