@@ -30,6 +30,7 @@ import CommentComponent from "./components/Comment";
 import { Spin } from "antd";
 import { useData } from "../../hooks/useDetails";
 import { InfomationCard } from "@/components/CardComponent";
+import Footer from "@/components/Footer";
 
 const Company = () => {
   const router = useRouter();
@@ -135,7 +136,7 @@ const Company = () => {
           </div>
         </section>
       </main>
-
+      <Footer />
       <style jsx>{`
         #close_now,
         #open_now {
