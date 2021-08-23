@@ -35,6 +35,7 @@
     &__logo {
         
         font-family: "Pacifico", cursive !important;
+        color: #004BA8 !important;
     }
 
     // &__date {
@@ -48,7 +49,7 @@
 .sidebar {
     grid-area: sidebar;
     position: fixed;
-    top: 35px;
+    top: 52px;
     left: 0;
     background-color: #fff;
     height: 100%;
@@ -86,6 +87,15 @@
                     svg {
                         fill: #fff !important;
                     }
+                }
+
+                
+            }
+
+            li.activeMenu {
+                background-color: #004BA8; 
+                svg {
+                    fill: #fff !important;
                 }
             }
         }

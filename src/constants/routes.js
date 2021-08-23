@@ -4,6 +4,8 @@ export const PAGE_HOME = '/'
 export const DIRECTORIES_PAGE = '/directories'
 export const PAGE_DIRECTIONS = '/directions'
 export const PAGE_DASHBOARD = '/dashboard'
+export const ADD_BUSINESS = '/dashboard/add-business'
+
 
 
 // Auth

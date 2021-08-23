@@ -12,12 +12,16 @@
 
   &__list {
     a {
-      &:hover {
+     
         &:hover {
 
           border-bottom: 2px solid #004ba8;
         }
-      }
+    
+    }
+
+    .activeClass {
+      border-bottom: 2px solid #004ba8;
     }
   }
 
@@ -412,7 +416,7 @@
 }
 
 .categories {
-  height: 1400px;
+  height: 1100px;
   background-image: url(/assets/symphony.png);
   background-color: #e0e2db;
   background-blend-mode: multiply;
@@ -464,8 +468,11 @@
   }
 
   &-list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    // grid-template-columns: repeat(3, 1fr);
     gap: 30px;
   }
 }
@@ -495,6 +502,26 @@
       font-size: clamp(0.7rem, 1vw + 1rem, .9rem);
     }
   }
+}
+
+.ant-pagination.mini .ant-pagination-item {
+  min-width: 40px !important;
+  height: 40px !important;
+  line-height: 43px !important;
+  font-size: 1rem !important;
+  
+}
+
+.ant-pagination-item-active {
+  box-shadow: rgb(0 0 0 / 15%) 0px 16px 32px, rgb(0 0 0 / 10%) 0px 3px 8px !important;
+}
+
+
+.ant-pagination-item-active {
+  font-weight: 600 !important;
+  background: #fff;
+  border: none !important;
+  border-radius: 20px !important;
 }
 
 

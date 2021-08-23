@@ -19,6 +19,7 @@ const BusinessCategories = (props) => {
             email={list.emails}
             url={DIRECTORIES_PAGE + '/' + list.place_id}
             rating={list.rating}
+            img_url={list.image}
           />
         ))}
       </div>

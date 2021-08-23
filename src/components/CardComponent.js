@@ -1,7 +1,6 @@
 import { BsDot } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
 import styled from "styled-components";
-import { NavLink } from "./ButtonComponent";
 
 import Link from "next/link";
 import { FiPhoneCall } from "react-icons/fi";
@@ -9,6 +8,7 @@ import ReactStars from "react-rating-stars-component";
 
 import {  AiOutlineMail } from "react-icons/ai";
 import { Collapse } from 'antd';
+import { HiOutlineMail } from "react-icons/hi";
 
 const { Panel } = Collapse;
 
@@ -35,15 +35,26 @@ export const CardComponent = ({ url }) => {
 
 const Wrapper = styled.div`
   background-color: #fff;
-  padding: 30px 40px;
-  width: 350px;
+  // padding: 30px 40px;
+  width: 300px;
+  height: 300px;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+
+  &:hover {
+    .company-info {
+      height: 60%;
+    }
+  }
 
 
 
   h5 {
-    font-size: 1rem;
+    font-size: .8rem;
     font-weight: 700;
-    color: #000;
+    color: #fff;
+    padding-bottom: 10px;
   }
 
   h6 {
@@ -62,68 +73,84 @@ const Wrapper = styled.div`
   }
 
   p {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     font-weight: 500;
+    color: #fff;
   }
+
+  .company-pic {
+    img{
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+  
+    }
+  }
+
+  .company-info {
+    height: 21%;
+    border-radius: 12px;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: all .3s ease;
+  }
+
+  .linkBtn {
+    a {
+      text-decoration: none;
+      font-size: .7rem;
+      padding: 5px 10px;
+      background-color: transparent;
+      border: 1px solid #fff;
+      color: #fff;
+      border-radius: 20px;
+      
+
+      &:hover {
+        background-color: #fff;
+        border: 1px solid transparent;
+        color: #004ba8;
+      }
+    }
+
+  }
+
+
 `;
 
 const Badge = styled.span`
+position: absolute;
+top: 10px;
+left: 10px;
   text-align: left;
-  padding: 10px 15px;
-  background-color: #004ca836;
-  color: #004ba8;
-  border-radius: 5px;
+  padding:5px 10px;
+  background-color: #004ba8;
+  color: #fff;
+  border-radius: 50px;
   font-size: 0.7rem;
   font-weight: 500;
 `;
-export const CategoriesCard = ({
-  category,
-  name,
-  location,
-  logo,
-  business_status,
-  phone,
-  email,
-  url,
-  rating
-}) => {
+export const CategoriesCard = (props) => {
+  console.log(props)
   return (
     <Wrapper>
-      <div>
-        <Badge>
-          {/* <BsDot style={{ fontSize: 50 }} /> */}
-          <span>{category}</span>
-        </Badge>
-      </div>
-      <div className="mt-3">
-        <h5>{name}</h5>
-      </div>
-      <div className="mt-3">
-        <h6>
-          <GoLocation style={{ fontSize: 17, color: "#ffc400" }} /> {location}
-        </h6>
-      </div>
-      <div className="logo mt-4">
-        <span className="mr-3">
-          <img src={logo} width="50" />
-        </span>
-        <h4>Business Status: {business_status}</h4>
-      </div>
-      <div className="mt-2 d-flex justify-content-between align-items-center">
-        <div>
-          <p>Phone #: {phone}</p>
-          <p>Email: {email ? email : "N/A"}</p>
-        </div>
-        <div>
-          <img src="/assets/claimed.jpeg" width="60" />
-        </div>
-      </div>
-      <div>
+      <div className="company-pic">
+        <img src={props.img_url} />
+        <div className="company-info px-2 py-2">
         <ReactStars
           count={5}
           // onChange={ratingChanged}
-          value={rating}
-          size={30}
+          value={props.rating}
+          size={15}
           isHalf={true}
           emptyIcon={<i className="far fa-star"></i>}
           halfIcon={<i className="fa fa-star-half-alt"></i>}
@@ -131,11 +158,25 @@ export const CategoriesCard = ({
           activeColor="#ffd700"
           edit={false}
         />
-      </div>
-      <div className="mt-3">
         <div>
-          <NavLink href={url} name="Show More" isRegisterLink />
+        <h5>{props.name}</h5>
+          <p><GoLocation style={{ fontSize: 15, color: "#ffc400" }} /> {props.location}</p>
+          <p><FiPhoneCall style={{ fontSize: 15, color: "#ffc400" }}/> Phone #: {props.phone}</p>
+          <p><HiOutlineMail style={{ fontSize: 15, color: "#ffc400" }}/> Email: {props.email ? props.email : "N/A"}</p>
         </div>
+        <div className="mt-2 linkBtn">
+          {/* <NavLink href={props.url} name="Show More" isRegisterLink /> */}
+          <Link href={props.url}>
+          <a>Show More</a>
+        </Link>
+      </div>
+      </div>
+      </div>
+      <div>
+        <Badge>
+          {/* <BsDot style={{ fontSize: 50 }} /> */}
+          <span>{props.category}</span>
+        </Badge>
       </div>
     </Wrapper>
   );
@@ -317,7 +358,7 @@ export const InfomationCard = ({children, title}) => {
 const DashboardWrapper = styled.div`
 background: #fff;
 border-radius: 10px;
-height: 200px;
+// height: 200px;
 box-shadow: rgb(0 0 0 / 15%) 0px 16px 32px, rgb(0 0 0 / 10%) 0px 3px 8px !important;
 `
 

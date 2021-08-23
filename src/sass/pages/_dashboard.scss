@@ -1,5 +1,9 @@
 .dashboard {
     &__text {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
         h5 {
             font-size: 1.5rem;
             font-weight: 500;
@@ -10,6 +14,17 @@
         p {
            font-size: .7rem;
            color: #707070 !important;
+        }
+
+        .addBtn {
+            button {
+                font-size: .7rem;
+                padding: 10px 15px;
+                background-color: #004BA8;
+                color: #fff;
+                border: none;
+                border-radius: 10px;
+            }
         }
     }
 }

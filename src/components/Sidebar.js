@@ -1,5 +1,5 @@
 import { AiOutlineHome } from "react-icons/ai";
-import { RiDashboardLine } from "react-icons/ri";
+import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import { VscSettings } from "react-icons/vsc";
 import { RiProfileLine } from "react-icons/ri";
 import { AiOutlineMessage } from "react-icons/ai";
@@ -11,8 +11,8 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { performUserLogout } from "src/redux/features/authSlice";
 
-const Sidebar = () => {
 
+const Sidebar = () => {
     const dispatch = useDispatch();
     const router = useRouter();
   
@@ -28,7 +28,7 @@ const Sidebar = () => {
       <section className="sidebar__content">
         <ul className="items1">
           <Tooltip placement="right" title="Dashboard">
-            <li>
+            <li className="activeMenu">
               <a>
                 <AiOutlineHome />
               </a>
@@ -37,7 +37,7 @@ const Sidebar = () => {
           <Tooltip placement="right" title="Business Lists">
           <li>
             <a>
-              <RiDashboardLine />
+              <AiOutlineAppstoreAdd />
             </a>
           </li>
           </Tooltip>
