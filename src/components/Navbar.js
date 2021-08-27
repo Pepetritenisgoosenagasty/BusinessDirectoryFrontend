@@ -1,4 +1,4 @@
-import { PAGE_DASHBOARD } from "@/constants/routes";
+import { PAGE_CHANGE_PASSWORD, PAGE_DASHBOARD, PAGE_PROFILE } from "@/constants/routes";
 import Link from "next/link";
 import { Menu, Dropdown, message } from "antd";
 import { DownOutlined } from "@ant-design/icons";
@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { performUserLogout } from "src/redux/features/authSlice";
 import { Avatar, Image } from "antd";
+import { userData } from "src/hooks/useLoggInUser";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -24,17 +25,21 @@ const Navbar = () => {
 
   let { pathname } = router;
 
+  const { user, isLoading, isError } = userData();
+
+  // console.log(user)
+
   const menu = (
     <Menu>
       <Menu.Item key="1">
-        <Link href="#">
+        <Link href={PAGE_PROFILE + "/" + `${user?.id}`}>
           <a>
             <CgProfile style={{ fontSize: 14 }} /> Profile
           </a>
         </Link>
       </Menu.Item>
       <Menu.Item key="2">
-        <Link href="#">
+        <Link href={PAGE_CHANGE_PASSWORD + "/" + `${user?.id}`}>
           <a>
             <FiLock className="" style={{ fontSize: 14 }} /> Change Password
           </a>
@@ -74,13 +79,13 @@ const Navbar = () => {
                 backgroundColor: "#fde3cf",
               }}
             >
-              U
+              ED
             </Avatar>
             <a
               className="ant-dropdown-link ml-2"
               onClick={(e) => e.preventDefault()}
             >
-              adjalokoedward@gmail.com <DownOutlined />
+             {user?.email} <DownOutlined />
             </a>
             </div>
           </Dropdown>

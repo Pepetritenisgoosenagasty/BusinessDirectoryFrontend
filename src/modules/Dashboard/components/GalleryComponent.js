@@ -1,4 +1,4 @@
-import { Form, Input, Button, Select, Tag } from "antd";
+import { Form, Input } from "antd";
 import { Upload, message } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 
@@ -41,14 +41,10 @@ const GalleryComponent = () => {
           {/* <label>
               Business Name<sup className="text-danger">*</sup>
             </label> */}
-          <Form.Item
+          {/* <Form.Item
             name="images"
-            rules={[
-              {
-                required: true,
-              },
-            ]}
-          >
+            
+          > */}
             <Dragger {...props}>
               <p className="ant-upload-drag-icon">
                 <InboxOutlined />
@@ -61,7 +57,7 @@ const GalleryComponent = () => {
                 uploading company data or other bad images
               </p>
             </Dragger>
-          </Form.Item>
+          {/* </Form.Item> */}
         </div>
       </div>
 
@@ -70,11 +66,7 @@ const GalleryComponent = () => {
           <label>Video URL</label>
           <Form.Item
             name="video"
-            rules={[
-              {
-                required: true,
-              },
-            ]}
+            
           >
             <Input placeholder="https://" />
           </Form.Item>

@@ -1,40 +1,14 @@
 import { Form, Input, Button, Select, Tag } from "antd";
+import { useCategories } from "src/hooks/useGetCategories";
+
 const { Option } = Select;
 const { TextArea } = Input;
 
-const options = [
-  { value: "gold" },
-  { value: "lime" },
-  { value: "green" },
-  { value: "cyan" },
-];
+
 
 const AboutContent = () => {
-  const children = [];
-  for (let i = 10; i < 36; i++) {
-    children.push(
-      <Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>
-    );
-  }
 
-  function tagRender(props) {
-    const { label, value, closable, onClose } = props;
-    const onPreventMouseDown = (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-    };
-    return (
-      <Tag
-        color={value}
-        onMouseDown={onPreventMouseDown}
-        closable={closable}
-        onClose={onClose}
-        style={{ marginRight: 3 }}
-      >
-        {label}
-      </Tag>
-    );
-  }
+  const { details, isLoading, isError} = useCategories()
 
   return (
     <div className="addForm container-fluid">
@@ -53,6 +27,7 @@ const AboutContent = () => {
             Business Name<sup className="text-danger">*</sup>
           </label>
           <Form.Item
+          
             name="name"
             rules={[
               {
@@ -75,8 +50,10 @@ const AboutContent = () => {
               },
             ]}
           >
-            <Select mode="multiple" allowClear style={{ width: "100%" }}>
-              {children}
+            <Select mode="multiple" allowClear style={{ width: "100%", borderRadius: 7 }}>
+              {details?.map((item, index )=> (
+                <Option key={index + 1}>{item.category}</Option>
+              ))}
             </Select>
           </Form.Item>
         </div>
@@ -85,44 +62,17 @@ const AboutContent = () => {
       <div className="row">
         <div className="col-lg-12 col-md-12 col-sm-12">
           <label>
-            Description<sup className="text-danger">*</sup>
+            Description
           </label>
           <Form.Item
             name="discription"
-            rules={[
-              {
-                required: true,
-              },
-            ]}
+            
           >
             <TextArea
               className="custom"
               style={{
                 height: 100,
               }}
-            />
-          </Form.Item>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-lg-12 col-md-12 col-sm-12">
-          <label>
-            Tags<sup className="text-danger">*</sup>
-          </label>
-          <Form.Item
-            name="tags"
-            rules={[
-              {
-                required: true,
-              },
-            ]}
-          >
-            <Select
-              mode="multiple"
-              showArrow
-              tagRender={tagRender}
-              style={{ width: "100%" }}
-              options={options}
             />
           </Form.Item>
         </div>

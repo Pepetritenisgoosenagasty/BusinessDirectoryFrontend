@@ -16,11 +16,20 @@ class AuthService {
       ...data,
     });
   }
+
+  requestRegister(path,data) {
+    return axios.post(this.domain + path, data, {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+  }
+
   getHeaders() {
     return {
       "Content-Type": "application/json",
       Accept: "application/json",
-      // Authorization: `Bearer ${this.getToken()}`,
+      Authorization: `Bearer ${this.getToken()}`,
     };
   }
 

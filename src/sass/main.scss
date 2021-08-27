@@ -294,6 +294,10 @@ input {
 //     }
 // }
 
+.ant-checkbox + span {
+    font-size: .7rem !important;
+}
+
 .steps-action {
     display: flex;
     justify-content: space-between;
@@ -303,6 +307,7 @@ input {
         font-size: .7rem;
         font-weight: 600;
         border: none !important;
+        box-shadow: 0 0 8px -4px rgb(0 0 0 / 50%);
 
     } 
     .ant-btn-primary {
@@ -311,7 +316,7 @@ input {
 }
 
 .ant-upload.ant-upload-drag  {
-    height: 300px !important;
+    // height: 300px !important;
     border: 2px dashed #004ba8 !important;
 }
 
@@ -331,6 +336,174 @@ input {
 .ant-upload.ant-upload-drag p.ant-upload-hint {
     font-size: .7rem !important;
 }
+
+.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+ border-radius: 7px !important;
+}
+
+.ant-picker-input {
+    ::-webkit-input-placeholder {
+        font-size: .7rem !important;
+    }
+}
+
+.ant-form-item-explain.ant-form-item-explain-error {
+    font-size: .7rem !important;
+}
+
+.ant-table {
+    font-size: .7rem !important;
+} 
+
+.ant-pagination-prev .ant-pagination-item-link, .ant-pagination-next .ant-pagination-item-link {
+    border: none !important;
+}
+
+.review {
+    // .ant-input-group {
+    //     border-radius: 50px !important;
+    // }
+
+    .ant-input-group > .ant-input:first-child, .ant-input-group-addon:first-child {
+        border-top-left-radius: 60px !important;
+        border-bottom-left-radius: 60px !important;
+
+        &:focus {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+    }
+
+    .ant-input-search > .ant-input-group > .ant-input-group-addon:last-child .ant-input-search-button {
+    
+        border-radius: 0 15px 15px 0 !important;
+
+    }
+    .ant-btn > .anticon {
+        line-height: 2 !important;
+    }
+
+    .ant-btn-primary {
+       
+        background: #004ba8 !important;
+        border-color: #004ba8 !important;
+    }
+
+    .ant-input::placeholder {
+        font-size: .7rem;
+        padding-left: 10px;
+    }
+}
+
+.ant-modal-content {
+    border-radius: 15px !important;
+
+}
+
+.ant-modal-header {
+    border-radius: 15px 15px 0 0 !important;
+
+    .ant-modal-title {
+        font-size: .8rem !important;
+        font-weight: 600 !important;
+
+    }
+}
+.hidden { display: none; }
+
+.ant-radio-wrapper {
+    font-size: .7rem !important;
+}
+
+.site-calendar-demo-card {
+    // width: 300px;
+    height: 352px;
+    border: none !important;
+    border-radius: 2px;
+    
+    
+    .ant-picker-calendar-header {
+        .ant-select {
+            span {
+                font-size: .7rem !important;
+            }
+        }
+        .ant-radio-group{
+           label {
+            font-size: .7rem !important;
+           }
+
+        }
+
+    }
+
+    .ant-picker-calendar {
+        font-size: .7rem !important;
+    }
+  }
+
+  .container-d0-1-2-6 {
+    box-shadow: rgb(0 0 0 / 15%) 0px 16px 32px, rgb(0 0 0 / 10%) 0px 3px 8px !important;
+
+     height: 230px;
+        .rw-today {
+            font-size: .8rem !important;   
+    }
+
+    .main-d1-1-2-7 {
+        border-radius: 10px 10px 0px 0px !important;
+    }
+
+    .daysPanel-1-2-21 {
+        font-size: .7rem !important;
+        border-radius: 0px 0px 10px 10px !important;
+        box-shadow: rgb(0 0 0 / 15%) 0px 16px 32px, rgb(0 0 0 / 10%) 0px 3px 8px !important;
+    
+    }
+  }
+
+.changePassword {
+    .ant-btn-primary{
+         width: 100%;
+         height: 40px;
+         border: 1px solid #004ba8 !important;
+         color: #004ba8 !important;
+         border-radius: 10px;
+         background: #fff !important;
+         transition: all .3s ease;
+
+         &:hover {
+            border: 1px solid transparent !important;
+            color: #fff !important;
+            background: #004ba8 !important;
+         }
+     }
+ }
+
+ .ant-upload.ant-upload-select-picture-card {
+    width: 160px !important;
+    height: 166px !important;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    text-align: center;
+    vertical-align: top;
+    background-color: #fff !important;
+    border: none !important;
+    border-radius: 50px !important;
+ }
+
+ .statistics {
+    height: 170px;
+ }
+
+ .header-1-2-3 {
+     font-size: .8rem !important;
+ }
+
+ .current-1-2-9 {
+    font-size: 30px !important;
+}
+  
 @import './mediaQueries/labtops';
 @import './mediaQueries/mobile';
 @import './mediaQueries/tablets';

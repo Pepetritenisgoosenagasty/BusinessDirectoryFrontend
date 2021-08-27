@@ -1,8 +1,14 @@
 import MapComponent from "@/components/Map";
-import { Form, Input, Button, Select, Tag } from "antd";
+import { Form, Input, Select } from "antd";
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
+import { useState } from "react";
+
 const { Option } = Select;
 
 const ContactComponents = () => {
+  const [value, setValue] = useState();
+
   return (
     <div className="addForm container-fluid">
       <div>
@@ -57,7 +63,14 @@ const ContactComponents = () => {
                   },
                 ]}
               >
-                <Input />
+                <PhoneInput
+                  international
+                  countryCallingCodeEditable={false}
+                  defaultCountry="GH"
+                  value={value}
+                  onChange={setValue}
+                  maxLength={17}
+                />
               </Form.Item>
             </div>
             <div className="col-12">
@@ -72,20 +85,16 @@ const ContactComponents = () => {
                   },
                 ]}
               >
-                <Input placeholder="info@example.com" />
+                <Input type="email" placeholder="info@example.com" />
               </Form.Item>
             </div>
             <div className="col-12">
               <label>
-                Business Website<sup className="text-danger">*</sup>
+                Business Website
               </label>
               <Form.Item
                 name="website"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
+               
               >
                 <Input placeholder="https://" />
               </Form.Item>
@@ -97,8 +106,8 @@ const ContactComponents = () => {
           <label>
             Business Address<sup className="text-danger">*</sup>
           </label>
-          <div style={{ width: '100%', height: '290px'}}>
-             <MapComponent/>
+          <div style={{ width: "100%", height: "290px" }}>
+            <MapComponent />
           </div>
         </div>
       </div>
