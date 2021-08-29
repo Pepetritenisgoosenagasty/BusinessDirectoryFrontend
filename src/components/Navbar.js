@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { performUserLogout } from "src/redux/features/authSlice";
 import { Avatar, Image } from "antd";
 import { userData } from "src/hooks/useLoggInUser";
+import { formatDate } from "@/constants/DateFormat";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -67,7 +68,7 @@ const Navbar = () => {
             <GoCalendar />
           </span>
           <span className="ml-2 mt-3">
-            Today <strong>August 29</strong>
+            Today, <strong>{ formatDate(Date.now()) }</strong>
           </span>
         </div>
         <div className="header__dropdown">

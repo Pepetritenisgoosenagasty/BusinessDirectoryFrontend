@@ -26,14 +26,11 @@ const GalleryComponent = () => {
   };
 
   return (
-    <div className="addForm container-fluid">
+    <div className="addForm container">
       <div>
         <h5>Upload Images</h5>
         <p>
-          We are not responsible for any damages caused by the use of this
-          website, or by posting business listings here. Please use our site at
-          your own discretion and exercise good judgement as well as common
-          sense when advertising business here.
+        Input field with <code>*</code> on lable means field is required.
         </p>
       </div>
       <div className="row mt-3">
@@ -41,10 +38,10 @@ const GalleryComponent = () => {
           {/* <label>
               Business Name<sup className="text-danger">*</sup>
             </label> */}
-          {/* <Form.Item
+          <Form.Item
             name="images"
             
-          > */}
+          > 
             <Dragger {...props}>
               <p className="ant-upload-drag-icon">
                 <InboxOutlined />
@@ -56,14 +53,15 @@ const GalleryComponent = () => {
                 Support for a single or bulk upload. Strictly prohibit from
                 uploading company data or other bad images
               </p>
+              <em>(Only *.jpeg and *.png images will be accepted)</em>
             </Dragger>
-          {/* </Form.Item> */}
+          </Form.Item>
         </div>
       </div>
 
       <div className="row">
         <div className="col-lg-12 col-md-12 col-sm-12">
-          <label>Video URL</label>
+          <label>Video URL <small>(Optional)</small></label>
           <Form.Item
             name="video"
             
@@ -83,6 +81,7 @@ const GalleryComponent = () => {
         label,
         p {
           font-size: 0.7rem;
+          font-weight: 600;
         }
       `}</style>
     </div>

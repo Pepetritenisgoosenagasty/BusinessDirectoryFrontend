@@ -9,37 +9,43 @@ import HoursComponent from "../../components/HoursComponent";
 import SocialComponent from "../../components/SocialComponent";
 import StepForm from "../StepForm";
 
-const { Step } = Steps;
-
-const steps = [
-  {
-    key: 1,
-    title: "About Business",
-    content: <AboutContent />
-  },
-  {
-    key: 2,
-    title: "Business Contact",
-    content: <ContactComponents />,
-  },
-  {
-    key: 3,
-    title: "Gallery",
-    content: <GalleryComponent />,
-  },
-  {
-    key: 4,
-    title: "Social Media Handles",
-    content: <SocialComponent />,
-  },
-  {
-    key: 5,
-    title: "Opening Hours",
-    content: <HoursComponent />,
-  },
-];
 
 const Add = () => {
+  const { Step } = Steps;
+  const [form] = Form.useForm();
+
+  let inputData = form;
+
+
+  
+  
+  const steps = [
+    {
+      key: 1,
+      title: "About Business",
+      content: <AboutContent />
+    },
+    {
+      key: 2,
+      title: "Business Contact",
+      content: <ContactComponents inputData={inputData} />,
+    },
+    {
+      key: 3,
+      title: "Gallery",
+      content: <GalleryComponent />,
+    },
+    {
+      key: 4,
+      title: "Social Media Handles",
+      content: <SocialComponent />,
+    },
+    {
+      key: 5,
+      title: "Opening Hours",
+      content: <HoursComponent />,
+    },
+  ];
   const [current, setCurrent] = useState(0);
 
   const next = () => {
@@ -59,7 +65,7 @@ const Add = () => {
   return (
     <>
       <div className="container-fluid content py-5">
-     <Form  onFinish={handleFinish}>
+     <Form form={form}  onFinish={handleFinish}>
         <div className="row">
           <StepForm  steps={steps}/>
           {/* <div className="col-12">

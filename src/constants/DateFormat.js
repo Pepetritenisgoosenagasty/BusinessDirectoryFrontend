@@ -6,7 +6,7 @@ dayjs.extend(localizedFormat)
 const formatDate = (date) => {
     try {
         if(date != null){
-            return dayjs(date).format('DD-MM-YYYY')
+            return dayjs(date).format('MMMM, D')
         }
 
         return ''

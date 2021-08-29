@@ -34,3 +34,4 @@ export const URL_REGISTER = "auth/local/register";
 export const URL_FORGOT_PASSWORD = "auth/forgot-password";
 export const URL_LOGGEDIN_USER = "users/me";
 export const URL_UPDATE_USER = "users/";
+export const URL_RESET_PASSWORD = "auth/reset-password"

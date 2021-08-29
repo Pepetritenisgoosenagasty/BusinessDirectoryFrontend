@@ -45,8 +45,10 @@ const dispatch = useDispatch()
 
 
    form.setFieldsValue({
+     picture: user?.picture,
     firstname: user?.firstname,
     lastname: user?.lastname,
+    gender: user?.gender,
     email: user?.email,
     username: user?.username,
     phone_number: user?.phone_number
@@ -57,7 +59,7 @@ const dispatch = useDispatch()
 
    const onFinish = (values) => {
 
-    console.log(values)
+    // console.log(values)
       
     try {
 
@@ -72,7 +74,7 @@ const dispatch = useDispatch()
     
     
         dispatch(
-          performUpdate(URL_UPDATE_USER, user['id'], new_formdata)
+          performUpdate(URL_UPDATE_USER +`${user.id}`, new_formdata)
         ).finally(() => {
           setIsloadingSubmit(false)
         });

@@ -2,22 +2,62 @@ import MapComponent from "@/components/Map";
 import { Form, Input, Select } from "antd";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { districts } from "@/constants/Districts";
+// import { Marker } from "@react-google-maps/api";
+import useGetUserLocation from "src/hooks/useGetUserLocation";
+// import { Marker } from "@react-google-maps/api";
 
 const { Option } = Select;
 
-const ContactComponents = () => {
+
+
+
+const ContactComponents = (props) => {
   const [value, setValue] = useState();
+  const [data, setData] = useState({})
+  
+  const useLocation = useGetUserLocation();
+
+  useEffect(() => {
+    setData({...useLocation})
+  }, [useLocation])
+
+props.inputData?.setFieldsValue({
+  lat: data?.lat,
+  lng: data?.lng
+})
+
+
+ //    Marker
+//  const MarkerContent = () => {
+//   const position = {
+//     lat: data?.lat,
+//     lng: data?.lng,
+//   };
+
+//   return (
+//     <>
+//       <Marker
+//         position={position}
+//         animation={google.maps.Animation.BOUNCE}
+//         icon={{
+//           url: "https://img.icons8.com/glyph-neue/64/000000/marker.png",
+//           scaledSize: new window.google.maps.Size(80, 80),
+//         }}
+//       />
+//     </>
+//   );
+// };
+
+
 
   return (
     <div className="addForm container-fluid">
       <div>
-        <h5>Contact Info</h5>
+        <h5>Business Contact Information</h5>
         <p>
-          We are not responsible for any damages caused by the use of this
-          website, or by posting business listings here. Please use our site at
-          your own discretion and exercise good judgement as well as common
-          sense when advertising business here.
+         Input field with <code>*</code> on lable means field is required.
         </p>
       </div>
       <div className="row mt-3">
@@ -25,10 +65,10 @@ const ContactComponents = () => {
           <div className="row">
             <div className="col-12">
               <label>
-                Business Region<sup className="text-danger">*</sup>
+               City<sup className="text-danger">*</sup>
               </label>
               <Form.Item
-                name="region"
+                name="district"
                 rules={[
                   {
                     required: true,
@@ -45,10 +85,23 @@ const ContactComponents = () => {
                       .indexOf(input.toLowerCase()) >= 0
                   }
                 >
-                  <Option value="...">...</Option>
-                  <Option value="...">...</Option>
-                  <Option value="...">...</Option>
+                  {
+                    districts.map((item, index )=> (
+                      <Option key={index} value={item}>{item}</Option>
+
+                    ))
+                  }
                 </Select>
+              </Form.Item>
+            </div>
+            <div className="col-12">
+              <label>
+                Address
+              </label>
+              <Form.Item
+                name="address"
+              >
+               <Input placeholder="eg. Naa Adjeley Street 435"/>
               </Form.Item>
             </div>
             <div className="col-12">
@@ -75,7 +128,7 @@ const ContactComponents = () => {
             </div>
             <div className="col-12">
               <label>
-                Business Email<sup className="text-danger">*</sup>
+                Email<sup className="text-danger">*</sup>
               </label>
               <Form.Item
                 name="email"
@@ -90,7 +143,7 @@ const ContactComponents = () => {
             </div>
             <div className="col-12">
               <label>
-                Business Website
+                Website
               </label>
               <Form.Item
                 name="website"
@@ -104,11 +157,38 @@ const ContactComponents = () => {
 
         <div className="col-lg-6 col-md-12 col-sm-12">
           <label>
-            Business Address<sup className="text-danger">*</sup>
+            Your Current Location
           </label>
           <div style={{ width: "100%", height: "290px" }}>
-            <MapComponent />
+            <MapComponent> 
+              {/* <MarkerContent /> */}
+            </MapComponent>
           </div>
+
+        <div className="row mt-4">
+        <div className="col-6">
+              <label>
+                Latitude
+              </label>
+              <Form.Item
+                name="lat"
+               
+              >
+                <Input  disabled/>
+              </Form.Item>
+            </div>
+            <div className="col-6">
+              <label>
+                Longitude
+              </label>
+              <Form.Item
+                name="lng"
+               
+              >
+                <Input  disabled/>
+              </Form.Item>
+            </div>
+        </div>
         </div>
       </div>
       <style jsx>{`
@@ -121,6 +201,7 @@ const ContactComponents = () => {
         label,
         p {
           font-size: 0.7rem;
+          font-weight: 600;
         }
       `}</style>
     </div>

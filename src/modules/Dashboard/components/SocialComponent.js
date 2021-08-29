@@ -6,16 +6,13 @@ const SocialComponent = () => {
         <div>
           <h5>Social Media</h5>
           <p>
-            We are not responsible for any damages caused by the use of this
-            website, or by posting business listings here. Please use our site at
-            your own discretion and exercise good judgement as well as common
-            sense when advertising business here.
+          Input field with <code>*</code> on lable means field is required.
           </p>
         </div>
         <div className="row mt-3">
           <div className="col-lg-6 col-md-12 col-sm-12">
             <label>
-                LinkedIn Profile URL
+                LinkedIn Profile URL <small>(Optional)</small>
               </label>
             <Form.Item
               name="linkedin"
@@ -25,7 +22,7 @@ const SocialComponent = () => {
           </div>
           <div className="col-lg-6 col-md-12 col-sm-12">
             <label>
-                Facebook Profile URL
+                Facebook Profile URL <small>(Optional)</small>
               </label>
             <Form.Item
               name="facebook"
@@ -37,7 +34,7 @@ const SocialComponent = () => {
         <div className="row">
           <div className="col-lg-6 col-md-12 col-sm-12">
             <label>
-                Twitter Profile URL
+                Twitter Profile URL <small>(Optional)</small>
               </label>
             <Form.Item
               name="twitter"
@@ -47,7 +44,7 @@ const SocialComponent = () => {
           </div>
           <div className="col-lg-6 col-md-12 col-sm-12">
             <label>
-                Youtube URL
+                Youtube URL <small>(Optional)</small>
               </label>
             <Form.Item
               name="youtube"
@@ -67,6 +64,7 @@ const SocialComponent = () => {
           label,
           p {
             font-size: 0.7rem;
+            font-weight: 600;
           }
         `}</style>
       </div>

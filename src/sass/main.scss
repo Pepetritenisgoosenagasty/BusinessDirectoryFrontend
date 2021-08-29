@@ -503,6 +503,10 @@ input {
  .current-1-2-9 {
     font-size: 30px !important;
 }
+
+.ant-input[disabled] {
+    color: #000 !important;
+}
   
 @import './mediaQueries/labtops';
 @import './mediaQueries/mobile';

@@ -7,7 +7,8 @@ const HoursComponent = () => {
     return (
         <div className="addForm container-fluid">
         <div>
-          <h5>Opening Hours</h5>
+          <h5>Business Opening Hours</h5>
+         <p> Input field with <code>*</code> on lable means field is required.</p>
           <p>Example: 08.00am - 5.00pm or 08.00 - 17.00</p>
         </div>
         <div className=" mt-3">
@@ -37,6 +38,7 @@ const HoursComponent = () => {
           label,
           p {
             font-size: 0.7rem;
+            font-weight: 600;
           }
         `}</style>
       </div>

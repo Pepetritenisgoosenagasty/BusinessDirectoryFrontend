@@ -71,7 +71,17 @@ const Register = () => {
         console.log(error);
       }
 
-    } else {
+    } else if(values.password.length < 6) {
+      setIsSubmitting(false);
+      dispatch(
+        enqueueSnackbar({
+          message: "Password must be more than 6 characters",
+          options: {
+            variant: "error",
+          },
+        })
+      );
+    } else  {
       setIsSubmitting(false);
       dispatch(
         enqueueSnackbar({
