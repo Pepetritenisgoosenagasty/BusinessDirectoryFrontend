@@ -4,6 +4,8 @@ import { GOOGLE_MAP_API_KEY } from '@/constants/global';
 import Link from 'next/link';
 import { DIRECTORIES_PAGE } from '@/constants/routes';
 import MapStyle from './mapStyle';
+import { FaMapMarkerAlt } from 'react-icons/fa';
+import ReactStars from "react-rating-stars-component";
 
 const containerStyle = {
   width: '100%',
@@ -39,13 +41,7 @@ const MapComponent = (props) => {
 
 
   const setMapSize = (index) => {
-
-
     try {
-
-
-
-    
       if (typeof window != 'undefined' && index != null) {
         return new window.google.maps.Size(getSize(index), getSize(index))
       }
@@ -95,7 +91,8 @@ const MapComponent = (props) => {
                 />
               );
             })}
-          {selectedCompany && (
+          {selectedCompany  && (
+            <div className="infoBox">
             <InfoWindow
               position={{
                 lat: selectedCompany.geometry.location.lat,
@@ -103,15 +100,33 @@ const MapComponent = (props) => {
               }}
               onCloseClick={() => setSelectedCompany(null)}
             >
-              <div>
+              <div className="content">
+                <div className="content__img">
                 <img src={selectedCompany.image} width="100%" height="100" />
+                </div>
+                <div className="content__text">
                 <Link href={DIRECTORIES_PAGE + "/" + selectedCompany.place_id}>
                   <h5 className="mt-3">{selectedCompany.name}</h5>
                 </Link>
-                <p>{selectedCompany.formatted_address}</p>
-                <p>{selectedCompany.category}</p>
+                <p>
+                <ReactStars
+                      count={5}
+                      // onChange={ratingChanged}
+                      value={selectedCompany.rating}
+                      size={15}
+                      isHalf={true}
+                      emptyIcon={<i className="far fa-star"></i>}
+                      halfIcon={<i className="fa fa-star-half-alt"></i>}
+                      fullIcon={<i className="fa fa-star"></i>}
+                      activeColor="#ffd700"
+                      edit={false}
+                    />
+                </p>
+                <p><FaMapMarkerAlt /> {selectedCompany.formatted_address}</p>
+                </div>
               </div>
             </InfoWindow>
+            </div>
           )}
         </>
       </GoogleMap>

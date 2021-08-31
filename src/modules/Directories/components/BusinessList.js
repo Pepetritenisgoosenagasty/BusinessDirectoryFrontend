@@ -86,9 +86,8 @@ const onSearch = async value => {
             phone={result.formatted_phone_number}
             star={result.rating}
             location={result.formatted_address}
-            url={result.image}
+            url={result.image ? result.image : 'https://placeholder.com/banner-ads/'}
             total_ratings={result.user_ratings_total}
-            icon="/assets/claimed.jpeg"
             href={DIRECTORIES_PAGE + "/" + result.place_id}
           />
         ))}

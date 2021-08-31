@@ -35,7 +35,7 @@ export const performUserLogin = (path, data) => (dispatch) => {
   return authServices
     .requestLOGIN(path, data)
     .then((res) => {
-      const { user, token, message } = res.data;
+      const { user, jwt, message } = res.data;
       dispatch(setUser(user));
       dispatch(loginUser());
       dispatch(
@@ -46,7 +46,7 @@ export const performUserLogin = (path, data) => (dispatch) => {
           },
         })
       );
-      authServices.setToken(token);
+      authServices.setToken(jwt);
       return res.data;
     }).catch(error => {
       if(error.response){
@@ -61,9 +61,9 @@ export const performUserLogin = (path, data) => (dispatch) => {
 // User Registration
 export const  performUserRegistration = (path, data) => (dispatch) => {
   return authServices
-      .requestPOST(path, data)
+      .requestRegister(path, data)
       .then((res) => {
-        const { user, token, message } = res.data;
+        const { user, jwt, message } = res.data;
         dispatch(setUser(user));
         dispatch(loginUser());
         dispatch(
@@ -74,7 +74,7 @@ export const  performUserRegistration = (path, data) => (dispatch) => {
             },
           })
         );
-        authServices.setToken(token);
+        authServices.setToken(jwt);
         return res.data;
       }).catch(error => {
         if(error.response){

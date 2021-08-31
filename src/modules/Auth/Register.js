@@ -1,7 +1,7 @@
 import { AuthCard } from "@/components/CardComponent";
 import { PAGE_HOME, PAGE_LOGIN, PAGE_DASHBOARD, URL_REGISTER } from "@/constants/routes";
 import Link from "next/link";
-import { Form, Input, Button, InputNumber } from "antd";
+import { Form, Input, Button, InputNumber, Radio } from "antd";
 import { Divider } from "antd";
 import { motion } from "framer-motion";
 import { FiFacebook } from "react-icons/fi";
@@ -58,11 +58,10 @@ const Register = () => {
 
 
   const submitForm = (values) => {
-    
     setIsSubmitting(true);
     if(values.cpassword === values.password) {
       try {
-        values['username'] = nanoid();
+    
         dispatch(performUserRegistration(URL_REGISTER, values))
         .finally(() => {
           setIsSubmitting(false);
@@ -72,7 +71,17 @@ const Register = () => {
         console.log(error);
       }
 
-    } else {
+    } else if(values.password.length < 6) {
+      setIsSubmitting(false);
+      dispatch(
+        enqueueSnackbar({
+          message: "Password must be more than 6 characters",
+          options: {
+            variant: "error",
+          },
+        })
+      );
+    } else  {
       setIsSubmitting(false);
       dispatch(
         enqueueSnackbar({
@@ -178,6 +187,56 @@ const Register = () => {
                     </div>
 
                     <div className="row">
+                    <div className="col-lg-6 col-md-12 col-sm-12">
+                      <label>
+                        Gender
+                      </label>
+                      <Form.Item
+                        name="gender"
+                        rules={[
+                          {
+                            required: true,
+                          },
+                        ]}
+                      >
+                        <Radio.Group>
+                          <Radio value="Male">Male</Radio>
+                          <Radio value="Female">Female</Radio>
+                        </Radio.Group>
+                      </Form.Item>
+                    </div>
+                    <div className="col-lg-6 col-md-12 col-sm-12">
+                      <label>
+                        Username
+                      </label>
+                      <Form.Item
+                        name="username"
+                        rules={[
+                          {
+                            required: true,
+                          },
+                        ]}
+                      >
+                        <Input style={{ borderRadius: 7 }} />
+                      </Form.Item>
+                    </div>
+                    </div>
+
+                    <div className="row">
+                    <div className="col-lg-6 col-md-6 col-sm-12">
+                        <label>Email</label>
+                        <Form.Item
+                          name="email"
+                          rules={[
+                            {
+                              required: true,
+                              message: "Please input your email!",
+                            },
+                          ]}
+                        >
+                          <Input />
+                        </Form.Item>
+                      </div>
                       <div className="col-lg-6 col-md-6 col-sm-12">
                         <label>Phone Number</label>
                         <Form.Item
@@ -207,20 +266,7 @@ const Register = () => {
                           />
                         </Form.Item>
                       </div>
-                      <div className="col-lg-6 col-md-6 col-sm-12">
-                        <label>Email</label>
-                        <Form.Item
-                          name="email"
-                          rules={[
-                            {
-                              required: true,
-                              message: "Please input your email!",
-                            },
-                          ]}
-                        >
-                          <Input />
-                        </Form.Item>
-                      </div>
+                     
                     </div>
                     <div className="row">
                       <div className="col-lg-6 col-md-6 col-sm-12">

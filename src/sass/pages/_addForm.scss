@@ -1,0 +1,65 @@
+.addForm {
+    .ant-input:not(.ant-input.custom) {
+        height: 32px !important;
+        
+    }
+
+ 
+    .ant-input {
+        border-radius: 7px !important;
+
+        &:hover {
+            border-color: none !important;
+            outline: none !important;
+        }
+
+        &:focus {
+            box-shadow: none !important;
+            outline: none !important;
+        }
+    }
+
+
+
+    .ant-input:placeholder-shown {
+        font-size: .7rem !important;
+    }
+
+    .PhoneInput {
+       input {
+        border: 1px solid #d9d9d9 !important;
+        height: 32px;
+        border-radius: 7px;
+
+
+        &:hover {
+            border-color: #40a9ff;
+          }
+
+          &:focus {
+            border-color: #40a9ff;
+            border-right-width: 1px !important;
+            outline: 0;
+            -webkit-box-shadow: 0 0 0 2px rgb(24 144 255 / 20%);
+            box-shadow: 0 0 0 2px rgb(24 144 255 / 20%);
+        
+          }
+       }
+    
+    }
+
+    .wokingHours {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 50px;
+    }
+    
+//    .viewBtn {
+     
+//         color: #40a9ff !important;
+//         text-decoration: none !important;
+      
+//    }
+
+    
+}
