@@ -8,6 +8,9 @@ import { useEffect } from "react";
 import NavigationMenu from "@/components/NavigationMenu";
 import { GetDirectionCard } from "./Components/GetDirectionCard";
 import { Spin } from 'antd';
+import { Spinner } from "@/components/Spinner";
+import { Results } from "@/components/Result";
+import { PAGE_HOME } from "@/constants/routes";
 
 const index = () => {
   const [directions, setDirections] = useState({});
@@ -41,8 +44,8 @@ const index = () => {
     setDirectionResponse(value);
   };
 
-  if (isLoading) return <Spin size="large" />;
-  if (isError) return <div>Error</div>;
+  if (isLoading) return <Spinner />;
+  if (isError) return  <Results status="500" title="500" subTitle="Sorry, something went wrong." url={PAGE_HOME}/>;
   return (
     <div>
       <NavigationMenu directory />

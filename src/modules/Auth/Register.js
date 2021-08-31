@@ -130,7 +130,7 @@ const Register = () => {
             </Link>
                 </div>
                 <div>
-                <span>Already have an account?</span>
+                {/* <span>Already have an account?</span> */}
                 <Link href={PAGE_LOGIN}>
                   <motion.a whileHover={{ scale: 1.1, duration: 0.5 }}>
                     SignIn
@@ -141,7 +141,7 @@ const Register = () => {
               </div>
               <div className="form-content mt-3">
                 <h1>
-                  Create your free account to manage your <br /> business
+                  Create your free account to manage your business
                 </h1>
 
                 <div>

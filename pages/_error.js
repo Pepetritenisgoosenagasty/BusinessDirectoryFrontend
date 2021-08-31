@@ -1,3 +1,5 @@
+import { Results } from '@/components/Result'
+import { PAGE_HOME } from '@/constants/routes'
 import Error from 'next/error'
 
 export async function getServerSideProps() {
@@ -12,8 +14,8 @@ export async function getServerSideProps() {
 
 export default function Page({ errorCode, stars }) {
   if (errorCode) {
-    return <Error statusCode={errorCode} />
+    return <Results status={errorCode} title={errorCode} subTitle="Sorry, something went wrong." url={PAGE_HOME}/>
   }
 
-  return <div>Next stars: {stars}</div>
+  return <Results status="500" title="500" subTitle="Sorry, something went wrong." url={PAGE_HOME}/>
 }

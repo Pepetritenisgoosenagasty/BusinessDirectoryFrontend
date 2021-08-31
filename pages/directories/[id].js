@@ -13,7 +13,7 @@ const index = () => {
             <PageTitle title={`Business Directory | ${id}`} />
            <div>
                <ComapniesName />
-               <Footer />
+              
            </div>
         </AppLayout>
     )

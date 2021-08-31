@@ -143,7 +143,7 @@ const Login = () => {
                 </div>
                 <div>
 
-                <span>Don`t have an account yet?</span>
+                {/* <span>Don`t have an account yet?</span> */}
                 <Link href={PAGE_REGISTER}>
                   <motion.a whileHover={{ scale: 1.1, duration: 0.5 }}>
                     SignUp

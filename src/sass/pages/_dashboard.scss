@@ -1,0 +1,15 @@
+.dashboard {
+    &__text {
+        h5 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #707070 !important;
+           
+        }
+
+        p {
+           font-size: .7rem;
+           color: #707070 !important;
+        }
+    }
+}

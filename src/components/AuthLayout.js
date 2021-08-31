@@ -7,7 +7,8 @@ const AuthLayout = ({ children }) => {
         body {
           font-family: "Montserrat", sans-serif;
             overflow: hidden;
-          background: #D3D2C7; 
+          background-color: #D3D2C7; 
+          background-image: url(/assets/symphony.png);
           position: relative;
         }
       `}</style>

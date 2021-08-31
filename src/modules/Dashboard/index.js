@@ -1,24 +1,61 @@
-import { PAGE_LOGIN } from "@/constants/routes";
-import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
-import { performUserLogout } from "src/redux/features/authSlice";
+import { DashboardCustomCard } from "@/components/CardComponent";
+import { DashboardFooter } from "@/components/DashboardFooter";
+
 
 const index = () => {
-  const dispatch = useDispatch();
-  const router = useRouter();
-
-  const logoutUser = () => {
-    dispatch(performUserLogout()).finally(() => {
-      router.push(PAGE_LOGIN);
-    });
-  };
-
+ 
   return (
-    <div>
-      <p>Dashboard Content Here</p>
-
-      <a onClick={() => logoutUser()}>Logout</a>
+    <>
+    <div className="dashboard container-fluid content mb-5">
+      <div className="row dashboard__text d-block px-5 py-3"> 
+        <h5>Dashboard</h5>
+        <p>Welcome to Business Directory Dashboard</p>
+      </div>
+      <div className="row px-4">
+          <div className="col-lg-4 col-md-12 col-sm-12">
+           <DashboardCustomCard >
+        
+           </DashboardCustomCard>
+          </div>
+          <div className="col-lg-4 col-md-12 col-sm-12">
+          <DashboardCustomCard >
+        
+        </DashboardCustomCard>
+          </div>
+          <div className="col-lg-4 col-md-12 col-sm-12">
+            <div className="row">
+              <div className="col-12">
+              <DashboardCustomCard >
+        
+              </DashboardCustomCard>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-12">
+              {/* <DashboardCustomCard >
+        
+      </DashboardCustomCard> */}
+              </div>
+            </div>
+          </div>
+      </div>
+      <div className="row px-4 mt-4">
+       <div className="col-lg-8 col-md-12 col-sm-12">
+       <DashboardCustomCard >
+        
+        </DashboardCustomCard>
+       </div>
+       <div className="col-lg-4 col-md-12 col-sm-12">
+       <DashboardCustomCard >
+        
+        </DashboardCustomCard>
+       </div>
+      </div>
+  
+     
     </div>
+      <DashboardFooter />
+      </>
   );
 };
 

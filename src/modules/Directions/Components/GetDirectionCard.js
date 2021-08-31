@@ -10,6 +10,9 @@ import { useGetDirections } from "src/hooks/useGetDirections";
 import { Spin } from 'antd';
 import { useEffect, useState } from "react";
 import { BsArrow90DegRight } from "react-icons/bs";
+import { Spinner } from "@/components/Spinner";
+import { Results } from "@/components/Result";
+import { PAGE_HOME } from "@/constants/routes";
 
 const DirectionCardWrapper = styled.div`
   position: fixed;
@@ -64,6 +67,7 @@ const DirectionCardWrapper = styled.div`
       padding: 10px;
       border-radius: 10px;
       background-color: #f3eaf4;
+      font-size: .75rem;
     }
     span {
       font-weight: 500;
@@ -78,6 +82,10 @@ const DirectionCardWrapper = styled.div`
       color: #8c2f39 !important;
       font-size: .8rem;
       font-weight: 600;
+    }
+
+    .end {
+      font-size: .75rem;
     }
 
     span {
@@ -96,6 +104,8 @@ const DirectionCardWrapper = styled.div`
       font-size: 0.8rem;
       margin-bottom: 0 !important;
     }
+
+    
   }
 `;
 
@@ -106,7 +116,7 @@ const GetInfo = ({  info, distance, duration }) => (
         <GiDirectionSigns style={{ fontSize: 30 }} />
       </span>
       <div>
-        <div dangerouslySetInnerHTML={{ __html: info }} />
+        <div style={{ fontSize: '.8rem'}} dangerouslySetInnerHTML={{ __html: info }} />
         <span>
           <small className="text-info"> distance: {distance}</small>
           <small className="ml-2 text-info"> duration: {duration}</small>
@@ -130,8 +140,8 @@ export const GetDirectionCard = (props) => {
   // }, [getDirections]);
   // console.log(data);
 
-  if (isLoading) return ( <Spin size="large" />)
-  if (isError) return (<div>Error</div>)
+  if (isLoading) return <Spinner />;
+  if (isError) return  <Results status="500" title="500" subTitle="Sorry, something went wrong." url={PAGE_HOME}/>;
   return (
     <DirectionCardWrapper>
       <div className="pt-3">

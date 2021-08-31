@@ -142,17 +142,19 @@ export const CategoriesCard = ({
 };
 
 const OverviewWrapper = styled.div`
-  // height: 190px ;
+
   cursor: pointer;
-  background: transparent;
-  width: 60vw;
+  background: #fff;
+  margin: 40px 30px ;
+  width: 55vw;
   border-top: 1px solid #eef1f7;
-  // border-bottom: 1px solid #EEF1F7;
-  padding: 30px 40px;
+  
   display: grid;
+  border-radius: 10px;
   grid-template-columns: repeat(2, 1fr) !important;
   align-items: center;
   transition: all 0.3s ease;
+  box-shadow: rgb(0 0 0 / 15%) 0px 16px 32px, rgb(0 0 0 / 10%) 0px 3px 8px !important;
   z-index: -10;
 
   &:hover {
@@ -161,8 +163,8 @@ const OverviewWrapper = styled.div`
 `;
 
 const ImageContainer = styled.div`
-  width: 400px;
-  height: 200px;
+  width: 100%;
+  height: 240px;
 
   img {
     width: 100%;
@@ -172,7 +174,8 @@ const ImageContainer = styled.div`
 `;
 const ContentContainer = styled.div`
   width: 100%;
-  margin-left: 10px;
+  // margin-left: 30px;
+  padding: 20px 30px;
   h5 {
     font-size: 1rem;
     font-weight: 600;
@@ -308,6 +311,21 @@ export const InfomationCard = ({children, title}) => {
       {children}
     </Panel>
   </Collapse>
+  )
+}
+
+const DashboardWrapper = styled.div`
+background: #fff;
+border-radius: 10px;
+height: 200px;
+box-shadow: rgb(0 0 0 / 15%) 0px 16px 32px, rgb(0 0 0 / 10%) 0px 3px 8px !important;
+`
+
+export const DashboardCustomCard = ({children}) => {
+  return(
+    <DashboardWrapper>
+    {children}
+    </DashboardWrapper>
   )
 }
 

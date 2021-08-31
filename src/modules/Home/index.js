@@ -172,7 +172,7 @@ const index = () => {
         {/*  */}
         <section className="work_content">
           <h5>How it works</h5>
-          <div className="mini-card">
+          <div className="mini-card container mx-auto">
             <div className="row">
               <div className="col-lg-4 col-md-12 col-sm-12 d-flex">
                 <div>

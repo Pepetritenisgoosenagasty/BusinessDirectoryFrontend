@@ -46,9 +46,9 @@ const onSearch = async value => {
 };
 
 
-  function showTotal(total) {
-    return `Total ${total} items`;
-  }
+  // function showTotal(total) {
+  //   return `Total ${total} items`;
+  // }
 
   return (
     <div className="">
@@ -68,7 +68,7 @@ const onSearch = async value => {
         <h1>Explore All 300+ Private Companies</h1>
       </div>
       <div className="row">
-     <div className="container px-5 businessSearch">
+     <div className="container px-5 businessSearch pb-5">
      <Search placeholder="Enter Company`s name" onSearch={onSearch} style={{ width: '100%' }} />
      </div>
       </div>
