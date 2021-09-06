@@ -1,104 +1,75 @@
-import { Comment, Avatar, Form, Button, List, Input } from "antd";
+import { URL_REVIEWS } from "@/constants/routes";
+import { Comment, Avatar, Form, Button, List, Input, Rate } from "antd";
 import moment from "moment";
 import { useState } from "react";
 import ReactStars from "react-rating-stars-component";
+import { useDispatch } from "react-redux";
+import { performCreate } from "src/redux/actions/apiActionCreators";
 
 const { TextArea } = Input;
 
+const CommentComponent = (props) => {
+  const [submitting, setSubmitting] = useState(false);
+  const dispatch = useDispatch()
 
+  const [form] = Form.useForm()
 
-const Editor = ({ onChange, onSubmit, submitting, value }) => (
-  <>
-   <Form.Item name="name">
-       <label className="label">Name</label>
-      <Input  onChange={onChange} value={value} />
-    </Form.Item>
-    <Form.Item>
-    <label className="label">Rating</label>   
-    <ReactStars
-        count={5}
-        // onChange={ratingChanged}
-        size={20}
-        isHalf={true}
-        emptyIcon={<i className="far fa-star"></i>}
-        halfIcon={<i className="fa fa-star-half-alt"></i>}
-        fullIcon={<i className="fa fa-star"></i>}
-        activeColor="#ffd700"
-        /> 
-    </Form.Item>
-    <Form.Item name="message">
-    <label className="label">Message</label>
-      <TextArea  rows={4} onChange={onChange} value={value} />
-    </Form.Item>
-    <Form.Item>
-      <Button
-        htmlType="submit"
-        loading={submitting}
-        onClick={onSubmit}
-        type="primary"
-      >
-        Add Review
-      </Button>
-    </Form.Item>
-  </>
-);
-
-const CommentComponent = () => {
-  const [comments, setComments] = useState([]);
-  const [Submitting, setSubmitting] = useState(false);
-  const [value, setValue] = useState("");
-
-
-  const CommentList = ({ comments }) => (
-    <List
-      dataSource={comments}
-      header={`${comments.length} ${comments.length > 0 ? "replies" : "reply"}`}
-      itemLayout="horizontal"
-      renderItem={(props) => <Comment {...props} />}
-    />
-  );
-
-  const handleSubmit = () => {
-    if (!value) {
-      return;
-    }
-    setSubmitting(true);
-
-    setTimeout(() => {
-      setSubmitting(false);
-      setValue('');
-      setComments([...comments], {
-        author: "Han Solo",
-        avatar:
-          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-        content: <p>{value}</p>,
-        datetime: moment().fromNow(),
+  const onFinish= (values) => {
+   
+    try {
+      values
+      dispatch(
+        performCreate(URL_REVIEWS, {
+          name: values.name,
+          rate: values.rate,
+          message: values.message,
+          business_id: props.placeId
+        })
+      ).finally(() => {
+        setSubmitting(false)
       });
-    }, 1000);
-  };
+      
+      
+  } catch (error) {
+      console.log(error)
+  }
 
-  const handleChange = (e) => {
-    setValue(e.target.value);
-  };
+  form.resetFields()
 
+  }
   return (
     <div>
+      <Form  name="basic" onFinish={onFinish} form={form}>
+          <div>
+          <label className="label">Name</label>
+        <Form.Item name="name"   rules={[{ required: true}]}>
+          <Input style={{ borderRadius: 7 }} />
+        </Form.Item>
+          </div>
+        
+          <div>
+        <Form.Item name="rate" rules={[{ required: true}]}>
+            <Rate />
+        </Form.Item>
+          </div>
+       <div>
+          <label className="label">Message</label>
+       <Form.Item name="message" rules={[{ required: true}]}>
+          <TextArea rows={4} style={{ borderRadius: 7 }} />
+        </Form.Item>
+       </div>
+        <Form.Item>
+          <div className="changePassword text-sm">
+            <Button htmlType="submit" loading={submitting} type="primary">
+              Submit
+            </Button>
+          </div>
+        </Form.Item>
+      </Form>
 
-      {comments.length > 0 && <CommentList comments={comments} />}
-      <Comment
-        content={
-          <Editor
-            onChange={handleChange}
-            onSubmit={handleSubmit}
-            submitting={Submitting}
-            value={value}
-          />
-        }
-      />
-
-<style jsx>{`
-        label  {
-          font-size: .7rem;
+      <style jsx>{`
+        label {
+          font-size: 0.7rem;
           font-weight: 600;
         }
       `}</style>

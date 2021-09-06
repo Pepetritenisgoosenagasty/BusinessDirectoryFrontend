@@ -26,7 +26,7 @@ const GalleryComponent = () => {
   };
 
   return (
-    <div className="addForm container">
+    <div className="addForm container-fluid">
       <div>
         <h5>Upload Images</h5>
         <p>

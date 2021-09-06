@@ -21,11 +21,7 @@ const OpeningDays = (props) => {
       <div className="col-9">
         <Form.Item
           name={props.days}
-          rules={[
-            {
-              required: true,
-            },
-          ]}
+         
         >
           <TimePicker.RangePicker
             disabled={disabled}

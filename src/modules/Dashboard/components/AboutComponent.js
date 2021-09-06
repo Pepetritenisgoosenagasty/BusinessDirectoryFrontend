@@ -47,9 +47,9 @@ const AboutContent = () => {
               },
             ]}
           >
-            <Select mode="multiple" allowClear style={{ width: "100%", borderRadius: 7 }}>
+            <Select  allowClear style={{ width: "100%", borderRadius: 7 }}>
               {details?.map((item, index )=> (
-                <Option key={index + 1}>{item.category}</Option>
+                <Option key={index + 1} value={item.category}>{item.category}</Option>
               ))}
             </Select>
           </Form.Item>
@@ -75,7 +75,7 @@ const AboutContent = () => {
         </div>
       </div>
       <div className="row">
-      <div className="col-lg-12 col-md-12 col-sm-12">
+      {/* <div className="col-lg-12 col-md-12 col-sm-12">
           <label>
             Keywords
           </label>
@@ -90,7 +90,7 @@ const AboutContent = () => {
           >
             <Input placeholder="Maximun 15, should be separated by commas"/>
           </Form.Item>
-        </div>
+        </div> */}
 
       </div>
 
@@ -108,7 +108,7 @@ const AboutContent = () => {
               },
             ]}
           >
-            <Checkbox.Group style={{ width: '100%' }} onChange="">
+            <Checkbox.Group style={{ width: '100%' }}>
             <Row>
               <Col span={4}>
                 <Checkbox value="Free WIFI">Free WIFI</Checkbox>

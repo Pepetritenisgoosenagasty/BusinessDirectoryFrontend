@@ -1,4 +1,4 @@
-const ViewReview = () => {
+const ViewReview = (props) => {
     return (
         <div>
             <p>Review Content Here</p>
