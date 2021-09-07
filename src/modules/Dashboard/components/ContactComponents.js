@@ -68,7 +68,7 @@ props.inputData?.setFieldsValue({
                City<sup className="text-danger">*</sup>
               </label>
               <Form.Item
-                name="district"
+                name="city"
                 rules={[
                   {
                     required: true,
@@ -109,7 +109,7 @@ props.inputData?.setFieldsValue({
                 Phone Number<sup className="text-danger">*</sup>
               </label>
               <Form.Item
-                name="phone"
+                name="phone_number"
                 rules={[
                   {
                     required: true,

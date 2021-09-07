@@ -62,7 +62,7 @@ const AboutContent = () => {
             Description
           </label>
           <Form.Item
-            name="discription"
+            name="description"
             
           >
             <TextArea
@@ -101,7 +101,7 @@ const AboutContent = () => {
           </label>
           <Form.Item
           
-            name="facilities"
+            name="amenities"
             rules={[
               {
                 required: true,

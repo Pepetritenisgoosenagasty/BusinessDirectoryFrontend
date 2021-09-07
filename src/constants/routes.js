@@ -36,3 +36,5 @@ export const URL_LOGGEDIN_USER = "users/me";
 export const URL_UPDATE_USER = "users/";
 export const URL_RESET_PASSWORD = "auth/reset-password"
 export const URL_REVIEWS = "reviews"
+export const URL_ADD_BUSINESSES = "businesses"
+export const URL_GET_BUSINESS = "businesses"

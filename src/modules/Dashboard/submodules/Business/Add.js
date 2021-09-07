@@ -12,6 +12,14 @@ import { BiArrowBack } from "react-icons/bi";
 import StepForm from "../StepForm";
 import { Marker } from "@react-google-maps/api";
 import useGetUserLocation from "src/hooks/useGetUserLocation";
+import { URL_ADD_BUSINESSES, URL_GET_BUSINESS } from "@/constants/routes";
+import { useDispatch } from "react-redux";
+import { performCreate } from "src/redux/actions/apiActionCreators";
+import { useRouter } from "next/router";
+import { userData } from "src/hooks/useLoggInUser";
+import { nanoid } from "nanoid";
+import useGetEntity from "src/hooks/useGetEntity";
+
 
 const Add = () => {
   const { Step } = Steps;
@@ -19,33 +27,39 @@ const Add = () => {
 
   let inputData = form;
 
-  const steps = [
-    {
-      key: 1,
-      title: "About Business",
-      content: <AboutContent />,
-    },
-    {
-      key: 2,
-      title: "Business Contact",
-      content: <ContactComponents inputData={inputData} />,
-    },
-    {
-      key: 3,
-      title: "Gallery",
-      content: <GalleryComponent />,
-    },
-    {
-      key: 4,
-      title: "Social Media Handles",
-      content: <SocialComponent />,
-    },
-    {
-      key: 5,
-      title: "Opening Hours",
-      content: <HoursComponent />,
-    },
-  ];
+
+  // const steps = [
+  //   {
+  //     key: 1,
+  //     title: "About Business",
+  //     content: <AboutContent />,
+  //   },
+  //   {
+  //     key: 2,
+  //     title: "Business Contact",
+  //     content: <ContactComponents inputData={inputData} />,
+  //   },
+  //   {
+  //     key: 3,
+  //     title: "Gallery",
+  //     content: <GalleryComponent />,
+  //   },
+  //   {
+  //     key: 4,
+  //     title: "Social Media Handles",
+  //     content: <SocialComponent />,
+  //   },
+  //   {
+  //     key: 5,
+  //     title: "Opening Hours",
+  //     content: <HoursComponent />,
+  //   },
+  // ];
+
+  const [isloadingSubmit, setIsloadingSubmit] = useState(false);
+
+  const dispatch = useDispatch();
+
   const [current, setCurrent] = useState(0);
 
   const next = () => {
@@ -56,13 +70,62 @@ const Add = () => {
     setCurrent(current - 1);
   };
 
-  const handleFinish = (values) => {
-    console.log(values);
+  const { user, isLoading, isError } = userData();
+
+  
+
+  let url = URL_GET_BUSINESS + `?_where[user_id]=${user?.id}`;
+
+  // const object = useGetEntity({
+  //   url: url,
+  // });
+
+  // console.log(object?.data?.id)
+
+
+  const onFinish = (values) => {
+    try {
+      setIsloadingSubmit(true);
+      dispatch(
+        performCreate(URL_ADD_BUSINESSES, {
+          ...values,
+          user_id: user?.id,
+          geometry: {
+            lat: values.lat,
+            lng: values.lng,
+          },
+          working_hours: {
+            Mondays: values.Monday,
+            Tuesdays: values.Tuesday,
+            Wednesdays: values.Wednesday,
+            Thursdays: values.Thursday,
+            Fridays: values.Friday,
+            Saturdays: values.Saturday,
+            Sunday: values.Sunday,
+          },
+          social_media_handles: {
+            linkedIn: values.linkedin,
+            facebook: values.facebook,
+            twitter:  values.twitter,
+            youtube: values.youtube
+          },
+          place_id: nanoid(50),
+        })
+      )
+        .then((data) => {
+          if (data == true) {
+            form.resetFields();
+          }
+        })
+        .finally(() => {
+          setIsloadingSubmit(false);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const useLocation = useGetUserLocation();
-
-
 
   return (
     <>
@@ -84,7 +147,7 @@ const Add = () => {
             </motion.button>
           </div>
         </div>
-        <Form form={form} onFinish={handleFinish}>
+        <Form form={form} onFinish={onFinish}>
           <div className="row">
             <div className="col-12">
               <DashboardCustomCard>
@@ -96,7 +159,10 @@ const Add = () => {
             <div className="col-12 mt-3">
               <DashboardCustomCard>
                 <div className="p-3">
-                  <ContactComponents inputData={inputData} useLocation={useLocation}/>
+                  <ContactComponents
+                    inputData={inputData}
+                    useLocation={useLocation}
+                  />
                 </div>
               </DashboardCustomCard>
             </div>
@@ -117,14 +183,14 @@ const Add = () => {
             <div className="col-12 mt-3">
               <DashboardCustomCard>
                 <div className="p-3">
-                  <HoursComponent /> 
+                  <HoursComponent />
                 </div>
               </DashboardCustomCard>
             </div>
 
-
             <div className="col-6 mx-auto mt-3">
               <Button
+                loading={isloadingSubmit}
                 style={{
                   background: "#379634",
                   height: 50,

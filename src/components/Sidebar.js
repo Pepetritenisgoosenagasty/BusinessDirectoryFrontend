@@ -44,7 +44,7 @@ const Sidebar = () => {
             </li>
           </Tooltip>
            </Link>
-          <Link href={PAGE_ADD_BUSINESS}>
+          <Link href={PAGE_ADD_BUSINESS }>
           <Tooltip placement="right" title="My Business">
           <li className={`${pathname.split('/').includes('business') ? "activeMenu" : ''}`}>
             <a>

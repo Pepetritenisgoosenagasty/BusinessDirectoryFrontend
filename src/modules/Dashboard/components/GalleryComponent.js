@@ -4,26 +4,8 @@ import { InboxOutlined } from "@ant-design/icons";
 
 const { Dragger } = Upload;
 
-const GalleryComponent = () => {
-  const props = {
-    name: "file",
-    multiple: true,
-    action: "",
-    onChange(info) {
-      const { status } = info.file;
-      if (status !== "uploading") {
-        console.log(info.file, info.fileList);
-      }
-      if (status === "done") {
-        message.success(`${info.file.name} file uploaded successfully.`);
-      } else if (status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
-    onDrop(e) {
-      console.log("Dropped files", e.dataTransfer.files);
-    },
-  };
+const GalleryComponent = (props) => {
+
 
   return (
     <div className="addForm container-fluid">
@@ -38,24 +20,17 @@ const GalleryComponent = () => {
           {/* <label>
               Business Name<sup className="text-danger">*</sup>
             </label> */}
-          <Form.Item
-            name="images"
-            
-          > 
-            <Dragger {...props}>
-              <p className="ant-upload-drag-icon">
-                <InboxOutlined />
-              </p>
-              <p className="ant-upload-text">
-                Click or drag images to this area to upload
-              </p>
-              <p className="ant-upload-hint">
-                Support for a single or bulk upload. Strictly prohibit from
-                uploading company data or other bad images
-              </p>
-              <em>(Only *.jpeg and *.png images will be accepted)</em>
-            </Dragger>
-          </Form.Item>
+         <Form.Item
+              name="images"
+              rules={[
+                {
+                  required: false,
+                  message: "Please uplaod your profile!",
+                },
+              ]}
+            >
+              <Input type="file" allowClear multiple/>
+            </Form.Item>
         </div>
       </div>
 
