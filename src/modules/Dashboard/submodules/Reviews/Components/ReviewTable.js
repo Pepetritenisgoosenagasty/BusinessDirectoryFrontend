@@ -1,5 +1,5 @@
 import ModalComponent from '@/components/ModalComponent';
-import { URL_REVIEWS } from '@/constants/routes';
+import { URL_GET_BUSINESS, URL_REVIEWS } from '@/constants/routes';
 import { Table, Tag, Space } from 'antd';
 import { Input } from 'antd';
 import { useEffect, useState } from 'react';
@@ -10,6 +10,8 @@ import { performGetAll } from 'src/redux/actions/apiActionCreators';
 import ViewReview from './ViewReview';
 import { Rate } from 'antd';
 import { formatDateHuman, formatTime } from '@/constants/DateFormat';
+import { userData } from 'src/hooks/useLoggInUser';
+import { useGetEntity } from 'src/hooks/useGetEntity';
 
 
 const { Search } = Input;
@@ -19,23 +21,31 @@ const ReviewTable = () => {
   const [title, setTitle] = useState("");
   const [width, setWidth] = useState()
   const [data, setData] = useState()
+  const [record, setRecord] = useState({})
   const dispatch = useDispatch()
   
   const fetchReviews = async () => {
     let reviews = await  dispatch(performGetAll(URL_REVIEWS + '?_where[business_id]=ChIJxeyZCXma3w8RKrwetDD3fiw'))
      setData(reviews)
-    console.log(reviews)
+    // console.log(reviews)
   }
 
   useEffect(() => {
     fetchReviews()
   }, [])
 
+  
+  const { user, isLoading, isError } = userData();
+  const objData = useGetEntity(URL_GET_BUSINESS  + `?user_id=${user?.id}`)
 
-  const showModal = () => {
+console.log(objData)
+
+
+  const showModal = (record) => {
     setIsModalVisible(true);
-    setTitle("View Review")
+    setTitle("User Review Info")
     setWidth(600)
+    setRecord(record)
   };
 
 
@@ -70,7 +80,7 @@ const ReviewTable = () => {
           render: text => <a>{text}</a>,
         },
         {
-          title: 'Requested Date & Time',
+          title: 'Date & Time',
           dataIndex: 'created_at',
           key: 'time',
           render: (text, record) => formatDateHuman(record.created_at) + "   " + formatTime(record.created_at) ,
@@ -93,7 +103,7 @@ const ReviewTable = () => {
           key: 'action',
           render: (text, record) => (
             <div className="viewBtn">
-              <a onClick={showModal}  style={{ color: '#40a9ff'}}>View</a>
+              <a onClick={() => showModal(record)}  style={{ color: '#40a9ff'}}>View</a>
 
             </div>
           ),
@@ -136,7 +146,7 @@ const ReviewTable = () => {
         </div>
 
         <ModalComponent title={title} visible={isModalVisible} onCancel={handleCancel} modalWidth={width}>
-           <ViewReview data={data} />
+           <ViewReview record={record} />
         </ModalComponent>
         </>
     )

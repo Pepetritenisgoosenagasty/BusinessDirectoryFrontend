@@ -50,7 +50,8 @@ export const performCreate = (path,data) => dispatch => {
     return authServices.requestPOST(path,data).then(res => {
         let {data} = res
         dispatch(enqueueSnackbar({
-            message: data?.message,
+            // message: data?.message,
+            message: "Created Successfully",
             options: {
               variant: 'success' 
             }

@@ -50,7 +50,12 @@ export const performUserLogin = (path, data) => (dispatch) => {
       return res.data;
     }).catch(error => {
       if(error.response){
-        handleError(error,dispatch)
+        dispatch(enqueueSnackbar({
+          message: error.response.data.message[0].messages[0].message,
+          options: {
+            variant: 'error' 
+          }
+        }))
         dispatch(clearUser())
       }
    

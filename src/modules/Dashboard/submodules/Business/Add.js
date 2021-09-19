@@ -12,7 +12,7 @@ import { BiArrowBack } from "react-icons/bi";
 import StepForm from "../StepForm";
 import { Marker } from "@react-google-maps/api";
 import useGetUserLocation from "src/hooks/useGetUserLocation";
-import { URL_ADD_BUSINESSES, URL_GET_BUSINESS } from "@/constants/routes";
+import { PAGE_EDIT_BUSINESS, URL_ADD_BUSINESSES, URL_GET_BUSINESS } from "@/constants/routes";
 import { useDispatch } from "react-redux";
 import { performCreate } from "src/redux/actions/apiActionCreators";
 import { useRouter } from "next/router";
@@ -72,7 +72,7 @@ const Add = () => {
 
   const { user, isLoading, isError } = userData();
 
-  
+  const router = useRouter()
 
   let url = URL_GET_BUSINESS + `?_where[user_id]=${user?.id}`;
 
@@ -81,6 +81,14 @@ const Add = () => {
   // });
 
   // console.log(object?.data?.id)
+
+
+    // if(!_.isEmpty(data)){
+    //   form.resetFields()
+    //   router.push(PAGE_EDIT_PROJECT+'/'+data.id);
+     
+    // }
+
 
 
   const onFinish = (values) => {
@@ -113,8 +121,12 @@ const Add = () => {
         })
       )
         .then((data) => {
-          if (data == true) {
+          
+          if (data == true || data.length > 0) {
             form.resetFields();
+            router.push(PAGE_EDIT_BUSINESS+'/'+user?.id);
+
+            console.log(data)
           }
         })
         .finally(() => {
