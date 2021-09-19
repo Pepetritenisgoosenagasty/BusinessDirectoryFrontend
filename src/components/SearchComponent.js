@@ -1,7 +1,6 @@
-import { CategorySvg } from "@/components/SvgComponents";
-import { BiCaretDown } from "react-icons/bi";
+
 import { BsSearch } from "react-icons/bs";
-import GooglePlacesAutocomplete, {geocodeByAddress} from "react-google-places-autocomplete";
+import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { GOOGLE_MAP_API_KEY } from "@/constants/global";
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
