@@ -9,9 +9,9 @@ import CalendarComponent from "@/components/CalendarComponent";
 import ReactWeather, { useOpenWeather } from "react-open-weather";
 import ReviewLists from "./components/Table/ReviewLists";
 
-const VisitorsChart = dynamic(() => import('./components/Chart/VisitorsChart'), {
-  ssr: false,
-});
+// const VisitorsChart = dynamic(() => import('./components/Chart/VisitorsChart'), {
+//   ssr: false,
+// });
 
 const index = () => {
   const { data, isLoading, errorMessage } = useOpenWeather({
@@ -91,7 +91,7 @@ const index = () => {
           <div className="col-lg-8 col-md-12 col-sm-12">
             <DashboardCustomCard>
             <div className="p-3 ">
-              <VisitorsChart />
+              {/* <VisitorsChart /> */}
             </div>
             </DashboardCustomCard>
           </div>
