@@ -179,10 +179,9 @@ const index = () => {
                   <BiSearchAlt style={{ fontSize: 45 }} />
                 </div>
                 <div className="content-text">
-                  <h5>Search for your preferred private company</h5>
+                  <h5>Search for private company</h5>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod
+                   Get Information of your desired private company just by searching by the name of the private company.
                   </p>
                 </div>
               </div>
@@ -191,10 +190,9 @@ const index = () => {
                   <BiCheckDouble style={{ fontSize: 45 }} />
                 </div>
                 <div className="content-text">
-                  <h5>Find preferred private company</h5>
+                  <h5>Find private companies</h5>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod
+                   This paltform also provides you with locations and directions to your prefered private company.
                   </p>
                 </div>
               </div>
@@ -205,8 +203,7 @@ const index = () => {
                 <div className="content-text">
                   <h5>Register your private company</h5>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod
+                    Let your business reach a wider audience by registering it own this platform.
                   </p>
                 </div>
               </div>
@@ -291,7 +288,7 @@ const index = () => {
         </section>
         <section className="service">
           <div className="service-content">
-            <h5>Connect with your desired Company</h5>
+            <h5>Connect with your desired private company <br /> in Accra Central</h5>
             <p className="">
               Be visible! Obtain new customers and generate more traffic. <br />{" "}
               Improve social media shares. Get reviews and grow business

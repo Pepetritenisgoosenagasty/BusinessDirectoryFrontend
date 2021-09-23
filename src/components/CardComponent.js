@@ -280,9 +280,9 @@ export const BusinessListCard = ({
             </div>
           <h5>
             {name}
-            <span className="ml-1">
+            {/* <span className="ml-1">
               <img src={icon && icon} width="15" height="15" />
-            </span>
+            </span> */}
           </h5>
           <div className="d-flex align-items-center">
             {/* <img src="/assets/star-on.png" alt="Picture of rating" width="20" height="20" /> */}

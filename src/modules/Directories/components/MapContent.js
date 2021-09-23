@@ -100,11 +100,11 @@ const MapComponent = (props) => {
               }}
               onCloseClick={() => setSelectedCompany(null)}
             >
-              <div className="content">
-                <div className="content__img">
+              <div className="infoContent">
+                <div className="infoContent__img">
                 <img src={selectedCompany.image} width="100%" height="100" />
                 </div>
-                <div className="content__text">
+                <div className="infoContent__text">
                 <Link href={DIRECTORIES_PAGE + "/" + selectedCompany.place_id}>
                   <h5 className="mt-3">{selectedCompany.name}</h5>
                 </Link>
