@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { BiArrowBack } from "react-icons/bi";
 import { Form, Input, Button, Radio, Avatar } from "antd";
 import UpdatePicture from "./Components/ChangeImage"
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { userData } from "src/hooks/useLoggInUser";
 import { Spinner } from "@/components/Spinner";
 import { Results } from "@/components/Result";
@@ -40,27 +40,26 @@ const dispatch = useDispatch()
       };
     
   const router = useRouter();
-
+  
+useEffect(() => {
+  form.setFieldsValue({
+    picture: user?.picture,
+   firstname: user?.firstname,
+   lastname: user?.lastname,
+   gender: user?.gender,
+   email: user?.email,
+   username: user?.username,
+   phone_number: user?.phone_number
+  })
+}, [user])
  
 
 
-   form.setFieldsValue({
-     picture: user?.picture,
-    firstname: user?.firstname,
-    lastname: user?.lastname,
-    gender: user?.gender,
-    email: user?.email,
-    username: user?.username,
-    phone_number: user?.phone_number
-   })
 
    if (isLoading) return <Spinner />;
    if (isError) return  <Results status="500" title="500" subTitle="Sorry, something went wrong." url={PAGE_HOME}/>;
 
    const onFinish = (values) => {
-
-    // console.log(values)
-      
     try {
 
         setIsloadingSubmit(true);
@@ -79,13 +78,12 @@ const dispatch = useDispatch()
           setIsloadingSubmit(false)
         });
         
-        
     } catch (error) {
         console.log(error)
     }
-  
-
 };
+
+
 
 
   return (
@@ -232,7 +230,7 @@ const dispatch = useDispatch()
                   </div>
                   <div className="row">
                     <div className="col-lg-7 mx-auto col-md-12 col-sm-12 changePassword">
-                      <Button htmlType="submit" type="primary">
+                      <Button htmlType="submit" type="primary" isLoading={isloadingSubmit}>
                         Save Changes
                       </Button>
                     </div>

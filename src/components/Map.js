@@ -23,7 +23,7 @@ const defaultOptions = {
   styles: MapStyle
 };
 
-const  MapComponent = ({children, ApiUrl, centerPin}) => {
+const  MapComponent = ({children, ApiUrl, centerPin, zoom}) => {
   return (
     <LoadScript
     googleMapsApiKey={`${process.env.googleApisKey}`}
@@ -31,7 +31,7 @@ const  MapComponent = ({children, ApiUrl, centerPin}) => {
       <GoogleMap
          mapContainerStyle={containerStyle}
          center={centerPin ?? center}
-         zoom={12}
+         zoom={zoom}
          options={defaultOptions}
       >
         { /* Child components, such as markers, info windows, etc. */ }

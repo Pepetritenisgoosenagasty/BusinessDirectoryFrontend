@@ -1,12 +1,11 @@
-import MapComponent from "@/components/Map";
+import Map from "@/components/Map";
 import { Form, Input, Select } from "antd";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { useEffect, useState } from "react";
 import { districts } from "@/constants/Districts";
-// import { Marker } from "@react-google-maps/api";
-import useGetUserLocation from "src/hooks/useGetUserLocation";
-// import { Marker } from "@react-google-maps/api";
+import { Marker } from "@react-google-maps/api";
+
 
 const { Option } = Select;
 
@@ -17,11 +16,11 @@ const ContactComponents = (props) => {
   const [value, setValue] = useState();
   const [data, setData] = useState({})
   
-  const useLocation = useGetUserLocation();
+ 
 
   useEffect(() => {
-    setData({...useLocation})
-  }, [useLocation])
+    setData({...props?.useLocation})
+  }, [props?.useLocation])
 
 props.inputData?.setFieldsValue({
   lat: data?.lat,
@@ -29,27 +28,28 @@ props.inputData?.setFieldsValue({
 })
 
 
+// console.log(props)
+
  //    Marker
-//  const MarkerContent = () => {
-//   const position = {
-//     lat: data?.lat,
-//     lng: data?.lng,
-//   };
+ const MarkerContent = () => {
+  const position = {
+    lat: data?.lat,
+    lng: data?.lng,
+  };
 
-//   return (
-//     <>
-//       <Marker
-//         position={position}
-//         animation={google.maps.Animation.BOUNCE}
-//         icon={{
-//           url: "https://img.icons8.com/glyph-neue/64/000000/marker.png",
-//           scaledSize: new window.google.maps.Size(80, 80),
-//         }}
-//       />
-//     </>
-//   );
-// };
-
+  return (
+    <>
+      <Marker
+        position={position}
+        animation={google.maps.Animation.BOUNCE}
+        icon={{
+          url: "https://img.icons8.com/glyph-neue/64/000000/marker.png",
+          scaledSize: new window.google.maps.Size(40, 40),
+        }}
+      />
+    </>
+  );
+};
 
 
   return (
@@ -68,7 +68,7 @@ props.inputData?.setFieldsValue({
                City<sup className="text-danger">*</sup>
               </label>
               <Form.Item
-                name="district"
+                name="city"
                 rules={[
                   {
                     required: true,
@@ -109,7 +109,7 @@ props.inputData?.setFieldsValue({
                 Phone Number<sup className="text-danger">*</sup>
               </label>
               <Form.Item
-                name="phone"
+                name="phone_number"
                 rules={[
                   {
                     required: true,
@@ -160,9 +160,9 @@ props.inputData?.setFieldsValue({
             Your Current Location
           </label>
           <div style={{ width: "100%", height: "290px" }}>
-            <MapComponent> 
-              {/* <MarkerContent /> */}
-            </MapComponent>
+            <Map zoom={10}> 
+              <MarkerContent />
+            </Map>
           </div>
 
         <div className="row mt-4">

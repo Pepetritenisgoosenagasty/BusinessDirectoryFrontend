@@ -79,6 +79,7 @@ const index = () => {
       } else {
         setcurrentPage(1);
         setrawData([...actualData]);
+        
       }
     } catch (error) {
       console.log(error);

@@ -89,7 +89,7 @@ const DetailsSidebar = (props) => {
      <div className=" my-2">
                 <InfomationCard title="Write Review">
                 <div>
-                    <CommentComponent />
+                    <CommentComponent placeId={props.placeId}/>
                   </div>
                 </InfomationCard>
               </div>

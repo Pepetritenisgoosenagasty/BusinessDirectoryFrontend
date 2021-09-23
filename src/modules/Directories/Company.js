@@ -85,7 +85,7 @@ const Company = () => {
       <NavigationMenu directory />
       <main className="company">
         <section className="map-section">
-          <Map>
+          <Map zoom={12}>
             <MarkerContent />
           </Map>
         </section>
@@ -130,7 +130,7 @@ const Company = () => {
               <div className="col-lg-4 col-md-12 col-sm-12">
                 <div className="row">
                   <div className="col-12">
-                    <DetailsSidebar data={details} />
+                    <DetailsSidebar data={details} placeId={placeId}/>
                   </div>
                 </div>
               </div>
