@@ -1,6 +1,7 @@
 import { DashboardCustomCard } from "@/components/CardComponent";
 import { Button, Form, Steps, message } from "antd";
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 import { FiChevronLeft } from "react-icons/fi";
 
@@ -28,11 +29,11 @@ export default function StepForm(props) {
     }
   }
   return (
-    <div className="container">
+    <div className="container-fluid">
          <div className="row">
           <div className="col-12">
             <DashboardCustomCard>
-              <Steps current={current} className="px-3 py-3">
+              <Steps current={current} className="px-3 py-3 d-none">
                 {/* {steps.map((item) => (
                   <Step key={item.title} title={item.title} />
                 ))} */}
@@ -50,6 +51,12 @@ export default function StepForm(props) {
             </DashboardCustomCard>
 
             <DashboardCustomCard>
+            <div className="px-3  py-3">
+            <h6 className="m-0">Register New Business Below</h6>
+            </div>
+            </DashboardCustomCard>
+
+            <DashboardCustomCard>
             <div className="steps-content px-3 py-3 mt-3">
             {renderContent()}
             </div>
@@ -58,7 +65,7 @@ export default function StepForm(props) {
               
              <div>
              {current > 0 && (
-                 <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
+                 <Button className="previous-btn" style={{ margin: "0 8px" }} onClick={() => prev()}>
                   Previous
                 </Button>
               )}
@@ -66,16 +73,15 @@ export default function StepForm(props) {
 
               <div>
               {current < props.steps.length - 1 && (
-                  <Button type="primary" onClick={() => next()}>
+                  <Button type="primary" className="next-btn" onClick={() => next()}>
                   Next
                 </Button>
               )}
               {current === props.steps.length - 1 && (
                   <Button
                   htmlType="submit"
-                  style={{ background: '#379634 '}}
-                  type="primary"
-                  onClick={() => message.success("Processing complete!")}
+                 
+                   className="submit-btn"
                   >
                   Submit
                 </Button>

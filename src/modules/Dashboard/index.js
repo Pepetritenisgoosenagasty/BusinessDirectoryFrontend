@@ -9,9 +9,9 @@ import CalendarComponent from "@/components/CalendarComponent";
 import ReactWeather, { useOpenWeather } from "react-open-weather";
 import ReviewLists from "./components/Table/ReviewLists";
 
-// const VisitorsChart = dynamic(() => import('./components/Chart/VisitorsChart'), {
-//   ssr: false,
-// });
+const VisitorsChart = dynamic(() => import('./components/Chart/VisitorsChart'), {
+  ssr: false,
+});
 
 const index = () => {
   const { data, isLoading, errorMessage } = useOpenWeather({
@@ -30,7 +30,7 @@ const index = () => {
             <h5>Dashboard</h5>
             <p>Welcome to Business Directory Dashboard</p>
           </div>
-          <div className="addBtn">
+          {/* <div className="addBtn">
             <Link href={PAGE_ADD_BUSINESS}>
               <motion.button
                 whileHover={{
@@ -41,7 +41,7 @@ const index = () => {
                 <RiAddLine /> Add New Business
               </motion.button>
             </Link>
-          </div>
+          </div> */}
         </div>
         <div className="row px-4">
           <div className="col-lg-4 col-md-12 col-sm-12">
@@ -91,7 +91,7 @@ const index = () => {
           <div className="col-lg-8 col-md-12 col-sm-12">
             <DashboardCustomCard>
             <div className="p-3 ">
-              {/* <VisitorsChart /> */}
+              <VisitorsChart />
             </div>
             </DashboardCustomCard>
           </div>

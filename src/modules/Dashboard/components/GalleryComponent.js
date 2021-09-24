@@ -1,11 +1,26 @@
 import { Form, Input } from "antd";
 import { Upload, message } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
+import UploadImg from "./UploadImg";
+import { useEffect, useState } from "react";
 
 const { Dragger } = Upload;
 
 const GalleryComponent = (props) => {
+  const [fileList, setFileList] = useState([])
 
+
+  const [uploadedFiles, setUploadedFiles] = useState([])
+
+  useEffect(() => {
+    setUploadedFiles([...fileList])
+  }, [fileList])
+
+  const handleUploadedFile = (fileList) => {
+   
+    fileList && setFileList([...fileList])
+     
+  }
 
   return (
     <div className="addForm container-fluid">
@@ -20,7 +35,7 @@ const GalleryComponent = (props) => {
           {/* <label>
               Business Name<sup className="text-danger">*</sup>
             </label> */}
-         <Form.Item
+         {/* <Form.Item
               name="images"
               rules={[
                 {
@@ -30,7 +45,8 @@ const GalleryComponent = (props) => {
               ]}
             >
               <Input type="file" allowClear multiple/>
-            </Form.Item>
+            </Form.Item> */}
+             <UploadImg fileList={fileList} onUpload={handleUploadedFile} />
         </div>
       </div>
 

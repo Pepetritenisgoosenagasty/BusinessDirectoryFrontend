@@ -28,33 +28,6 @@ const Add = () => {
   let inputData = form;
 
 
-  // const steps = [
-  //   {
-  //     key: 1,
-  //     title: "About Business",
-  //     content: <AboutContent />,
-  //   },
-  //   {
-  //     key: 2,
-  //     title: "Business Contact",
-  //     content: <ContactComponents inputData={inputData} />,
-  //   },
-  //   {
-  //     key: 3,
-  //     title: "Gallery",
-  //     content: <GalleryComponent />,
-  //   },
-  //   {
-  //     key: 4,
-  //     title: "Social Media Handles",
-  //     content: <SocialComponent />,
-  //   },
-  //   {
-  //     key: 5,
-  //     title: "Opening Hours",
-  //     content: <HoursComponent />,
-  //   },
-  // ];
 
   const [isloadingSubmit, setIsloadingSubmit] = useState(false);
 
@@ -139,10 +112,40 @@ const Add = () => {
 
   const useLocation = useGetUserLocation();
 
+  const steps = [
+    {
+      key: 1,
+      title: "About Business",
+      content: <AboutContent />,
+    },
+    {
+      key: 2,
+      title: "Business Contact",
+      content:  <ContactComponents inputData={inputData} useLocation={useLocation}
+    />,
+    },
+    {
+      key: 3,
+      title: "Gallery",
+      content: <GalleryComponent />,
+    },
+    {
+      key: 4,
+      title: "Social Media Handles",
+      content: <SocialComponent />,
+    },
+    {
+      key: 5,
+      title: "Opening Hours",
+      content: <HoursComponent />,
+    },
+  ];
+
+
   return (
     <>
       <div className="container-fluid content py-5">
-        <div className="row dashboard__text container-fluid   py-3">
+        {/* <div className="row dashboard__text container-fluid   py-3">
           <div>
             <h5>Add New Business</h5>
           </div>
@@ -158,10 +161,10 @@ const Add = () => {
               <BiArrowBack /> Go Back
             </motion.button>
           </div>
-        </div>
+        </div> */}
         <Form form={form} onFinish={onFinish}>
           <div className="row">
-            <div className="col-12">
+            {/* <div className="col-12">
               <DashboardCustomCard>
                 <div className="p-3">
                   <AboutContent />
@@ -203,21 +206,16 @@ const Add = () => {
             <div className="col-6 mx-auto mt-3">
               <Button
                 loading={isloadingSubmit}
-                style={{
-                  background: "#379634",
-                  height: 50,
-                  width: "100%",
-                  borderRadius: 50,
-                }}
+                className="submit-button"
                 type="primary"
                 onClick={() => message.success("Processing complete!")}
                 htmlType="submit"
               >
                 Submit
               </Button>
-            </div>
+            </div> */}
 
-            {/* <StepForm  steps={steps}/> */}
+            <StepForm  steps={steps}/>
             {/* <div className="col-12">
             <DashboardCustomCard>
               <Steps current={current} className="px-3 py-3">

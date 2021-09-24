@@ -18,13 +18,36 @@
 
         .addBtn {
             button {
-                font-size: .7rem;
-                padding: 10px 15px;
-                background-color: #004BA8;
-                color: #fff;
-                border: none;
-                border-radius: 10px;
+                font-size: .7rem !important;
+                padding: 10px 15px !important;
+                background-color: #004BA8 !important;
+                color: #fff !important;
+                border: none !important;
+                border-radius: 10px !important;
+                width: 200px !important;
+                height: 40px !important;
             }
         }
     }
+
+  
+}
+
+.submit-button {
+    background: #379634 !important;
+    height: 50px !important;
+    width: 100% !important;
+    border-radius: 50px !important;
+}
+
+.submit-btn {
+    background: #379634 !important;
+    color: #fff !important;
+    width: 130px !important;
+}
+
+
+.previous-btn,
+.next-btn {
+    width: 100px !important;
 }

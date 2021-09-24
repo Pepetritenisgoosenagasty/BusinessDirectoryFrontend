@@ -38,11 +38,11 @@ const NavigationMenu = (props) => {
                 </Link>
               </li>
               {/* <li><Link href={PAGE_HOME}><a>Job Careers</a></Link></li> */}
-              <li className={`${pathname === 'termsConditions' ? 'activeClass' : ''}`}>
+              {/* <li className={`${pathname === 'termsConditions' ? 'activeClass' : ''}`}>
                 <Link href={PAGE_HOME}>
                   <a>Terms & Conditions</a>
                 </Link>
-              </li>
+              </li> */}
               {/* <li><Link href={PAGE_REGISTER}><a>Contact Us</a></Link></li> */}
             </ul>
           </div>

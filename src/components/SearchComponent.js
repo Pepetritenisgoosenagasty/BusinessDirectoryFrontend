@@ -154,7 +154,7 @@ const SearchComponent = () => {
         console.log('filter',option?.label)
         return option?.label
       }}
-      value={value}
+      value={searchText}
       options={options}
       onSelect={onSelect}
       onSearch={handleSearch}
