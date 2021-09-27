@@ -21,24 +21,38 @@ const ReviewTable = () => {
   const [title, setTitle] = useState("");
   const [width, setWidth] = useState()
   const [data, setData] = useState()
+  const [businessData, setBusinessData] = useState()
   const [record, setRecord] = useState({})
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
+  const { user } = userData();
+
+  const fetchBusinessId = async () => {
+    let businessData = await  dispatch(performGetAll(URL_GET_BUSINESS + '?_where[user_id]='+user?.id))
+    setBusinessData(businessData[0]?.place_id)
+    // console.log(reviews)
+  }
+
+  // console.log(businessData)
   
   const fetchReviews = async () => {
-    let reviews = await  dispatch(performGetAll(URL_REVIEWS + '?_where[business_id]=ChIJxeyZCXma3w8RKrwetDD3fiw'))
+    let reviews = await  dispatch(performGetAll(URL_REVIEWS + '?_where[business_id]='+ businessData))
      setData(reviews)
     // console.log(reviews)
   }
 
   useEffect(() => {
+    fetchBusinessId()
+  }, [user])
+
+  useEffect(() => {
     fetchReviews()
-  }, [])
-
+  }, [businessData])
   
-  const { user, isLoading, isError } = userData();
-  const objData = useGetEntity(URL_GET_BUSINESS  + `?user_id=${user?.id}`)
+ 
+//   const objData = useGetEntity(URL_GET_BUSINESS  + `?_where[user_id]=${user?.id}`)
 
-console.log(objData)
+// console.log(objData)
 
 
   const showModal = (record) => {

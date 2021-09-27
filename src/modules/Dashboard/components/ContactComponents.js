@@ -14,7 +14,8 @@ const { Option } = Select;
 
 const ContactComponents = (props) => {
   const [value, setValue] = useState();
-  const [data, setData] = useState({})
+  const [data, setData] = useState({});
+  const [business, setBusiness] = useState([])
   
  
 
@@ -22,13 +23,26 @@ const ContactComponents = (props) => {
     setData({...props?.useLocation})
   }, [props?.useLocation])
 
-props.inputData?.setFieldsValue({
-  lat: data?.lat,
-  lng: data?.lng
-})
+  useEffect(() => {
+    setBusiness({...props?.businessData})
+  }, [props?.businessData])
 
+ useEffect(() => {
+  props.inputData?.setFieldsValue({
+    lat: data?.lat,
+    lng: data?.lng,
+    city: business?.city,
+    address: business?.address,
+    phone_number: business?.phone_number,
+    email: business?.email,
+    website: business?.website
+  
+  })
+  
+ }, [data,business])
 
 // console.log(props)
+
 
  //    Marker
  const MarkerContent = () => {
@@ -41,11 +55,11 @@ props.inputData?.setFieldsValue({
     <>
       <Marker
         position={position}
-        animation={google.maps.Animation.BOUNCE}
-        icon={{
-          url: "https://img.icons8.com/glyph-neue/64/000000/marker.png",
-          scaledSize: new window.google.maps.Size(40, 40),
-        }}
+        // animation={google.maps.Animation.BOUNCE}
+        // icon={{
+        //   url: "https://img.icons8.com/glyph-neue/64/000000/marker.png",
+        //   scaledSize: new window.google.maps.Size(40, 40),
+        // }}
       />
     </>
   );
@@ -96,38 +110,6 @@ props.inputData?.setFieldsValue({
             </div>
             <div className="col-12">
               <label>
-                Address
-              </label>
-              <Form.Item
-                name="address"
-              >
-               <Input placeholder="eg. Naa Adjeley Street 435"/>
-              </Form.Item>
-            </div>
-            <div className="col-12">
-              <label>
-                Phone Number<sup className="text-danger">*</sup>
-              </label>
-              <Form.Item
-                name="phone_number"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <PhoneInput
-                  international
-                  countryCallingCodeEditable={false}
-                  defaultCountry="GH"
-                  value={value}
-                  onChange={setValue}
-                  maxLength={17}
-                />
-              </Form.Item>
-            </div>
-            <div className="col-12">
-              <label>
                 Email<sup className="text-danger">*</sup>
               </label>
               <Form.Item
@@ -156,16 +138,52 @@ props.inputData?.setFieldsValue({
         </div>
 
         <div className="col-lg-6 col-md-12 col-sm-12">
-          <label>
+          {/* <label>
             Your Current Location
-          </label>
-          <div style={{ width: "100%", height: "290px" }}>
-            <Map zoom={10}> 
+          </label> */}
+          {/* <div style={{ width: "100%", height: "290px" }}> */}
+            {/* <Map zoom={10} apiKey={process.env.googleApisKey}> 
               <MarkerContent />
-            </Map>
+            </Map> */}
+          {/* </div> */}
+          <div className="row">
+          <div className="col-12">
+              <label>
+                Address
+              </label>
+              <Form.Item
+                name="address"
+              >
+               <Input placeholder="eg. Naa Adjeley Street 435"/>
+              </Form.Item>
+            </div>
           </div>
-
-        <div className="row mt-4">
+          <div className="row">
+          <div className="col-12">
+              <label>
+                Phone Number<sup className="text-danger">*</sup>
+              </label>
+              <Form.Item
+                name="phone_number"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+                {/* <PhoneInput
+                  international
+                  countryCallingCodeEditable={false}
+                  defaultCountry="GH"
+                  value={value}
+                  onChange={setValue}
+                  maxLength={17}
+                /> */}
+                 <Input type="tel" placeholder="000 0000 000 000" />
+              </Form.Item>
+            </div>
+          </div>
+        <div className="row">
         <div className="col-6">
               <label>
                 Latitude

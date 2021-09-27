@@ -284,10 +284,10 @@ input {
     }
 
     button {
-        background: #fff !important;
+        background: #fff ;
        
-        width: 35px !important;
-        height: 26px !important;
+        // width: 35px;
+        // height: 26px;
     
     }
 
@@ -296,22 +296,22 @@ input {
     font-size: .7rem !important;
 }
 
-.steps-action {
-    display: flex;
-    justify-content: space-between;
-    .ant-btn {
-        width: 200px;
-        border-radius: 30px;
-        font-size: .7rem;
-        font-weight: 600;
-        border: none !important;
-        box-shadow: 0 0 8px -4px rgb(0 0 0 / 50%);
+// .steps-action {
+//     display: flex;
+//     justify-content: space-between;
+//     .ant-btn {
+//         width: 200px;
+//         border-radius: 30px;
+//         font-size: .7rem;
+//         font-weight: 600;
+//         border: none !important;
+//         box-shadow: 0 0 8px -4px rgb(0 0 0 / 50%);
 
-    } 
-    .ant-btn-primary {
-        background: #004ba8;
-    }
-}
+//     } 
+//     .ant-btn-primary {
+//         background: #004ba8;
+//     }
+// }
 
 .ant-upload.ant-upload-drag  {
     // height: 300px !important;
@@ -383,6 +383,7 @@ input {
     }
     .ant-btn > .anticon {
         line-height: 2 !important;
+        // padding-right: 50px !important;
     }
 
     .ant-btn-primary {
@@ -466,13 +467,13 @@ input {
 
 .changePassword {
     .ant-btn-primary{
-         width: 100%;
-         height: 40px;
+         width: 100% !important;
+         height: 40px !important;
          border: 1px solid #004ba8 !important;
          color: #004ba8 !important;
-         border-radius: 10px;
+         border-radius: 10px !important;
          background: #fff !important;
-         transition: all .3s ease;
+         transition: all .3s ease !important;
 
          &:hover {
             border: 1px solid transparent !important;
@@ -510,10 +511,19 @@ input {
     color: #000 !important;
 }
 
-.ant-btn-primary {
+// .ant-btn-primary {
        
-    background: #004ba8 !important;
-    border-color: #004ba8 !important;
+//     background: #004ba8 !important;
+//     border-color: #004ba8 !important;
+// }
+
+
+.ant-upload-list-item:hover .ant-upload-list-item-card-actions-btn {
+    background: transparent !important;
+}
+
+.ant-descriptions-bordered .ant-descriptions-item-label {
+    font-weight: 600 !important;
 }
 
   

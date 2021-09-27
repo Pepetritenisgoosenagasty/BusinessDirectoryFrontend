@@ -23,10 +23,10 @@ const defaultOptions = {
   styles: MapStyle
 };
 
-const  MapComponent = ({children, ApiUrl, centerPin, zoom}) => {
+const  MapComponent = ({children, apiKey, centerPin, zoom}) => {
   return (
     <LoadScript
-    googleMapsApiKey={`${process.env.googleApisKey}`}
+    googleMapsApiKey={`${apiKey}`}
     >
       <GoogleMap
          mapContainerStyle={containerStyle}

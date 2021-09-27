@@ -18,6 +18,7 @@ const index = () => {
   const [origin, setOrigin] = useState({});
   const [destination, setDestination] = useState({});
   const [directionResponse, setDirectionResponse] = useState(null);
+  const API_KEY = process.env.googleApisKey;
 
   const router = useRouter();
 
@@ -25,7 +26,7 @@ const index = () => {
 
   const { data, isLoading, isError } = useGetPlaceDetails({
     place_id: router.query.id,
-    apiKey: `${process.env.googleApisKey}`,
+    apiKey: `${API_KEY}`,
   });
 
   useEffect(() => {
@@ -55,7 +56,7 @@ const index = () => {
         </div>
         <MapComponent
           centerPin={origin}
-          ApiUrl={`${process.env.googleApisKey}`}
+          apiKey={`${API_KEY}`}
         >
           <>
             <DirectionsRenderer

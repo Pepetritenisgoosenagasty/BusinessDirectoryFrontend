@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { Divider } from 'antd';
 import { InfomationCard } from '@/components/CardComponent';
 import CommentComponent from './Comment';
+import { SiFacebook, SiTwitter, SiInstagram, SiYoutube, SiLinkedin, SiWhatsapp } from "react-icons/si";
 
 
 const CardContainer = styled.div`
@@ -61,7 +62,14 @@ const DetailsSidebar = (props) => {
 
          <div className=" my-2">
                 <InfomationCard title="Social Media">
-
+                  <div className="d-flex justify-content-between px-3">
+                    <span><SiFacebook style={{ fontSize: 30}}/></span>
+                    <span><SiTwitter style={{ fontSize: 30}}/></span>
+                    <span><SiInstagram style={{ fontSize: 30}}/></span>
+                    <span><SiYoutube style={{ fontSize: 30}}/></span>
+                    <span><SiLinkedin style={{ fontSize: 30}}/></span>
+                    <span><SiWhatsapp style={{ fontSize: 30}}/></span>
+                  </div>
                 </InfomationCard>
               </div>
      </div>

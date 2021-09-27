@@ -1,11 +1,43 @@
 import { Form, Input } from "antd";
 import { Upload, message } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
+import UploadImg from "./UploadImg";
+import { useEffect, useState } from "react";
 
 const { Dragger } = Upload;
 
 const GalleryComponent = (props) => {
+  const [fileList, setFileList] = useState([])
+  const [business, setBusiness] = useState([])
 
+
+  useEffect(() => {
+    setBusiness({...props?.businessData})
+  }, [props?.businessData])
+
+useEffect(() => {
+  props.inputData?.setFieldsValue({
+    video: business?.video,
+  
+  })
+}, [business])
+
+// useEffect(() => {
+//   props.handleUpload(fileList)
+// }, [fileList])
+
+
+  const [uploadedFiles, setUploadedFiles] = useState([])
+
+  useEffect(() => {
+    setUploadedFiles([...fileList])
+  }, [fileList])
+
+  const handleUploadedFile = (fileList) => {
+   
+    fileList && setFileList([...fileList])
+     
+  }
 
   return (
     <div className="addForm container-fluid">
@@ -20,7 +52,7 @@ const GalleryComponent = (props) => {
           {/* <label>
               Business Name<sup className="text-danger">*</sup>
             </label> */}
-         <Form.Item
+         {/* <Form.Item
               name="images"
               rules={[
                 {
@@ -30,11 +62,12 @@ const GalleryComponent = (props) => {
               ]}
             >
               <Input type="file" allowClear multiple/>
-            </Form.Item>
+            </Form.Item> */}
+             <UploadImg fileList={fileList} onUpload={handleUploadedFile} />
         </div>
       </div>
 
-      <div className="row">
+      {/* <div className="row">
         <div className="col-lg-12 col-md-12 col-sm-12">
           <label>Video URL <small>(Optional)</small></label>
           <Form.Item
@@ -44,7 +77,7 @@ const GalleryComponent = (props) => {
             <Input placeholder="https://" />
           </Form.Item>
         </div>
-      </div>
+      </div> */}
 
       <style jsx>{`
         h5 {

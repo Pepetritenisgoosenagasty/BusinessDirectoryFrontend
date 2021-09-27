@@ -1,6 +1,23 @@
 import { Form, Input } from "antd";
+import { useEffect, useState } from "react";
 
-const SocialComponent = () => {
+const SocialComponent = (props) => {
+  const [business, setBusiness] = useState([])
+
+
+  useEffect(() => {
+    setBusiness({...props?.businessData})
+  }, [props?.businessData])
+
+
+useEffect(() => {
+  props?.inputData?.setFieldsValue({
+    linkedin: business?.social_media_handles?.linkedIn,
+    facebook: business?.social_media_handles?.facebook,
+    twitter: business?.social_media_handles?.twitter,
+    youtube: business?.social_media_handles?.youtube,
+  })
+}, [business])
     return (
         <div className="addForm container-fluid">
         <div>

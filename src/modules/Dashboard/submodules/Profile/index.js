@@ -89,9 +89,12 @@ useEffect(() => {
   return (
     <>
       <div className="dashboard container-fluid content py-5">
-        <div className="row dashboard__text  px-5 py-3">
+       <div className="row px-4 mb-5">
+         <div className="col-lg-12">
+         <DashboardCustomCard>
+         <div className="row dashboard__text  px-4 py-2">
           <div>
-            <h5>My Profile</h5>
+            <h6 className="m-0">My Profile</h6>
           </div>
 
           <div className="addBtn">
@@ -106,6 +109,10 @@ useEffect(() => {
             </motion.button>
           </div>
         </div>
+
+         </DashboardCustomCard>
+         </div>
+       </div>
         <Form form={form} onFinish={onFinish}>
           <div className="row px-4">
             <div className="col-lg-3 col-md-12 col-sm-12">

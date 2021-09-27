@@ -1,10 +1,23 @@
+import { formatTime } from "@/constants/DateFormat";
 import { Form, Input, Checkbox } from "antd";
 import { TimePicker } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import moment from 'moment';
 
 const OpeningDays = (props) => {
   const [disabled, setDisabled] = useState(true);
+  const [business, setBusiness] = useState([])
 
+
+  useEffect(() => {
+    setBusiness({...props?.data?.businessData})
+  }, [props?.data?.businessData])
+
+props?.data?.inputData?.setFieldsValue({
+  days: moment(business?.working_hours?.Monday),
+
+})
+  // console.log(props)
   const handleOnChange = (e) => {
     // console.log("checked = ", e.target.value);
     e.target.checked;
