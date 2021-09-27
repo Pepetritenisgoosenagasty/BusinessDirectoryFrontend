@@ -1,15 +1,29 @@
 import { Form, Input, Button, Select, Tag } from "antd";
 import { useCategories } from "src/hooks/useGetCategories";
 import { Checkbox, Row, Col } from 'antd';
+import { useEffect, useState } from "react";
 const { Option } = Select;
 const { TextArea } = Input;
 
 
 
-const AboutContent = () => {
+const AboutContent = (props) => {
+const [business, setBusiness] = useState([])
+  const { details } = useCategories()
 
-  const { details, isLoading, isError} = useCategories()
+  useEffect(() => {
+    setBusiness({...props?.businessData})
+  }, [props?.businessData])
 
+useEffect(() => {
+  props.inputData?.setFieldsValue({
+    name: business?.name,
+    category: business?.category,
+    description: business?.description,
+    amenities: business?.amenities
+  })
+  
+}, [business])
   return (
     <div className="addForm container-fluid">
       <div>

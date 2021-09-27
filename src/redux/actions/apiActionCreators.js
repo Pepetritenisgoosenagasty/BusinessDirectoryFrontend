@@ -57,7 +57,7 @@ export const performCreate = (path,data) => dispatch => {
             }
           }))
 
-          return true
+          return data 
 
     }).catch(error => {
       if(error){

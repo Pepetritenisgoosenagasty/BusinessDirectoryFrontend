@@ -80,7 +80,8 @@ const Navbar = () => {
                 backgroundColor: "#fde3cf",
               }}
             >
-              ED
+              {user?.firstname?.charAt(0)}
+              {user?.lastname?.charAt(0)}
             </Avatar>
             <a
               className="ant-dropdown-link ml-2"

@@ -1,7 +1,7 @@
 import { DashboardCustomCard } from "@/components/CardComponent";
 import { DashboardFooter } from "@/components/DashboardFooter";
 import { Steps, Button, message, Form } from "antd";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import AboutContent from "../../components/AboutComponent";
 import ContactComponents from "../../components/ContactComponents";
 import GalleryComponent from "../../components/GalleryComponent";
@@ -12,13 +12,14 @@ import { BiArrowBack } from "react-icons/bi";
 import StepForm from "../StepForm";
 import { Marker } from "@react-google-maps/api";
 import useGetUserLocation from "src/hooks/useGetUserLocation";
-import { PAGE_EDIT_BUSINESS, URL_ADD_BUSINESSES, URL_GET_BUSINESS } from "@/constants/routes";
+import { PAGE_BUSINESS, PAGE_EDIT_BUSINESS, URL_ADD_BUSINESSES, URL_GET_BUSINESS } from "@/constants/routes";
 import { useDispatch } from "react-redux";
 import { performCreate } from "src/redux/actions/apiActionCreators";
 import { useRouter } from "next/router";
 import { userData } from "src/hooks/useLoggInUser";
 import { nanoid } from "nanoid";
 import useGetEntity from "src/hooks/useGetEntity";
+import authServices from "src/services/auth.services";
 
 
 const Add = () => {
@@ -27,42 +28,14 @@ const Add = () => {
 
   let inputData = form;
 
+  const [images, setImages] = useState([])
 
 
   const [isloadingSubmit, setIsloadingSubmit] = useState(false);
 
   const dispatch = useDispatch();
 
-  const [current, setCurrent] = useState(0);
-
-  const next = () => {
-    setCurrent(current + 1);
-  };
-
-  const prev = () => {
-    setCurrent(current - 1);
-  };
-
-  const { user, isLoading, isError } = userData();
-
-  const router = useRouter()
-
-  let url = URL_GET_BUSINESS + `?_where[user_id]=${user?.id}`;
-
-  // const object = useGetEntity({
-  //   url: url,
-  // });
-
-  // console.log(object?.data?.id)
-
-
-    // if(!_.isEmpty(data)){
-    //   form.resetFields()
-    //   router.push(PAGE_EDIT_PROJECT+'/'+data.id);
-     
-    // }
-
-
+  const { user } = userData();
 
   const onFinish = (values) => {
     try {
@@ -88,19 +61,54 @@ const Add = () => {
             linkedIn: values.linkedin,
             facebook: values.facebook,
             twitter:  values.twitter,
-            youtube: values.youtube
+            youtube: values.youtube,
           },
           place_id: nanoid(50),
+          published_at: null
         })
       )
         .then((data) => {
           
           if (data == true || data.length > 0) {
-            form.resetFields();
-            router.push(PAGE_EDIT_BUSINESS+'/'+user?.id);
+           
+            // router.push(PAGE_BUSINESS);
 
-            console.log(data)
+            // console.log(data)
+            uploadProfileImage(data)
           }
+        })
+        // .finally(() => {
+        //   setIsloadingSubmit(false);
+        // });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+
+  const uploadProfileImage = (data) => {
+    try {
+      let data_id = data?.id;
+
+      let new_formdata = new FormData();
+
+      images.forEach(({ originFileObj }) => new_formdata.append(`files`, originFileObj, originFileObj.name))
+
+      // new_formdata.append("files", fileObject);
+      new_formdata.append("ref", "businesses");
+      new_formdata.append("refId", data_id);
+      new_formdata.append("field", "galleries");
+      // new_formdata.append("source", "users-permissions");
+
+      setIsloadingSubmit(true);
+      authServices
+        .requestPOST("upload", new_formdata)
+        .then((res) => {
+          console.log(res.data)
+        })
+        .catch((err) => {
+          console.log(err);
         })
         .finally(() => {
           setIsloadingSubmit(false);
@@ -110,8 +118,14 @@ const Add = () => {
     }
   };
 
+
   const useLocation = useGetUserLocation();
 
+  const handleUpload = (data) => {
+    
+  }
+
+  
   const steps = [
     {
       key: 1,
@@ -126,138 +140,28 @@ const Add = () => {
     },
     {
       key: 3,
-      title: "Gallery",
-      content: <GalleryComponent />,
-    },
-    {
-      key: 4,
       title: "Social Media Handles",
       content: <SocialComponent />,
     },
     {
-      key: 5,
+      key: 4,
       title: "Opening Hours",
       content: <HoursComponent />,
     },
+    {
+      key: 5,
+      title: "Gallery",
+      content: <GalleryComponent handleUpload={handleUpload} />,
+    }
   ];
 
 
   return (
     <>
       <div className="container-fluid content py-5">
-        {/* <div className="row dashboard__text container-fluid   py-3">
-          <div>
-            <h5>Add New Business</h5>
-          </div>
-
-          <div className="addBtn">
-            <motion.button
-              whileHover={{
-                scale: 1.1,
-                textShadow: "0px 0px 4px gray",
-              }}
-              onClick={() => router.back()}
-            >
-              <BiArrowBack /> Go Back
-            </motion.button>
-          </div>
-        </div> */}
         <Form form={form} onFinish={onFinish}>
           <div className="row">
-            {/* <div className="col-12">
-              <DashboardCustomCard>
-                <div className="p-3">
-                  <AboutContent />
-                </div>
-              </DashboardCustomCard>
-            </div>
-            <div className="col-12 mt-3">
-              <DashboardCustomCard>
-                <div className="p-3">
-                  <ContactComponents
-                    inputData={inputData}
-                    useLocation={useLocation}
-                  />
-                </div>
-              </DashboardCustomCard>
-            </div>
-            <div className="col-12 mt-3">
-              <DashboardCustomCard>
-                <div className="p-3">
-                  <GalleryComponent />
-                </div>
-              </DashboardCustomCard>
-            </div>
-            <div className="col-12 mt-3">
-              <DashboardCustomCard>
-                <div className="p-3">
-                  <SocialComponent />
-                </div>
-              </DashboardCustomCard>
-            </div>
-            <div className="col-12 mt-3">
-              <DashboardCustomCard>
-                <div className="p-3">
-                  <HoursComponent />
-                </div>
-              </DashboardCustomCard>
-            </div>
-
-            <div className="col-6 mx-auto mt-3">
-              <Button
-                loading={isloadingSubmit}
-                className="submit-button"
-                type="primary"
-                onClick={() => message.success("Processing complete!")}
-                htmlType="submit"
-              >
-                Submit
-              </Button>
-            </div> */}
-
             <StepForm  steps={steps}/>
-            {/* <div className="col-12">
-            <DashboardCustomCard>
-              <Steps current={current} className="px-3 py-3">
-                {steps.map((item) => (
-                  <Step key={item.title} title={item.title} />
-                ))}
-              </Steps>
-            </DashboardCustomCard>
-
-            <DashboardCustomCard>
-            <div className="steps-content px-3 py-3 mt-3">
-                {steps[current].content}
-            </div>
-            </DashboardCustomCard>
-            <div className="steps-action mt-4">
-              
-             <div>
-             {current > 0 && (
-                 <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
-                  Previous
-                </Button>
-              )}
-             </div>
-
-              <div>
-              {current < steps.length - 1 && (
-                  <Button type="primary" onClick={() => next()}>
-                  Next
-                </Button>
-              )}
-              {current === steps.length - 1 && (
-                  <Button
-                  style={{ background: '#379634 '}}
-                  type="primary"
-                  onClick={() => message.success("Processing complete!")}
-                  >
-                  Submit
-                </Button>
-              )}
-              </div>
-            </div>
-          </div> */}
           </div>
         </Form>
       </div>

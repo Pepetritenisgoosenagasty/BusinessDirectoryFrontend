@@ -181,7 +181,7 @@ export const GetDirectionCard = (props) => {
         </div>
         <div className="warning my-3 px-2 py-2 text-justify">
           <h6>
-            Walking directions are in beta. Use caution – This route may be
+            Driving directions are in beta. Use caution – This route may be
             missing sidewalks or pedestrian paths.
           </h6>
         </div>

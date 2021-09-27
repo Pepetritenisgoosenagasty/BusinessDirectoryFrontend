@@ -1,6 +1,8 @@
+import { useState } from "react"
 import OpeningDays from "./OpeningDays"
 
-const HoursComponent = () => {
+const HoursComponent = (props) => {
+
 
   const Days = ["Monday", "Tuesday", "Wednesday", "Thunday", "Friday", "Saturday", "Sunday"]
   
@@ -16,7 +18,7 @@ const HoursComponent = () => {
          
            {
              Days.map((day, i) => (
-               <OpeningDays key={i} days={day} />
+               <OpeningDays key={i} days={day} data={props}/>
              ))
            }
           </div>

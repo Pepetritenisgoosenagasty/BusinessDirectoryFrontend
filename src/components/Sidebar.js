@@ -6,7 +6,7 @@ import { AiOutlineMessage } from "react-icons/ai";
 import { AiOutlineLogout } from "react-icons/ai";
 import { ImEye } from "react-icons/im";
 import { Tooltip } from "antd";
-import { PAGE_ADD_BUSINESS, PAGE_DASHBOARD, PAGE_LOGIN, PAGE_PROFILE, PAGE_REVIEWS } from "@/constants/routes";
+import { PAGE_BUSINESS, PAGE_DASHBOARD, PAGE_LOGIN, PAGE_PROFILE, PAGE_REVIEWS } from "@/constants/routes";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { performUserLogout } from "src/redux/features/authSlice";
@@ -44,7 +44,7 @@ const Sidebar = () => {
             </li>
           </Tooltip>
            </Link>
-          <Link href={PAGE_ADD_BUSINESS }>
+          <Link href={PAGE_BUSINESS }>
           <Tooltip placement="right" title="My Business">
           <li className={`${pathname.split('/').includes('business') ? "activeMenu" : ''}`}>
             <a>

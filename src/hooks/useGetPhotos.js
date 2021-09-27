@@ -7,7 +7,7 @@ export function useGetPhotos (photo_reference) {
     const { data, error } = useSWR(`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${photo_reference}&key=${process.env.googleApisKey}`, fetcher)
   
     return {
-      details: data,
+      photoData: data,
       isLoading: !error && !data,
       isError: error
     }
