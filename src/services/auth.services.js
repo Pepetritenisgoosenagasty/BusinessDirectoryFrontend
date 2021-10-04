@@ -67,6 +67,14 @@ class AuthService {
     });
   }
 
+  requestPOSTReviews(path, data) {
+    return axios.post(this.domain + path, data, {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+  }
+
   requestPUT(path,data) {
     return axios.put(this.domain + path , data, {
       headers: this.getHeaders(),

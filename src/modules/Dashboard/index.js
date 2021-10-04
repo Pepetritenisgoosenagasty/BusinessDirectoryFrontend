@@ -150,14 +150,14 @@ const index = () => {
           </div>
         </div>
         <div className="row px-4 mt-4">
-          <div className="col-lg-8 col-md-12 col-sm-12">
+          {/* <div className="col-lg-8 col-md-12 col-sm-12">
             <DashboardCustomCard>
             <div className="p-3 ">
               <VisitorsChart />
             </div>
             </DashboardCustomCard>
-          </div>
-          <div className="col-lg-4 col-md-12 col-sm-12">
+          </div> */}
+          <div className="col-lg-6 col-md-12 col-sm-12 mx-auto">
             <DashboardCustomCard>
               <ReviewLists />
             </DashboardCustomCard>

@@ -6,7 +6,7 @@ import {
   AiOutlineExclamationCircle,
   AiOutlineStar,
 } from "react-icons/ai";
-import { Rate, Tag, Image } from 'antd';
+import { Rate, Tag, Image, Empty } from 'antd';
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import {
@@ -114,7 +114,7 @@ const Company = () => {
                       <span> <BiMap style={{ color: "#004ba8", fontSize: 20}} /> {details?.address}</span>
                     </div>
                     <div>
-                      <span> <BiPhoneCall style={{ color: "#004ba8", fontSize: 20}}/> {"+" + phoneNumberFormatter(details?.phone_number)}</span>
+                      <span> <BiPhoneCall style={{ color: "#004ba8", fontSize: 20}}/> {phoneNumberFormatter(details?.phone_number)}</span>
                     </div>
                     <div>
                       <span> <BiEnvelope style={{ color: "#004ba8", fontSize: 20}}/> {details?.email}</span>
@@ -143,9 +143,14 @@ const Company = () => {
                   </div>
                 </div>
                 <div className="row">
-                  {/* <div className="col-12">
-                    <InfomationCard title="Listing Features"></InfomationCard>
-                  </div> */}
+                  <div className="col-12">
+                    <InfomationCard title="Listing Features">
+                      <div>
+                      
+                        {details?.amenities?.length > 0 ? details?.amenities?.join(", ") : (<Empty description="Not Provided "/>)}
+                      </div>
+                    </InfomationCard>
+                  </div>
                   <div className="col-12 my-2">
                     <InfomationCard title="Galleries/Photos">
                     <div className="pb-4">

@@ -67,6 +67,30 @@ export const performCreate = (path,data) => dispatch => {
         return false
     })
 
+}
+
+export const performCreateReviews = (path,data) => dispatch => {
+
+  return authServices.requestPOSTReviews(path,data).then(res => {
+      let {data} = res
+      dispatch(enqueueSnackbar({
+          // message: data?.message,
+          message: "Review Submitted Successfully",
+          options: {
+            variant: 'success' 
+          }
+        }))
+
+        return data 
+
+  }).catch(error => {
+    if(error){
+
+      handleError(error, dispatch)
+    }
+      return false
+  })
+
 } 
 
 export const performUpdate = (path,data) => dispatch => {

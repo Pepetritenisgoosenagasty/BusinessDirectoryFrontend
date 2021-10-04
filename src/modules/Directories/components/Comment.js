@@ -5,7 +5,7 @@ import moment from "moment";
 import { useState } from "react";
 import ReactStars from "react-rating-stars-component";
 import { useDispatch } from "react-redux";
-import { performCreate } from "src/redux/actions/apiActionCreators";
+import { performCreate, performCreateReviews } from "src/redux/actions/apiActionCreators";
 import { handleKeyDown } from "src/utils/filterKeyCodes";
 
 const { TextArea } = Input;
@@ -13,15 +13,15 @@ const { TextArea } = Input;
 const CommentComponent = (props) => {
   const [submitting, setSubmitting] = useState(false);
   const dispatch = useDispatch()
-console.log(props)
+// console.log(props)
   const [form] = Form.useForm()
 
   const onFinish= (values) => {
    
     try {
-      values
+      
       dispatch(
-        performCreate(URL_REVIEWS, {
+        performCreateReviews(URL_REVIEWS, {
           name: values.name,
           rate: values.rate,
           message: values.message,
@@ -30,6 +30,7 @@ console.log(props)
       ).finally(() => {
         setSubmitting(false)
         props?.reviews?.refetchEntity()
+        form.resetFields()
       });
       
       
@@ -37,7 +38,6 @@ console.log(props)
       console.log(error)
   }
 
-  form.resetFields()
 
   }
 

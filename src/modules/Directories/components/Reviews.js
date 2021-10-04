@@ -1,3 +1,4 @@
+import { formatDateHuman } from "@/constants/DateFormat";
 import { Comment, Tooltip, List } from "antd";
 import Avatar from "antd/lib/avatar/avatar";
 import moment from "moment";
@@ -9,7 +10,7 @@ const Reviews = (props) => {
 
   useEffect(() => {
     setListData(props?.data?.data);
-  }, [props?.data?.data]);
+  }, [props?.data]);
 
   // console.log(props)
 
@@ -50,8 +51,8 @@ const Reviews = (props) => {
                   </>
                 }
                 datetime={
-                  <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
-                    <span>{item.created_at}</span>
+                  <Tooltip title="">
+                    <span>{formatDateHuman(item.created_at)}</span>
                   </Tooltip>
                 }
               />

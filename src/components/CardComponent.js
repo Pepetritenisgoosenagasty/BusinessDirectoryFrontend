@@ -240,13 +240,13 @@ const BadgeSpan = styled.span`
 `;
 
 export const BusinessListCard = (props) => {
-
+// console.log(props)
   return (
     <Link href={props?.href}>
       <OverviewWrapper onMouseEnter={props?.handleMouseOver}>
         <ImageContainer>
           <img
-            src={props?.url ?? props?.data[0]?.url }
+            src={props?.imgUrl}
             alt="Picture of the company"
             width={300}
             height={100}
@@ -268,7 +268,7 @@ export const BusinessListCard = (props) => {
                     />
             </div>
           <h5>
-            {name}
+            {props?.name}
             {/* <span className="ml-1">
               <img src={icon && icon} width="15" height="15" />
             </span> */}
@@ -290,7 +290,7 @@ export const BusinessListCard = (props) => {
               <span>
                 <FiPhoneCall /> <strong>Phone #</strong>:{" "}
 
-                {"+" + phoneNumberFormatter(props?.phone) ?? "N/A"}
+                {props?.phone ?? "N/A"}
               </span>
             </div>
             <div className="mt-1 pr-5">

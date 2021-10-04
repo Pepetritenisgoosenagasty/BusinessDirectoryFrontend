@@ -88,7 +88,7 @@ const onSearch = async value => {
           phone={result.phone_number}
           star={result.rate}
           location={result.address}
-          url={result.image}
+          imgUrl={result.image ?? result.galleries[0].url}
           total_ratings={result.user_rating}
           href={DIRECTORIES_PAGE + "/" + result.place_id}
           data={result.galleries}

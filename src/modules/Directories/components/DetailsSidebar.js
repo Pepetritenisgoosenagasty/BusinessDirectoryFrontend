@@ -9,6 +9,7 @@ import { InfomationCard } from '@/components/CardComponent';
 import CommentComponent from './Comment';
 import { SiFacebook, SiTwitter, SiInstagram, SiYoutube, SiLinkedin, SiWhatsapp } from "react-icons/si";
 import { formatTime } from '@/constants/DateFormat';
+import { Empty } from 'antd';
 
 
 const CardContainer = styled.div`
@@ -25,7 +26,7 @@ const DetailsSidebar = (props) => {
 
   useEffect(() => {
     setListData(props?.data)
-  }, [props, props?.data])
+  }, [props, props?.data, props?.reviews])
 
   // console.log(props)
 
@@ -45,11 +46,12 @@ const DetailsSidebar = (props) => {
         <div className=" my-2">
           <InfomationCard title="Social Media">
             <div className="d-flex justify-content-center px-3">
+              {!listData?.social_media_handles && (<Empty description="Not Provided "/>)}
               {listData?.social_media_handles?.facebook && (<a href={listData?.social_media_handles?.facebook} target="_blank" className="mr-4"><SiFacebook style={{ fontSize: 30 }} /></a>)}
               {listData?.social_media_handles?.twitter && (<a href={listData?.social_media_handles?.twitter} target="_blank" className="mr-4"><SiTwitter style={{ fontSize: 30 }} /></a>)}
               {listData?.social_media_handles?.instagram && (<a href={listData?.social_media_handles?.instagram} target="_blank" className="mr-4"><SiInstagram style={{ fontSize: 30 }} /></a>)}
               {listData?.social_media_handles?.youtube && (<a href={listData?.social_media_handles?.youtube} target="_blank" className="mr-4"><SiYoutube style={{ fontSize: 30 }} /></a>)}
-              {listData?.social_media_handles?.linkedin && (<a href={listData?.social_media_handles?.linkedin} target="_blank" className="mr-4"><SiLinkedin style={{ fontSize: 30 }} /></a>)}
+              {listData?.social_media_handles?.linkedIn && (<a href={listData?.social_media_handles?.linkedin} target="_blank" className="mr-4"><SiLinkedin style={{ fontSize: 30 }} /></a>)}
               {listData?.social_media_handles?.whatsapp && (<a href={listData?.social_media_handles?.whatsapp} target="_blank"><SiWhatsapp style={{ fontSize: 30 }} /></a>)}
             </div>
           </InfomationCard>
