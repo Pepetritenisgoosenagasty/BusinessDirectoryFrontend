@@ -1,7 +1,7 @@
 import { DashboardCustomCard } from "@/components/CardComponent";
 import { DashboardFooter } from "@/components/DashboardFooter";
 import { Steps, Button, message, Form } from "antd";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AboutContent from "../../components/AboutComponent";
 import ContactComponents from "../../components/ContactComponents";
 import GalleryComponent from "../../components/GalleryComponent";
@@ -20,22 +20,34 @@ import { userData } from "src/hooks/useLoggInUser";
 import { nanoid } from "nanoid";
 import useGetEntity from "src/hooks/useGetEntity";
 import authServices from "src/services/auth.services";
+import StepWizard from "react-step-wizard";
+
 
 
 const Add = () => {
   const { Step } = Steps;
   const [form] = Form.useForm();
-
+const router = useRouter();
   let inputData = form;
 
   const [images, setImages] = useState([])
-
+  let { query:{id} } = router;
 
   const [isloadingSubmit, setIsloadingSubmit] = useState(false);
 
   const dispatch = useDispatch();
 
-  const { user } = userData();
+  const { user } = userData(id);
+
+  const useLocation = useGetUserLocation();
+
+  useEffect(() => {
+    form.setFieldsValue({
+      lat: useLocation?.lat,
+      lng: useLocation?.lng,
+    })
+    
+   }, [useLocation])
 
   const onFinish = (values) => {
     try {
@@ -69,11 +81,9 @@ const Add = () => {
       )
         .then((data) => {
           
-          if (data == true || data.length > 0) {
+          if (data) {
            
-            // router.push(PAGE_BUSINESS);
 
-            // console.log(data)
             uploadProfileImage(data)
           }
         })
@@ -95,17 +105,17 @@ const Add = () => {
 
       images.forEach(({ originFileObj }) => new_formdata.append(`files`, originFileObj, originFileObj.name))
 
+
       // new_formdata.append("files", fileObject);
-      new_formdata.append("ref", "businesses");
+      new_formdata.append("ref", "business");
       new_formdata.append("refId", data_id);
       new_formdata.append("field", "galleries");
-      // new_formdata.append("source", "users-permissions");
 
       setIsloadingSubmit(true);
       authServices
-        .requestPOST("upload", new_formdata)
+        .requestUPLOAD("upload", new_formdata)
         .then((res) => {
-          console.log(res.data)
+          router.push(PAGE_BUSINESS);
         })
         .catch((err) => {
           console.log(err);
@@ -119,49 +129,56 @@ const Add = () => {
   };
 
 
-  const useLocation = useGetUserLocation();
+  
 
   const handleUpload = (data) => {
-    
+
+    console.log(data)
+    setImages([...data])
   }
 
-  
-  const steps = [
-    {
-      key: 1,
-      title: "About Business",
-      content: <AboutContent />,
-    },
-    {
-      key: 2,
-      title: "Business Contact",
-      content:  <ContactComponents inputData={inputData} useLocation={useLocation}
-    />,
-    },
-    {
-      key: 3,
-      title: "Social Media Handles",
-      content: <SocialComponent />,
-    },
-    {
-      key: 4,
-      title: "Opening Hours",
-      content: <HoursComponent />,
-    },
-    {
-      key: 5,
-      title: "Gallery",
-      content: <GalleryComponent handleUpload={handleUpload} />,
-    }
-  ];
 
 
   return (
     <>
       <div className="container-fluid content py-5">
+        <div className="row px-3 mb-5">
+         <div className="col-12">
+         <DashboardCustomCard>
+            <div className="px-3  py-3 d-flex justify-content-between">
+              <div className="row dashboard__text container-fluid ">
+                <div>
+                  <h6 className="m-0">Add New Business</h6>
+                </div>
+
+                <div className="addBtn">
+                  <motion.button
+                    whileHover={{
+                      scale: 1.1,
+                      textShadow: "0px 0px 4px gray",
+                    }}
+                    onClick={() => router.back()}
+                  >
+                    <BiArrowBack /> Go Back
+                  </motion.button>
+                </div>
+              </div>
+            </div>
+          </DashboardCustomCard>
+         </div>
+        </div>
         <Form form={form} onFinish={onFinish}>
           <div className="row">
-            <StepForm  steps={steps}/>
+            {/* <StepForm  steps={steps}/> */}
+           <div className="col-12">
+           <StepWizard>
+              <AboutContent />
+              <ContactComponents inputData={inputData} useLocation={useLocation}/>
+              <SocialComponent />
+              <HoursComponent />
+              <GalleryComponent isloadingSubmit={isloadingSubmit} handleUpload={handleUpload} />
+           </StepWizard>
+           </div>
           </div>
         </Form>
       </div>

@@ -37,6 +37,7 @@ props?.data?.inputData?.setFieldsValue({
          
         >
           <TimePicker.RangePicker
+          format="h:mm:ss A"
             disabled={disabled}
             style={{ width: "100%", borderRadius: 7 }}
           />

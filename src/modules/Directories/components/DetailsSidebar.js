@@ -8,6 +8,7 @@ import { Divider } from 'antd';
 import { InfomationCard } from '@/components/CardComponent';
 import CommentComponent from './Comment';
 import { SiFacebook, SiTwitter, SiInstagram, SiYoutube, SiLinkedin, SiWhatsapp } from "react-icons/si";
+import { formatTime } from '@/constants/DateFormat';
 
 
 const CardContainer = styled.div`
@@ -20,66 +21,96 @@ text-align: center;
 `
 
 const DetailsSidebar = (props) => {
-    const [listData, setListData] = useState()
+  const [listData, setListData] = useState()
 
-    useEffect(() => {
-        setListData(props?.data?.result)
-    }, [props, props?.data, props?.data?.result])
+  useEffect(() => {
+    setListData(props?.data)
+  }, [props, props?.data])
 
-    console.log(listData)
+  // console.log(props)
 
   return (
     <div className="list-content py-2">
       <div>
-      {listData?.website ? (<a id="website" href={listData?.website} target="_blank">Vist website</a>) : (<h5>Website: N/A</h5>)}
+        {listData?.website ? (<a id="website" href={listData?.website} target="_blank">Vist website</a>) : (<h5>Website: N/A</h5>)}
       </div>
       <div className="mt-3">
-      <Link href={PAGE_DIRECTIONS + '/' + listData?.place_id}>
-             <a id="direction" target="_blank">Get Directions</a>
-            
-             </Link>
+        <Link href={PAGE_DIRECTIONS + '/' + listData?.place_id}>
+          <a id="direction" target="_blank">Get Directions</a>
+
+        </Link>
       </div>
-     <div className="mt-5">
-     {/* <table>
-       <tbody>
-         <tr>
-           <td>
-             <Link href={PAGE_DIRECTIONS + '/' + listData?.place_id}>
-             <a id="website" href={listData?.website} target="_blank">Get Directions <GrDirections /></a>
-            
-             </Link>
-             <span className="ml-4"></span>
-            
-             
-           </td>
-           <td>
-             <span><HiOutlineLocationMarker /></span>
-             {listData?.vicinity}
-           </td>
-         </tr>
-       </tbody>
-     </table> */}
+      <div className="mt-5">
 
-         <div className=" my-2">
-                <InfomationCard title="Social Media">
-                  <div className="d-flex justify-content-between px-3">
-                    <span><SiFacebook style={{ fontSize: 30}}/></span>
-                    <span><SiTwitter style={{ fontSize: 30}}/></span>
-                    <span><SiInstagram style={{ fontSize: 30}}/></span>
-                    <span><SiYoutube style={{ fontSize: 30}}/></span>
-                    <span><SiLinkedin style={{ fontSize: 30}}/></span>
-                    <span><SiWhatsapp style={{ fontSize: 30}}/></span>
-                  </div>
-                </InfomationCard>
-              </div>
-     </div>
+        <div className=" my-2">
+          <InfomationCard title="Social Media">
+            <div className="d-flex justify-content-center px-3">
+              {listData?.social_media_handles?.facebook && (<a href={listData?.social_media_handles?.facebook} target="_blank" className="mr-4"><SiFacebook style={{ fontSize: 30 }} /></a>)}
+              {listData?.social_media_handles?.twitter && (<a href={listData?.social_media_handles?.twitter} target="_blank" className="mr-4"><SiTwitter style={{ fontSize: 30 }} /></a>)}
+              {listData?.social_media_handles?.instagram && (<a href={listData?.social_media_handles?.instagram} target="_blank" className="mr-4"><SiInstagram style={{ fontSize: 30 }} /></a>)}
+              {listData?.social_media_handles?.youtube && (<a href={listData?.social_media_handles?.youtube} target="_blank" className="mr-4"><SiYoutube style={{ fontSize: 30 }} /></a>)}
+              {listData?.social_media_handles?.linkedin && (<a href={listData?.social_media_handles?.linkedin} target="_blank" className="mr-4"><SiLinkedin style={{ fontSize: 30 }} /></a>)}
+              {listData?.social_media_handles?.whatsapp && (<a href={listData?.social_media_handles?.whatsapp} target="_blank"><SiWhatsapp style={{ fontSize: 30 }} /></a>)}
+            </div>
+          </InfomationCard>
+        </div>
+      </div>
 
-     <div className="mt-3">
-       <CardContainer>
-         <h5>Working Hours</h5>
-         {
+      <div className="mt-3">
+        <CardContainer>
+          <h5>Working Hours</h5>
+          <Divider />
+          <p>Modays:  {listData?.working_hours?.Mondays?.length > 0
+            ? formatTime(listData?.working_hours?.Mondays[0]) +
+            " - " +
+            formatTime(listData?.working_hours?.Mondays[1])
+            : "Closed"}
+          </p>
+          <Divider />
+          <p>Tuesdays:  {listData?.working_hours?.Tuesdays?.length > 0
+            ? formatTime(listData?.working_hours?.Tuesdays[0]) +
+            " - " +
+            formatTime(listData?.working_hours?.Tuesdays[1])
+            : "Closed"}
+          </p>
+          <Divider />
+          <p>Wednesdays:  {listData?.working_hours?.Wednesdays?.length > 0
+            ? formatTime(listData?.working_hours?.Wednesdays[0]) +
+            " - " +
+            formatTime(listData?.working_hours?.Wednesdays[1])
+            : "Closed"}
+          </p>
+          <Divider />
+          <p>Thursdays:  {listData?.working_hours?.Thursdays?.length > 0
+            ? formatTime(listData?.working_hours?.Thursdays[0]) +
+            " - " +
+            formatTime(listData?.working_hours?.Thursdays[1])
+            : "Closed"}
+          </p>
+          <Divider />
+          <p>Fridays:  {listData?.working_hours?.Fridays?.length > 0
+            ? formatTime(listData?.working_hours?.Fridays[0]) +
+            " - " +
+            formatTime(listData?.working_hours?.Fridays[1])
+            : "Closed"}
+          </p>
+          <Divider />
+          <p>Saturdays:  {listData?.working_hours?.Saturdays?.length > 0
+            ? formatTime(listData?.working_hours?.Saturdays[0]) +
+            " - " +
+            formatTime(listData?.working_hours?.Saturdays[1])
+            : "Closed"}
+          </p>
+          <Divider />
+          <p>Sundays:  {listData?.working_hours?.Sundays?.length > 0
+            ? formatTime(listData?.working_hours?.Sundays[0]) +
+            " - " +
+            formatTime(listData?.working_hours?.Sundays[1])
+            : "Closed"}
+          </p>
+          {/* {
            
-           listData?.opening_hours.weekday_text.map(
+           listData?.working_hours?.map(
              (item) => (
                <>
                <Divider/>
@@ -87,23 +118,23 @@ const DetailsSidebar = (props) => {
                             </>
                           )
                         )
-                      }
-         {/* <p>No job available at the moment</p>
+                      } */}
+          {/* <p>No job available at the moment</p>
 
          <Divider/> */}
-       </CardContainer>
-     </div>
+        </CardContainer>
+      </div>
 
-     <div className=" my-2">
-                <InfomationCard title="Write Review">
-                <div>
-                    <CommentComponent placeId={props.placeId}/>
-                  </div>
-                </InfomationCard>
-              </div>
+      <div className=" my-2">
+        <InfomationCard title="Write Review">
+          <div>
+            <CommentComponent placeId={props.placeId} reviews={props?.reviews}/>
+          </div>
+        </InfomationCard>
+      </div>
 
 
-     <style jsx>{`
+      <style jsx>{`
        table {
          background: #fff;
          width: 100%;

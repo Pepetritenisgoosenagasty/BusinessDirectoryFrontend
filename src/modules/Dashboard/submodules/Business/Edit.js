@@ -20,6 +20,7 @@ import useGetUserLocation from "src/hooks/useGetUserLocation"
 const Edit = () => {
   const [businessData, setBusinessData] = useState()
   const [isLoading, setisLoading] = useState(false)
+  const [images, setImages] = useState([])
   const dispatch = useDispatch()
     const router = useRouter();
     const [form] = useForm();
@@ -38,6 +39,35 @@ const Edit = () => {
         fetchBusiness()
       }
     }, [business_id])
+
+    
+      useEffect(() => {
+        form.setFieldsValue({
+          lat: useLocation?.lat,
+          lng: useLocation?.lng,
+        })
+        
+       }, [useLocation])
+    
+      useEffect(() => {
+      form.setFieldsValue({
+        name: businessData?.name,
+        category: businessData?.category,
+        description: businessData?.description,
+        amenities: businessData?.amenities,
+        city: businessData?.city,
+        address: businessData?.address,
+        phone_number: businessData?.phone_number,
+        email: businessData?.email,
+        website: businessData?.website,
+        linkedin: businessData?.social_media_handles?.linkedIn,
+        facebook: businessData?.social_media_handles?.facebook,
+        twitter: businessData?.social_media_handles?.twitter,
+        youtube: businessData?.social_media_handles?.youtube,
+      
+      })
+      
+     }, [businessData])
 
     const handleOnFinish = (values) => {
       try {
@@ -72,10 +102,15 @@ const Edit = () => {
       }
     }
    
+    const handleUpload = (data) => {
+
+      console.log(data)
+      setImages([...data])
+    }
     return (
         <>
         <div className="dashboard container-fluid content py-5">
-          <div className="row px-4 mb-4">
+          <div className="row px-5 mb-4">
            <div className="col-lg-12">
            <DashboardCustomCard>
           <div className="row dashboard__text  px-4 py-2">
@@ -106,47 +141,47 @@ const Edit = () => {
 
           <div className="row px-4">
             <div className="col-lg-12 col-md-12 col-sm-12">
-              <DashboardCustomCard>
+              
                   <div className="px-3 py-3">
-                   <AboutContent businessData={businessData} inputData={inputData}/>
+                   <AboutContent/>
                   </div>
-              </DashboardCustomCard>
+             
             </div>
           </div>
           <div className="row px-4 mt-4">
             <div className="col-lg-12 col-md-12 col-sm-12">
-              <DashboardCustomCard>
+              
               <div className="px-3 py-3">
-                   <ContactComponents inputData={inputData} businessData={businessData} useLocation={useLocation}/>
+                   <ContactComponents useLocation={useLocation}/>
                   </div>
-              </DashboardCustomCard>
+             
             </div>
           </div>
           <div className="row px-4 mt-4">
             <div className="col-lg-12 col-md-12 col-sm-12">
-              <DashboardCustomCard>
+              
               <div className="px-3 py-3">
-                   <GalleryComponent businessData={businessData} inputData={inputData}/>
+                   <GalleryComponent handleUpload={handleUpload}/>
                   </div>
-              </DashboardCustomCard>
+             
             </div>
           </div>
           <div className="row px-4 mt-4">
             <div className="col-lg-12 col-md-12 col-sm-12">
-              <DashboardCustomCard>
+              
               <div className="px-3 py-3">
-                   <SocialComponent businessData={businessData} inputData={inputData}/>
+                   <SocialComponent />
                   </div>
-              </DashboardCustomCard>
+             
             </div>
           </div>
           <div className="row px-4 mt-4">
             <div className="col-lg-12 col-md-12 col-sm-12">
-              <DashboardCustomCard>
+              
               <div className="px-3 py-3">
-                   <HoursComponent businessData={businessData} inputData={inputData}/>
+                   <HoursComponent/>
                   </div>
-              </DashboardCustomCard>
+             
             </div>
           </div>
           <div className="row px-4 mt-4">

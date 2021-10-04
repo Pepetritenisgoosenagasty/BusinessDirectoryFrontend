@@ -8,31 +8,36 @@ const Reviews = (props) => {
   const [listData, setListData] = useState([]);
 
   useEffect(() => {
-    setListData(props?.data?.result?.reviews);
-  }, []);
+    setListData(props?.data?.data);
+  }, [props?.data?.data]);
+
+  // console.log(props)
 
   return (
     <div>
-      {props?.data?.result?.reviews.length > 0 ? (
+      {props?.data?.data?.length > 0 ? (
         <List
           className="comment-list"
-          header={`${props.data?.result?.reviews.length} reviews`}
+          header={`${props.data?.data?.length} reviews`}
           itemLayout="horizontal"
           dataSource={listData}
           renderItem={(item) => (
             <li>
               <Comment
                 actions={<span key="comment-list-reply-to-0">Reply to</span>}
-                author={<a>{item.author_name}</a>}
+                author={<a>{item.name}</a>}
                 avatar={
-                  <Avatar src={item.profile_photo_url} alt={item.author_name} />
+                  <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}> 
+                     {item.name.charAt(0)}
+              {item.name.charAt(0)}
+                  </Avatar>
                 }
                 content={
                   <>
                     <ReactStars
                       count={5}
                       // onChange={ratingChanged}
-                      value={item.rating}
+                      value={item.rate}
                       size={20}
                       isHalf={true}
                       emptyIcon={<i className="far fa-star"></i>}
@@ -41,12 +46,12 @@ const Reviews = (props) => {
                       activeColor="#ffd700"
                       edit={false}
                     />
-                    <p>{item.text}</p>
+                    <p>{item.message}</p>
                   </>
                 }
                 datetime={
                   <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
-                    <span>{item.relative_time_description}</span>
+                    <span>{item.created_at}</span>
                   </Tooltip>
                 }
               />

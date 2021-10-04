@@ -5,6 +5,9 @@ import BusinessList from "./components/BusinessList";
 import MapContent from "./components/MapContent";
 import { useDebounce } from "use-debounce";
 import useSWR from 'swr'
+import { useGetEntity } from "src/hooks/useGetEntity";
+import { URL_GET_BUSINESS } from "@/constants/routes";
+import authServices from "src/services/auth.services";
 
 const index = () => {
   const [currentIndex, setcurrentIndex] = useState(2);
@@ -42,7 +45,14 @@ const index = () => {
   //   }
   // };
 
-  const fetcher = url => axios.get(url).then(res => {
+  // const businessData = useGetEntity(URL_GET_BUSINESS)
+  //  console.log(businessData)
+  // useEffect(() => {
+  //   setrawData(businessData?.details);
+  //   setActualData([...businessData?.details]);
+  // }, [businessData])
+
+  const fetcher = url => authServices.requestGETBusiness(url).then(res => {
     
     setrawData(res.data);
     setActualData([...res.data]);
@@ -86,9 +96,10 @@ const index = () => {
     }
   }, [deboucedValue]);
 
-  const { data, error } = useSWR('/Data/Data.json', fetcher)
+  const { data, error } = useSWR(URL_GET_BUSINESS, fetcher)
  
   // console.log(data)
+  
 
   // const handleSearchList = (value) => {
 

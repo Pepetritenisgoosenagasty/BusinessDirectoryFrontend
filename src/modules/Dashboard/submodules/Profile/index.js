@@ -12,14 +12,16 @@ import { Results } from "@/components/Result";
 import { PAGE_HOME, URL_UPDATE_USER } from "@/constants/routes";
 import { performUpdate } from "src/redux/actions/apiActionCreators";
 import { useDispatch } from "react-redux";
-
+import authServices from "src/services/auth.services";
 const index = () => {
-    const [fileString, setFileString] = useState("");
-    const [fileObject, setFileObject] = useState({});
-    // const [isLoading, setIsLoading] = useState(false);
+  const [fileString, setFileString] = useState("");
+  const [fileObject, setFileObject] = useState({});
+  // const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
     const [form] = Form.useForm();
 
-    const { user, isLoading, isError } = userData();
+    let { query:{id} } = router;
+    const { user, isLoading, isError } = userData(id);
     const [isloadingSubmit, setIsloadingSubmit] = useState(false)
 
 const dispatch = useDispatch()
@@ -39,7 +41,6 @@ const dispatch = useDispatch()
         setFileString(fileData);
       };
     
-  const router = useRouter();
   
 useEffect(() => {
   form.setFieldsValue({
@@ -73,14 +74,43 @@ useEffect(() => {
     
     
         dispatch(
-          performUpdate(URL_UPDATE_USER +`${user.id}`, new_formdata)
-        ).finally(() => {
-          setIsloadingSubmit(false)
-        });
+          performUpdate(URL_UPDATE_USER + '/' +`${user.id}`, new_formdata)
+        ).then(data =>  uploadProfileImage(data) )
         
     } catch (error) {
         console.log(error)
     }
+};
+
+
+const uploadProfileImage = (data) => {
+  try {
+    let data_id = data?.id;
+
+    let new_formdata = new FormData();
+
+
+    new_formdata.append("files", fileObject);
+    new_formdata.append("ref", "user");
+    new_formdata.append("refId", data_id);
+    new_formdata.append("field", "picture");
+    new_formdata.append("source", "users-permissions");
+
+    // setIsloadingSubmit(true);
+    authServices
+      .requestPOST("upload", new_formdata)
+      .then((res) => {
+        console.log(res.data)
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setIsloadingSubmit(false);
+      });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 
@@ -120,7 +150,7 @@ useEffect(() => {
                 <div className="px-3 py-5 text-center">
                    <Form.Item name="picture">
                         <UpdatePicture
-                          initialPhoto={user?.picture?.previewUrl}
+                          initialPhoto={user?.picture?.url}
                           userProfileIMG={userProfileIMG}
                           handleSetUserProfileIMGPicture={
                             handleSetUserProfileIMGPicture

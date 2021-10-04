@@ -19,7 +19,8 @@ const index = () => {
   const router = useRouter();
   const [isloadingSubmit, setIsloadingSubmit] = useState(false)
   const dispatch = useDispatch();
-  const { user, isLoading, isError } = userData();
+  let { query:{id} } = router;
+  const { user, isLoading, isError } = userData(id);
   
   if (isLoading) return <Spinner />;
   if (isError) return  <Results status="500" title="500" subTitle="Sorry, something went wrong." url={PAGE_HOME}/>;

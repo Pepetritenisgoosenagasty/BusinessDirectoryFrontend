@@ -1,0 +1,98 @@
+[
+    {
+        "formatted_address": "Liberia Road, Accra, Ghana",
+        "formatted_phone_number": "020 528 0090",
+        "geometry": {
+            "lat": 5.55037,
+            "lng": -0.1981268
+        },
+        "international_phone_number": "+233 20 528 0090",
+        "name": "Ghana Private Sector Development Facility (GPSDF)",
+        "weekday_text": [
+            "Monday: 8:00 am – 5:00 pm",
+            "Tuesday: 8:00 am – 5:00 pm",
+            "Wednesday: 8:00 am – 5:00 pm",
+            "Thursday: 8:00 am – 5:00 pm",
+            "Friday: 8:00 am – 5:00 pm",
+            "Saturday: Closed",
+            "Sunday: Closed"
+          ],
+        "place_id": "ChIJFb-CZZCQ3w8RMqE6W4_kuHg",
+        "category": "School",
+        "image": "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=ZdQ_hXbS6ox5MMKdss6bBg&cb_client=search.gws-prod.gps&w=408&h=240&yaw=67.71425&pitch=0&thumbfov=100",
+        "claimed": "YES",
+        "types": ["school", "point_of_interest", "establishment"],
+        "url": "https://maps.google.com/?cid=8698953984628138290",
+        "utc_offset": 0,
+        "emails": "",
+        "vicinity": "Liberia Road, Accra",
+        "website": "",
+        "description": ""
+      },
+      {
+        "formatted_address": "North Liberia Link Palma house, Second floor, Accra, Ghana",
+        "formatted_phone_number": "026 939 9903",
+        "geometry": {
+            "lat": 5.556389100000001,
+            "lng": -0.209862
+        },
+        "international_phone_number": "+233 26 939 9903",
+        "name": "Software companies | IT companies | ICT companies | IT consulting | ghana accra",
+        "weekday_text": [
+            "Monday: 9:00 am – 5:00 pm",
+            "Tuesday: 9:00 am – 5:00 pm",
+            "Wednesday: 9:00 am – 5:00 pm",
+            "Thursday: 9:00 am – 5:00 pm",
+            "Friday: 9:00 am – 5:00 pm",
+            "Saturday: Closed",
+            "Sunday: Closed"
+          ],
+        
+        "place_id": "ChIJ5waDV6GQ3w8RZpllD0o1Ip0",
+        "category": "Software company",
+        "image": "https://lh5.googleusercontent.com/p/AF1QipMKkZRkQqPk_msu5fMn8BWuo4McJlL9q2pQ6e24=w408-h306-k-no",
+        "claimed": "YES",
+        "rating": 4.8,
+        "types": [
+          "hardware_store",
+          "point_of_interest",
+          "store",
+          "establishment"
+        ],
+        "url": "https://maps.google.com/?cid=11322671005365016934",
+        "user_ratings_total": 16,
+        "utc_offset": 0,
+        "vicinity": "Second floor, North Liberia Link Palma house, Accra",
+        "emails": "",
+        "website": "http://www.techmaaxxghana.com/"
+      },
+      {
+        "formatted_address": "29 Independence Ave, Accra, Ghana",
+        "formatted_phone_number": "030 267 9222",
+        "geometry": {
+            "lat": 5.556875400000001,
+            "lng": -0.2005739
+        },
+        "international_phone_number": "+233 30 267 9222",
+        "name": "Fugar and Company",
+        "weekday_text": [
+            "Monday: 8:00 am – 7:00 pm",
+            "Tuesday: 8:00 am – 7:00 pm",
+            "Wednesday: 8:00 am – 7:00 pm",
+            "Thursday: 8:00 am – 7:00 pm",
+            "Friday: 8:00 am – 7:00 pm",
+            "Saturday: Closed",
+            "Sunday: Closed"
+          ],
+        "place_id": "ChIJxeyZCXma3w8RKrwetDD3fiw",
+        "category": "Law firm",
+        "image": "https://lh5.googleusercontent.com/p/AF1QipMY9msVnf-1cjH0-C5pX4HjZXmwSUYsu1HH5lBZ=w408-h544-k-no",
+        "claimed": "YES",
+        "rating": 4.3,
+        "user_ratings_total": 8,
+        "utc_offset": 0,
+        "emails": "fugar@ghana.com",
+        "vicinity": "29 Independence Avenue, Accra",
+        "website": "http://fugarandcompany.com.gh/"
+      }
+    ]

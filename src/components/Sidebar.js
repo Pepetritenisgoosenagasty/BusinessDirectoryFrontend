@@ -25,11 +25,11 @@ const Sidebar = () => {
     };
 
     let {pathname} =router;
-
-    const { user, isLoading, isError } = userData();
+    let { query:{id} } = router;
+    const { user, isLoading, isError } = userData(id);
 
    
-
+    console.log(user)
 
   return (
     <div className="sidebar">

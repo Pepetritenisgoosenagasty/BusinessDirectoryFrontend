@@ -1,39 +1,44 @@
+import { useEffect, useState } from "react";
 import Slider from "react-slick";
+import { SRLWrapper } from "simple-react-lightbox";
 
-const CustomPagingSlider = () => {
-    const settings = {
-        customPaging: function(i) {
-          return (
-            <a>
-              <img src={`/assets/images/abstract0${i + 1}.jpg`} />
-            </a>
-          );
-        },
-        dots: true,
-        dotsClass: "slick-dots slick-thumb",
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: true,
-      };
+const CustomPagingSlider = (props) => {
+const [imageData, setimageData] = useState()
 
+// useEffect(() => {
+//   setimageData(props?.galleries)
+// }, [props?.galleries])
+
+// console.log(imageData)
+  const settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    pauseOnHover: true
+  };
     return (
-         <div className="custom_paging">
+         <div className="">
+        <div>
+          <SRLWrapper>
         <Slider {...settings}>
-          <div>
-            <img src={"/assets/images/abstract02.jpg"} />
-          </div>
-          <div>
-            <img src={"/assets/images/abstract03.jpg"} />
-          </div>
-          <div>
-            <img src={"/assets/images/abstract04.jpg"} />
-          </div>
-          <div>
-            <img src={"/assets/images/abstract05.jpg"} />
-          </div>
+        {
+            props?.details?.galleries?.length > 0 && props?.details?.galleries?.map((photo, i) => (
+              // <img  src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${photo?.photo_reference}&key=${API_KEY}`} />
+              <>
+              <img
+                height="400px"
+                key={i}
+                src={photo.url}
+              />
+            </>
+            ))
+          }
         </Slider>
+                      </SRLWrapper>
+      </div>
       </div>
     )
 }

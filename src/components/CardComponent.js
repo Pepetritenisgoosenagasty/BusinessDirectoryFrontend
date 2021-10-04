@@ -9,6 +9,7 @@ import ReactStars from "react-rating-stars-component";
 import {  AiOutlineMail } from "react-icons/ai";
 import { Collapse } from 'antd';
 import { HiOutlineMail } from "react-icons/hi";
+import { phoneNumberFormatter } from "src/utils/filterKeyCodes";
 
 const { Panel } = Collapse;
 
@@ -238,26 +239,14 @@ const BadgeSpan = styled.span`
   font-weight: 600;
 `;
 
-export const BusinessListCard = ({
-  url,
-  icon,
-  href,
-  name,
-  star,
-  services,
-  category,
-  location,
-  email,
-  total_ratings,
-  phone,
-  handleMouseOver,
-}) => {
+export const BusinessListCard = (props) => {
+
   return (
-    <Link href={href}>
-      <OverviewWrapper onMouseEnter={handleMouseOver}>
+    <Link href={props?.href}>
+      <OverviewWrapper onMouseEnter={props?.handleMouseOver}>
         <ImageContainer>
           <img
-            src={url}
+            src={props?.url ?? props?.data[0]?.url }
             alt="Picture of the company"
             width={300}
             height={100}
@@ -268,7 +257,7 @@ export const BusinessListCard = ({
                <ReactStars
                       count={5}
                       // onChange={ratingChanged}
-                      value={star}
+                      value={props?.star}
                       size={15}
                       isHalf={true}
                       emptyIcon={<i className="far fa-star"></i>}
@@ -288,26 +277,27 @@ export const BusinessListCard = ({
             {/* <img src="/assets/star-on.png" alt="Picture of rating" width="20" height="20" /> */}
             <span>
               <strong>Users Ratings</strong>:{" "}
-              {total_ratings ? total_ratings : 0}
+              {props?.total_ratings ?? 0}
             </span>
           </div>
           <div className="d-flex justify-content-between mt-2">
             <span>
-              <strong>Service:</strong> {services}
+              <strong>Service:</strong> {props?.services}
             </span>
           </div>
           <div className=" mt-2">
             <div className="d-flex justify-content-between align-items-center">
               <span>
                 <FiPhoneCall /> <strong>Phone #</strong>:{" "}
-                {phone ? phone : "N/A"}
+
+                {"+" + phoneNumberFormatter(props?.phone) ?? "N/A"}
               </span>
             </div>
             <div className="mt-1 pr-5">
               {" "}
               <AiOutlineMail />{" "}
               <span className>
-                <strong>Email</strong>: {email ? email : "n/a"}
+                <strong>Email</strong>: {props?.email ?? "N/A"}
               </span>
             </div>
             <div className="mt-1">
@@ -320,7 +310,7 @@ export const BusinessListCard = ({
                   }}
                 />
               </span>
-              <span className="ml-2"> {location} </span>
+              <span className="ml-2"> {props?.location} </span>
             </div>
           </div>
         </ContentContainer>
