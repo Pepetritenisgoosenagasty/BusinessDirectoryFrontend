@@ -1,15 +1,23 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { performSelect } from "src/redux/actions/apiActionCreators";
 
 import useSWR from 'swr'
 import axios from 'axios'
+import authServices from "src/services/auth.services";
 
-const fetcher = url => axios.get(url).then(res => res.data)
+const fetcher = url => authServices.requestGETBusiness(url).then(res => res.data)
 
 export function useGetEntity (ApiUrl) {
-    const { data, error } = useSWR(`${ApiUrl}`, fetcher)
-  
+  const [isloading, setIsloading] = useState(true);
+  const [newData, setNewData] = useState();
+  const { data, error } = useSWR(ApiUrl, fetcher)
+   
+    useEffect(() => {
+      setNewData(data)
+    }, [data])
+
+
     useEffect(() => {
       refetchEntity();
     }, [ApiUrl]);
@@ -17,24 +25,24 @@ export function useGetEntity (ApiUrl) {
     const refetchEntity = () => {
       try {
         if(ApiUrl){
-          setIsloading(true);
-          performSelect(ApiUrl)
-            .then((data) => {
-              setData({ ...data });
-            })
-            .catch((err) => console.log(err))
-            .finally((err) => setIsloading(false));
+         authServices.requestGETBusiness(ApiUrl)
+         .then((data) => {
+          setNewData(data);
+        })
+        .catch((err) => console.log(err))
+        .finally((err) => setIsloading(false));
         }
       } catch (error) {
         console.log(error);
       }
     };
 
+
     return {
-      details: data,
-      isLoading: !error && !data,
-      refetchEntity: refetchEntity,
-      isError: error
+      details: newData,
+      isLoading: isloading,
+      isError: error,
+      refetchEntity
     }
   }
 

@@ -15,6 +15,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "@reduxjs/toolkit";
 import { useRouter } from "next/router";
 import { enqueueSnackbar } from "src/redux/actions/notification.action";
+import { handleKeyDown } from "src/utils/filterKeyCodes";
+import { keyCodeValues } from "@/constants/ConstantValues";
 
 const Register = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -167,7 +169,7 @@ const Register = () => {
                             },
                           ]}
                         >
-                          <Input />
+                          <Input onKeyDown={(e) => handleKeyDown(e, keyCodeValues.NUMBERS_KEYCODE)}/>
                         </Form.Item>
                       </div>
                       <div className="col-lg-6 col-md-6 col-sm-12">
@@ -181,7 +183,7 @@ const Register = () => {
                             },
                           ]}
                         >
-                          <Input />
+                          <Input onKeyDown={(e) => handleKeyDown(e, keyCodeValues.NUMBERS_KEYCODE)}/>
                         </Form.Item>
                       </div>
                     </div>

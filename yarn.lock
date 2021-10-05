@@ -3274,6 +3274,11 @@ react-slick@^0.28.1:
     lodash.debounce "^4.0.8"
     resize-observer-polyfill "^1.5.0"
 
+react-step-wizard@^5.3.9:
+  version "5.3.9"
+  resolved "https://registry.yarnpkg.com/react-step-wizard/-/react-step-wizard-5.3.9.tgz#6034679e47200d20842d89c113ea2eb1ea906716"
+  integrity sha512-CJdWckYHAYZOD8E8p38EiFpyIJoknouroyFy6AV3YzTcCMyiyivzLMxruUZUUoKqriZH70Ik9wadBCoGSVzW0Q==
+
 react-swipeable@^6.0.0:
   version "6.1.2"
   resolved "https://registry.yarnpkg.com/react-swipeable/-/react-swipeable-6.1.2.tgz#cdaec61e1ea449fe03ccb06f7f6bcddd6a252317"
@@ -3380,6 +3385,11 @@ recompose@^0.26.0:
     fbjs "^0.8.1"
     hoist-non-react-statics "^2.3.1"
     symbol-observable "^1.0.4"
+
+redux-persist@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-6.0.0.tgz#b4d2972f9859597c130d40d4b146fecdab51b3a8"
+  integrity sha512-71LLMbUq2r02ng2We9S215LtPu3fY0KgaGE0k8WRgl6RkqxtGfl7HUozz1Dftwsb0D/5mZ8dwAaPbtnzfvbEwQ==
 
 redux-thunk@^2.3.0:
   version "2.3.0"
@@ -3803,6 +3813,16 @@ subscribe-event@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/subscribe-event/-/subscribe-event-1.1.1.tgz#0d2f2c14c18e4de3e7d108b4dd56078b379d95c9"
   integrity sha512-ffuMVOFvhc+HSfW/Q9xSQJikswqnT7sd39EjAXi7gneZWg7XYwq/ee9rcn66ZxZEXOLXew0rJXA1GU1gH5/nzw==
+
+suneditor-react@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/suneditor-react/-/suneditor-react-3.3.0.tgz#06f6cef81c10a5a3e27af106eaea91068afad6c1"
+  integrity sha512-FB0C7/52MoXtAr96ACTJU3WUHAlSKTd0GnLGj8cKuXW8L8KtUOvxzXn7qGzhJS/hL9HcQCRYz1UHKUdtGIbwUg==
+
+suneditor@^2.41.3:
+  version "2.41.3"
+  resolved "https://registry.yarnpkg.com/suneditor/-/suneditor-2.41.3.tgz#2eb70d5c793ed50eab3ba2d282e984e076bb217e"
+  integrity sha512-V4Hz1PY2MhIhw2Lf1iInjEhuVp65B5EbqKb8GpBluZDfx3MnZnNm5v/+Ssr1rV9swTCUWOsl8Qo92KhLMZIllA==
 
 supports-color@^5.3.0, supports-color@^5.5.0:
   version "5.5.0"

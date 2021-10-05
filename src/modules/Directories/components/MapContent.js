@@ -76,8 +76,8 @@ const MapComponent = (props) => {
                 <Marker
                   key={index}
                   position={{
-                    lat: data.geometry.location.lat,
-                    lng: data.geometry.location.lng,
+                    lat: data.geometry.lat,
+                    lng: data.geometry.lng,
                   }}
                   onClick={(event) => {
                     setSelectedCompany(data);
@@ -95,8 +95,8 @@ const MapComponent = (props) => {
             <div className="infoBox">
             <InfoWindow
               position={{
-                lat: selectedCompany.geometry.location.lat,
-                lng: selectedCompany.geometry.location.lng,
+                lat: selectedCompany.geometry.lat,
+                lng: selectedCompany.geometry.lng,
               }}
               onCloseClick={() => setSelectedCompany(null)}
             >
@@ -112,7 +112,7 @@ const MapComponent = (props) => {
                 <ReactStars
                       count={5}
                       // onChange={ratingChanged}
-                      value={selectedCompany.rating}
+                      value={selectedCompany.rate}
                       size={15}
                       isHalf={true}
                       emptyIcon={<i className="far fa-star"></i>}
@@ -122,7 +122,7 @@ const MapComponent = (props) => {
                       edit={false}
                     />
                 </p>
-                <p><FaMapMarkerAlt /> {selectedCompany.formatted_address}</p>
+                <p><FaMapMarkerAlt /> {selectedCompany.address}</p>
                 </div>
               </div>
             </InfoWindow>

@@ -22,11 +22,34 @@ const DirectionCardWrapper = styled.div`
   height: 70vh;
   background: #fff;
   overflow: hidden;
-  overflow-y: auto;
   z-index: 1;
   padding: 9px 16px;
   border-radius: 6px;
   box-shadow: rgb(0 0 0 / 15%) 0px 16px 32px, rgb(0 0 0 / 10%) 0px 3px 8px !important;
+  transition: all .3s ease-in;
+  &:hover {
+    overflow-y: auto;
+  }
+  &::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+&::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+&::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
+}
+
 
   h1 {
     color: #053c5e !important;

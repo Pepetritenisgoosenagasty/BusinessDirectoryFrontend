@@ -1,25 +1,27 @@
+import { keyCodeValues } from "@/constants/ConstantValues";
 import { URL_REVIEWS } from "@/constants/routes";
 import { Comment, Avatar, Form, Button, List, Input, Rate } from "antd";
 import moment from "moment";
 import { useState } from "react";
 import ReactStars from "react-rating-stars-component";
 import { useDispatch } from "react-redux";
-import { performCreate } from "src/redux/actions/apiActionCreators";
+import { performCreate, performCreateReviews } from "src/redux/actions/apiActionCreators";
+import { handleKeyDown } from "src/utils/filterKeyCodes";
 
 const { TextArea } = Input;
 
 const CommentComponent = (props) => {
   const [submitting, setSubmitting] = useState(false);
   const dispatch = useDispatch()
-
+// console.log(props)
   const [form] = Form.useForm()
 
   const onFinish= (values) => {
    
     try {
-      values
+      
       dispatch(
-        performCreate(URL_REVIEWS, {
+        performCreateReviews(URL_REVIEWS, {
           name: values.name,
           rate: values.rate,
           message: values.message,
@@ -27,6 +29,8 @@ const CommentComponent = (props) => {
         })
       ).finally(() => {
         setSubmitting(false)
+        props?.reviews?.refetchEntity()
+        form.resetFields()
       });
       
       
@@ -34,16 +38,17 @@ const CommentComponent = (props) => {
       console.log(error)
   }
 
-  form.resetFields()
 
   }
+
+
   return (
     <div>
       <Form  name="basic" onFinish={onFinish} form={form}>
           <div>
           <label className="label">Name</label>
         <Form.Item name="name"   rules={[{ required: true}]}>
-          <Input style={{ borderRadius: 7 }} />
+          <Input style={{ borderRadius: 7 }} onKeyDown={(e) => handleKeyDown(e, keyCodeValues.NUMBERS_KEYCODE)}/>
         </Form.Item>
           </div>
         
@@ -55,7 +60,7 @@ const CommentComponent = (props) => {
        <div>
           <label className="label">Message</label>
        <Form.Item name="message" rules={[{ required: true}]}>
-          <TextArea rows={4} style={{ borderRadius: 7 }} />
+          <TextArea rows={4} style={{ borderRadius: 7 }} onKeyDown={(e) => handleKeyDown(e, keyCodeValues.NUMBERS_KEYCODE)}/>
         </Form.Item>
        </div>
         <Form.Item>

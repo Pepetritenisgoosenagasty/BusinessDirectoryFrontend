@@ -4,16 +4,66 @@ import { Link } from "@material-ui/core";
 import { RiAddLine } from "react-icons/ri";
 import dynamic from 'next/dynamic';
 import { motion } from "framer-motion";
-import { PAGE_ADD_BUSINESS } from "@/constants/routes";
+import { PAGE_ADD_BUSINESS, URL_BSUINESS_STAT, URL_GET_BUSINESS, URL_REVIEWS_STAT } from "@/constants/routes";
 import CalendarComponent from "@/components/CalendarComponent";
 import ReactWeather, { useOpenWeather } from "react-open-weather";
 import ReviewLists from "./components/Table/ReviewLists";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+import { userData } from "src/hooks/useLoggInUser";
+import { performGetAll } from "src/redux/actions/apiActionCreators";
 
 const VisitorsChart = dynamic(() => import('./components/Chart/VisitorsChart'), {
   ssr: false,
 });
 
 const index = () => {
+  const [count, setCount] = useState()
+  const [businessData, setBusinessData] = useState()
+  const [reviewData, setReviewData] = useState()
+  const dispatch = useDispatch();
+
+  const router = useRouter();
+  let { query:{id} } = router;
+  const { user } = userData(id);
+
+  const fetchBusinessId = async () => {
+    let businessData = await  dispatch(performGetAll(URL_GET_BUSINESS + '?_where[user_id]='+user?.id))
+    setBusinessData(businessData[0]?.place_id)
+  }
+
+  // console.log(businessData)
+  
+  const fetchAllBusiness = async () => {
+    let count = await  dispatch(performGetAll(URL_BSUINESS_STAT + '?_where[place_id]='+ businessData))
+    setCount(count)
+  }
+
+  const fetchReviews = async () => {
+    let reviews = await  dispatch(performGetAll(URL_REVIEWS_STAT + '?_where[business_id]='+ businessData))
+    setReviewData(reviews)
+
+  }
+
+  useEffect(() => {
+    if(user) {
+      fetchBusinessId()
+    }
+  }, [user])
+
+  useEffect(() => {
+    if(businessData) {
+      fetchAllBusiness()
+    }
+  }, [businessData])
+
+  useEffect(() => {
+    if(businessData) {
+      fetchReviews()
+    }
+  }, [businessData])
+
   const { data, isLoading, errorMessage } = useOpenWeather({
     key: "8cf32592cbe1014b3d55d37707a9a9c5",
     lat: "5.603717",
@@ -70,8 +120,14 @@ const index = () => {
             <div className="row">
               <div className="col-12">
                 <DashboardCustomCard>
-                  <div className="p-2 statistics">
-                    <h2>Hi</h2>
+                  <div className="p-2 statistics ">
+                    <div className="img-responsive">
+                      <img src="/assets/reviews.svg" width="100%" height="100%"/>
+                    </div>
+                    <div className="text">
+                      <h1>{reviewData ?? 0}</h1>
+                      <h6>Reviews</h6>
+                    </div>
                   </div>
                 </DashboardCustomCard>
               </div>
@@ -79,8 +135,14 @@ const index = () => {
             <div className="row">
               <div className="col-12 mt-4 ">
                 <DashboardCustomCard>
-                  <div className="p-2 statistics">
-                    <h2>Hi</h2>
+                <div className="p-2 statistics ">
+                    <div className="img-responsive">
+                      <img src="/assets/business.svg" width="100%" height="80%"/>
+                    </div>
+                    <div className="text">
+                      <h1 className="text-success">{count ?? 0}</h1>
+                      <h6>Registered Business</h6>
+                    </div>
                   </div>
                 </DashboardCustomCard>
               </div>
@@ -88,14 +150,14 @@ const index = () => {
           </div>
         </div>
         <div className="row px-4 mt-4">
-          <div className="col-lg-8 col-md-12 col-sm-12">
+          {/* <div className="col-lg-8 col-md-12 col-sm-12">
             <DashboardCustomCard>
             <div className="p-3 ">
               <VisitorsChart />
             </div>
             </DashboardCustomCard>
-          </div>
-          <div className="col-lg-4 col-md-12 col-sm-12">
+          </div> */}
+          <div className="col-lg-6 col-md-12 col-sm-12 mx-auto">
             <DashboardCustomCard>
               <ReviewLists />
             </DashboardCustomCard>

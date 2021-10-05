@@ -25,11 +25,22 @@ class AuthService {
     });
   }
 
+  requestGETBusiness(path) {
+    let url = this.domain + path;
+
+    return axios.get(url, {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+  }
+
   getHeaders() {
     return {
       "Content-Type": "application/json",
       Accept: "application/json",
       Authorization: `Bearer ${this.getToken()}`,
+
     };
   }
 
@@ -56,11 +67,33 @@ class AuthService {
     });
   }
 
+  requestPOSTReviews(path, data) {
+    return axios.post(this.domain + path, data, {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+  }
+
   requestPUT(path,data) {
     return axios.put(this.domain + path , data, {
       headers: this.getHeaders(),
     });
   }
+
+  requestUPLOAD(path,data) {
+    return axios.post(this.domain + path , data, {
+      headers:  {
+        "Content-Type": "multipart/form-data",
+        Accept: "application/json",
+        Authorization: `Bearer ${this.getToken()}`,
+        // 'content-type': 'multipart/form-data'
+
+      },
+    });
+  }
+
+
 
   requestDELETE(path, id) {
     return axios.delete(this.domain + path , {

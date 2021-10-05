@@ -1,13 +1,13 @@
 import useSWR from 'swr'
-import axios from 'axios'
+import authServices from 'src/services/auth.services'
 
-const fetcher = url => axios.get(url).then(res => res.data)
+const fetcher = url => authServices.requestGETBusiness(url)
 
-export function useData (place_id) {
-    const { data, error } = useSWR(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&key=${process.env.googleApisKey}`, fetcher)
+export function useData (value) {
+    const { data, error } = useSWR(value, fetcher)
   
     return {
-      details: data,
+      details: data?.data[0],
       isLoading: !error && !data,
       isError: error
     }

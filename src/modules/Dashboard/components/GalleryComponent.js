@@ -1,71 +1,80 @@
-import { Form, Input } from "antd";
+import { Button, Form, Input } from "antd";
 import { Upload, message } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 import UploadImg from "./UploadImg";
 import { useEffect, useState } from "react";
+import { DashboardCustomCard } from "@/components/CardComponent";
 
 const { Dragger } = Upload;
 
 const GalleryComponent = (props) => {
-  const [fileList, setFileList] = useState([])
-  const [business, setBusiness] = useState([])
+  const [fileList, setFileList] = useState([]);
 
-
-  useEffect(() => {
-    setBusiness({...props?.businessData})
-  }, [props?.businessData])
-
-useEffect(() => {
-  props.inputData?.setFieldsValue({
-    video: business?.video,
-  
-  })
-}, [business])
-
-// useEffect(() => {
-//   props.handleUpload(fileList)
-// }, [fileList])
-
-
-  const [uploadedFiles, setUploadedFiles] = useState([])
-
-  useEffect(() => {
-    setUploadedFiles([...fileList])
-  }, [fileList])
 
   const handleUploadedFile = (fileList) => {
-   
-    fileList && setFileList([...fileList])
-     
-  }
+    fileList && setFileList([...fileList]);
+  };
+
+  useEffect(() => {
+    props?.handleUpload(fileList);
+  }, [fileList]);
+
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+
+  useEffect(() => {
+    setUploadedFiles([...fileList]);
+  }, [fileList]);
+
+ 
 
   return (
     <div className="addForm container-fluid">
-      <div>
-        <h5>Upload Images</h5>
-        <p>
-        Input field with <code>*</code> on lable means field is required.
-        </p>
-      </div>
-      <div className="row mt-3">
-        <div className="col-lg-12 col-md-12 col-sm-12">
-          {/* <label>
-              Business Name<sup className="text-danger">*</sup>
-            </label> */}
-         {/* <Form.Item
-              name="images"
-              rules={[
-                {
-                  required: false,
-                  message: "Please uplaod your profile!",
-                },
-              ]}
-            >
-              <Input type="file" allowClear multiple/>
-            </Form.Item> */}
-             <UploadImg fileList={fileList} onUpload={handleUploadedFile} />
+      <DashboardCustomCard>
+        <div className="px-4 py-4">
+          <div>
+            <h5>Upload Images</h5>
+            <p>
+              Input field with <code>*</code> on lable means field is required.
+            </p>
+          </div>
+          <div className="row mt-3">
+            <div className="col-lg-12 col-md-12 col-sm-12">
+              <UploadImg fileList={fileList} onUpload={handleUploadedFile} />
+            </div>
+          </div>
         </div>
-      </div>
+      </DashboardCustomCard>
+     {
+       props.isActive && (   <div className="d-flex justify-content-between mt-3">
+       <button style={{
+             margin: "0 8px",
+             background: "#fff",
+             color: "#004ba8",
+             border: "1px solid #004ba8",
+             borderRadius: 30,
+             width: 150,
+             height: 40,
+           }} htmlType="button" type="button" onClick={props.previousStep}>
+         Previous
+       </button>
+         <Button
+           htmlType="submit"
+           type="primary"
+           loading={props?.isloadingSubmit}
+           className="submit-btn"
+           style={{
+             margin: "0 8px",
+             background: "#379634",
+             border: "none",
+             borderRadius: 30,
+             width: 150,
+             height: 40
+           }}
+         >
+           Submit
+         </Button>
+       </div>)
+     }
 
       {/* <div className="row">
         <div className="col-lg-12 col-md-12 col-sm-12">

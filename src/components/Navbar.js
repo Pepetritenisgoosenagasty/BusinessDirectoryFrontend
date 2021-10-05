@@ -24,9 +24,9 @@ const Navbar = () => {
     });
   };
 
-  let { pathname } = router;
+  let { query:{id} } = router;
 
-  const { user, isLoading, isError } = userData();
+  const { user, isLoading, isError } = userData(id);
 
   // console.log(user)
 
@@ -75,14 +75,15 @@ const Navbar = () => {
           <Dropdown overlay={menu}>
             <div>
             <Avatar
-              style={{
-                color: "#f56a00",
-                backgroundColor: "#fde3cf",
-              }}
-            >
-              {user?.firstname?.charAt(0)}
-              {user?.lastname?.charAt(0)}
-            </Avatar>
+            src={user?.picture?.url}
+              // style={{
+              //   color: "#f56a00",
+              //   backgroundColor: "#fde3cf",
+              // }}
+            />
+              {/* {user?.firstname?.charAt(0)}
+              {user?.lastname?.charAt(0)} */}
+            {/* </Avatar> */}
             <a
               className="ant-dropdown-link ml-2"
               onClick={(e) => e.preventDefault()}

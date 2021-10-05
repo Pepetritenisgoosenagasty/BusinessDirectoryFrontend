@@ -83,14 +83,15 @@ const onSearch = async value => {
           handleMouseOver={() => props.handleIndex(index)}
           name={result.name}
           services={result.category}
-          category={result.business_status.toLowerCase()}
-          email={result.emails}
-          phone={result.formatted_phone_number}
-          star={result.rating}
-          location={result.formatted_address}
-          url={result.image ? result.image : 'https://placeholder.com/banner-ads/'}
-          total_ratings={result.user_ratings_total}
+          // category={result.business_status.toLowerCase()}
+          email={result.email}
+          phone={result.phone_number}
+          star={result.rate}
+          location={result.address}
+          imgUrl={result.image ?? result.galleries[0].url}
+          total_ratings={result.user_rating}
           href={DIRECTORIES_PAGE + "/" + result.place_id}
+          data={result.galleries}
         />
       ))}
     </div>

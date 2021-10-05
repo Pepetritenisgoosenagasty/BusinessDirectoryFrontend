@@ -5,6 +5,7 @@ import PhoneInput from "react-phone-number-input";
 import { useEffect, useState } from "react";
 import { districts } from "@/constants/Districts";
 import { Marker } from "@react-google-maps/api";
+import { DashboardCustomCard } from "@/components/CardComponent";
 
 
 const { Option } = Select;
@@ -19,27 +20,27 @@ const ContactComponents = (props) => {
   
  
 
-  useEffect(() => {
-    setData({...props?.useLocation})
-  }, [props?.useLocation])
+  // useEffect(() => {
+  //   setData({...props?.useLocation})
+  // }, [props?.useLocation])
 
-  useEffect(() => {
-    setBusiness({...props?.businessData})
-  }, [props?.businessData])
+  // useEffect(() => {
+  //   setBusiness({...props?.businessData})
+  // }, [props?.businessData])
 
- useEffect(() => {
-  props.inputData?.setFieldsValue({
-    lat: data?.lat,
-    lng: data?.lng,
-    city: business?.city,
-    address: business?.address,
-    phone_number: business?.phone_number,
-    email: business?.email,
-    website: business?.website
+//  useEffect(() => {
+//   props.inputData?.setFieldsValue({
+//     lat: data?.lat,
+//     lng: data?.lng,
+//     city: business?.city,
+//     address: business?.address,
+//     phone_number: business?.phone_number,
+//     email: business?.email,
+//     website: business?.website
   
-  })
+//   })
   
- }, [data,business])
+//  }, [data,business])
 
 // console.log(props)
 
@@ -68,13 +69,16 @@ const ContactComponents = (props) => {
 
   return (
     <div className="addForm container-fluid">
+      <DashboardCustomCard>
+      <div className="px-4 py-4">
       <div>
         <h5>Business Contact Information</h5>
         <p>
          Input field with <code>*</code> on lable means field is required.
         </p>
       </div>
-      <div className="row mt-3">
+      </div>
+      <div className="row px-4 py-4">
         <div className="col-lg-6 col-md-12 col-sm-12">
           <div className="row">
             <div className="col-12">
@@ -171,15 +175,15 @@ const ContactComponents = (props) => {
                   },
                 ]}
               >
-                {/* <PhoneInput
+                <PhoneInput
                   international
                   countryCallingCodeEditable={false}
                   defaultCountry="GH"
                   value={value}
                   onChange={setValue}
                   maxLength={17}
-                /> */}
-                 <Input type="tel" placeholder="000 0000 000 000" />
+                />
+                 {/* <Input type="tel" placeholder="000 0000 000 000" /> */}
               </Form.Item>
             </div>
           </div>
@@ -207,8 +211,36 @@ const ContactComponents = (props) => {
               </Form.Item>
             </div>
         </div>
-        </div>
       </div>
+        </div>
+      </DashboardCustomCard>
+      {
+         props.isActive && (      <div className="d-flex justify-content-between mt-3">
+         <button style={{
+              margin: "0 8px",
+              background: "#fff",
+              color: "#004ba8",
+              border: "1px solid #004ba8",
+              borderRadius: 30,
+              width: 150,
+              height: 40,
+            }} htmlType="button" type="button" onClick={props.previousStep}>
+          Previous
+        </button>
+        <button style={{
+              margin: "0 8px",
+              background: "#004ba8",
+              color: "#fff",
+              border: "none",
+              borderRadius: 30,
+              width: 150,
+              height: 40,
+            }} htmlType="button" type="button" onClick={props.nextStep}>
+          Continue
+        </button>
+         </div>)
+      }
+
       <style jsx>{`
         h5 {
           color: #000;

@@ -1,11 +1,15 @@
 import useSWR from 'swr'
 import authServices from "src/services/auth.services";
-import { URL_LOGGEDIN_USER } from '@/constants/routes'
+import { URL_UPDATE_USER } from '@/constants/routes'
+import { useSelector } from 'react-redux';
+
 
 const fetcher = url => authServices.requestGET(url).then(res => res.data)
 
-export function userData () {
-    const { data, error } = useSWR(URL_LOGGEDIN_USER, fetcher)
+export function userData (id) {
+  const { user } = useSelector((state) => state.auth);
+
+    const { data, error } = useSWR(URL_UPDATE_USER + "/" + user?.id, fetcher)
   
     return {
       user: data,
@@ -13,4 +17,4 @@ export function userData () {
       isError: error
     }
   }
-// URL_LOGGEDIN_USER
+// URL_UPDATE_USER

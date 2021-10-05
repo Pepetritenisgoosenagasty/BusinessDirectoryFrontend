@@ -87,6 +87,7 @@
       "types": ["school", "point_of_interest", "establishment"],
       "url": "https://maps.google.com/?cid=8698953984628138290",
       "utc_offset": 0,
+      "website":"http://www.gpsda.org",
       "emails": "",
       "vicinity": "Liberia Road, Accra"
     },

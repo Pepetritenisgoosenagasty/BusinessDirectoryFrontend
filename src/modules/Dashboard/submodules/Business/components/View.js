@@ -9,9 +9,13 @@ import {
   SiWhatsapp,
 } from "react-icons/si";
 import { formatTime } from "@/constants/DateFormat";
+import  Image  from 'next/image';
+import { SRLWrapper } from "simple-react-lightbox";
+import { phoneNumberFormatter } from "src/utils/filterKeyCodes";
 
 const View = (props) => {
   const [data, setData] = useState();
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     setData(props?.record);
@@ -27,7 +31,7 @@ const View = (props) => {
         <Descriptions.Item label="Category">{data?.category}</Descriptions.Item>
         <Descriptions.Item label="Email">{data?.email}</Descriptions.Item>
         <Descriptions.Item label="Phone Number">
-          {"+" + data?.phone_number}
+          {phoneNumberFormatter(data?.phone_number)}
         </Descriptions.Item>
         <Descriptions.Item label="Amenities" span={2}>
           {data?.amenities.length > 0
@@ -36,7 +40,8 @@ const View = (props) => {
         </Descriptions.Item>
         <Descriptions.Item label="Description" span={2}>
           {/* <Badge status="processing" text="Running" /> */}
-          {data?.description}
+          {/* {data?.description} */}
+          <div style={{ fontSize: '.8rem'}} dangerouslySetInnerHTML={{ __html: data?.description }} />
         </Descriptions.Item>
         <Descriptions.Item label="Status" span={1}>
           {data?.published_at ? (
@@ -127,6 +132,22 @@ const View = (props) => {
               </a>
             )}
           </div>
+        </Descriptions.Item>
+        <Descriptions.Item span={3} label="Gallery">
+        <SRLWrapper>
+         {
+           data?.galleries?.map((item) => (
+            <>
+            <img
+           width="200"
+           height="200"
+           src={item.url}
+         
+         />
+            </>
+           ))
+         }
+          </SRLWrapper>
         </Descriptions.Item>
       </Descriptions>
     </div>
