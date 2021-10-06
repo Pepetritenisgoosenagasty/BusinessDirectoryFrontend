@@ -17,6 +17,7 @@ import {
   IoChatbubbleEllipsesOutline,
   IoEarthOutline,
 } from "react-icons/io5";
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { OautLogin, performUserLogin } from "src/redux/features/authSlice";
@@ -132,7 +133,7 @@ const Login = () => {
         </div> */}
       <div className="login-form">
         <AuthCard>
-          <div className="login-form-content">
+          <div className="login-form-content" style={{width: 500}}>
             <div>{/* <h1>1</h1> */}</div>
             <div>
               <div className="d-flex align-items-center justify-content-between signin-link">
@@ -192,7 +193,7 @@ const Login = () => {
                             },
                           ]}
                         >
-                          <Input type="password" />
+                          <Input.Password placeholder="New Password" iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} style={{ borderRadius: 7}}/>
                         </Form.Item>
                       </div>
                     </div>
