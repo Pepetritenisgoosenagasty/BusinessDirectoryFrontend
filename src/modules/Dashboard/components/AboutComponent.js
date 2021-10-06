@@ -78,7 +78,7 @@ const AboutContent = (props) => {
                   }}
                 /> */}
 
-                <SunEditor setAllPlugins={true} height="200px"/>
+              <SunEditor onChange={value => props?.setDescription(value)} setContents={props?.description} setAllPlugins={true} height="200px"/>
               </Form.Item>
             </div>
           </div>

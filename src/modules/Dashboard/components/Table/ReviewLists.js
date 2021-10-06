@@ -1,8 +1,10 @@
 import { formatDateHuman, formatTime } from '@/constants/DateFormat';
-import { URL_REVIEWS } from '@/constants/routes';
+import { URL_GET_BUSINESS, URL_REVIEWS } from '@/constants/routes';
 import { Table, Rate } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useGetEntity } from 'src/hooks/useGetEntity';
+import { userData } from 'src/hooks/useLoggInUser';
 import { performGetAll } from 'src/redux/actions/apiActionCreators';
 
 
@@ -10,16 +12,31 @@ import { performGetAll } from 'src/redux/actions/apiActionCreators';
 const ReviewLists = () => {
   const dispatch = useDispatch()
   const [data, setData] = useState()
+  const [businessData, setBusinessData] = useState()
 
-  const fetchReviews = async () => {
-    let reviews = await  dispatch(performGetAll(URL_REVIEWS + '?_where[business_id]=ChIJxeyZCXma3w8RKrwetDD3fiw'))
-     setData(reviews)
-    console.log(reviews)
+  const { user } = userData();
+
+  const fetchBusinessId = async () => {
+    let businessData = await  dispatch(performGetAll(URL_GET_BUSINESS + '?_where[user_id]='+user?.id))
+    setBusinessData(businessData[0]?.place_id)
+    // console.log(reviews)
   }
 
+  // console.log(businessData)
+
+  const reviews = useGetEntity(URL_REVIEWS + '?_where[business_id]='+ businessData);
+  
+  
+
   useEffect(() => {
-    fetchReviews()
-  }, [])
+    if(user) {
+      fetchBusinessId()
+    }
+  }, [user])
+
+  useEffect(() => {
+    setData(reviews?.details?.data)
+  }, [reviews?.details?.data])
 
 
     const dataSource = [

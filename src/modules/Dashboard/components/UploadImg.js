@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Upload, Modal } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
+import authServices from 'src/services/auth.services';
+import { URL_UPLOAD_FILE } from '@/constants/routes';
 function getBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -65,6 +67,23 @@ const  handleCancel = () => setState({...state, previewVisible: false });
   </div>
 );
    
+const handleDelete = async (image) => {
+
+  if(_.has(image,'id')){
+
+    authServices.requestDELETE(URL_UPLOAD_FILE + '/'+ image?.id,image?.id).then(res => {
+      if(res?.data){
+        return true
+      }
+    }).catch(err => {
+      return false
+    })
+
+  }else{
+    return true
+  }
+
+}
     return (
       <>
         <Upload
@@ -72,6 +91,7 @@ const  handleCancel = () => setState({...state, previewVisible: false });
           fileList={fileList}
           onPreview={handlePreview}
           onChange={handleChange}
+          onRemove={handleDelete}
 
         >
           {fileList?.length >= 8 ? null : uploadButton}
