@@ -27,6 +27,8 @@ import StepWizard from "react-step-wizard";
 const Add = () => {
   const { Step } = Steps;
   const [form] = Form.useForm();
+  const [description, setDescription] = useState('')
+
 const router = useRouter();
   let inputData = form;
 
@@ -51,6 +53,8 @@ const router = useRouter();
 
   const onFinish = (values) => {
     try {
+      values['description'] = description
+      
       setIsloadingSubmit(true);
       dispatch(
         performCreate(URL_ADD_BUSINESSES, {
@@ -172,7 +176,8 @@ const router = useRouter();
             {/* <StepForm  steps={steps}/> */}
            <div className="col-12">
            <StepWizard>
-              <AboutContent />
+              <AboutContent description={description}
+setDescription={setDescription} />
               <ContactComponents inputData={inputData} useLocation={useLocation}/>
               <SocialComponent />
               <HoursComponent />

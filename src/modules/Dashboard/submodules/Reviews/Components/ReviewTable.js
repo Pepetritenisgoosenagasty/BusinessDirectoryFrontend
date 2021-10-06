@@ -42,13 +42,6 @@ const ReviewTable = () => {
   const reviews = useGetEntity(URL_REVIEWS + '?_where[business_id]='+ businessData);
   
   
-  // const fetchReviews = async () => {
-  //   let reviews = await  dispatch(performGetAll(URL_REVIEWS + '?_where[business_id]='+ businessData))
-  //    setData(reviews)
-  //   // console.log(reviews)
-  // }
-
-  console.log(reviews?.details?.data)
 
   useEffect(() => {
     if(user) {

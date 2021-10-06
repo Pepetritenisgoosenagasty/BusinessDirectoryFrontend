@@ -35,3 +35,5 @@ export const URL_ADD_BUSINESSES = "businesses"
 export const URL_GET_BUSINESS = "businesses"
 export const URL_BSUINESS_STAT = 'businesses/count'
 export const URL_REVIEWS_STAT = 'reviews/count'
+export const URL_UPLOAD_FILE = 'upload/files'
+

@@ -31,7 +31,7 @@ const View = (props) => {
         <Descriptions.Item label="Category">{data?.category}</Descriptions.Item>
         <Descriptions.Item label="Email">{data?.email}</Descriptions.Item>
         <Descriptions.Item label="Phone Number">
-          {phoneNumberFormatter(data?.phone_number)}
+          {data?.phone_number}
         </Descriptions.Item>
         <Descriptions.Item label="Amenities" span={2}>
           {data?.amenities.length > 0
