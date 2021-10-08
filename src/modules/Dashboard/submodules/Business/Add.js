@@ -12,7 +12,7 @@ import { BiArrowBack } from "react-icons/bi";
 import StepForm from "../StepForm";
 import { Marker } from "@react-google-maps/api";
 import useGetUserLocation from "src/hooks/useGetUserLocation";
-import { PAGE_BUSINESS, PAGE_EDIT_BUSINESS, URL_ADD_BUSINESSES, URL_GET_BUSINESS } from "@/constants/routes";
+import { PAGE_BUSINESS, PAGE_EDIT_BUSINESS, PAGE_MSG, URL_ADD_BUSINESSES, URL_GET_BUSINESS } from "@/constants/routes";
 import { useDispatch } from "react-redux";
 import { performCreate } from "src/redux/actions/apiActionCreators";
 import { useRouter } from "next/router";
@@ -119,7 +119,7 @@ const router = useRouter();
       authServices
         .requestUPLOAD("upload", new_formdata)
         .then((res) => {
-          router.push(PAGE_BUSINESS);
+          router.push(PAGE_MSG);
         })
         .catch((err) => {
           console.log(err);

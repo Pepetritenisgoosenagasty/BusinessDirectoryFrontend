@@ -2,6 +2,7 @@ export const PAGE_HOME = "/";
 export const DIRECTORIES_PAGE = "/directories";
 export const PAGE_DIRECTIONS = "/directions";
 export const PAGE_DASHBOARD = "/dashboard";
+export const PAGE_MSG = "/dashboard/success-message";
 
 // Business Urls
 export const PAGE_BUSINESS = "/dashboard/business";
