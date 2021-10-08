@@ -114,7 +114,7 @@ const Company = () => {
                       <span> <BiMap style={{ color: "#004ba8", fontSize: 20}} /> {details?.address}</span>
                     </div>
                     <div>
-                      <span> <BiPhoneCall style={{ color: "#004ba8", fontSize: 20}}/> {phoneNumberFormatter(details?.phone_number)}</span>
+                      <span> <BiPhoneCall style={{ color: "#004ba8", fontSize: 20}}/> {details?.phone_number}</span>
                     </div>
                     <div>
                       <span> <BiEnvelope style={{ color: "#004ba8", fontSize: 20}}/> {details?.email}</span>

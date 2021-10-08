@@ -5,7 +5,7 @@ import NavigationMenu from "@/components/NavigationMenu";
 import SearchComponent from "@/components/SearchComponent";
 import { BiBuildings, BiCheckDouble, BiSearchAlt } from "react-icons/bi";
 import { useEffect, useState } from "react";
-import { DIRECTORIES_PAGE } from "@/constants/routes";
+import { DIRECTORIES_PAGE, URL_GET_BUSINESS } from "@/constants/routes";
 import axios from "axios";
 import {
   BrewyValues,
@@ -19,11 +19,13 @@ import {
   SuppliesValues,
   WasteValues,
 } from "@/constants/global";
+import authServices from "src/services/auth.services";
 
-const Categories = ({ children }) => {
+const Categories = (props) => {
+  console.log(props)
   return (
     <ul>
-      <li>{children}</li>
+      <li >{props.children}</li>
     </ul>
   );
 };
@@ -49,8 +51,8 @@ const index = () => {
 
   const getListData = async (url) => {
     try {
-      const res = await axios.get(url);
-
+      const res = await authServices.requestGETBusiness(url);
+        // console.log(res)
       // do map change filter here
       setrawData(res.data);
       setData([...res.data]);
@@ -70,7 +72,7 @@ const index = () => {
   }, [rawData, currentPage]);
 
   useEffect(() => {
-    getListData("/Data/Data.json");
+    getListData(URL_GET_BUSINESS);
   }, []);
 
   // Filter Functions
@@ -220,7 +222,7 @@ const index = () => {
           <div className="categories-buttons container mt-4">
             <Categories>
               <a
-                className="activeClass"
+                // className="activeClass"
                 onClick={() => handleAllCategories()}
               >
                 All Categories

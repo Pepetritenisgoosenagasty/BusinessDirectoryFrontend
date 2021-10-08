@@ -1,10 +1,10 @@
 import ModalComponent from '@/components/ModalComponent';
 import { URL_GET_BUSINESS, PAGE_EDIT_BUSINESS } from '@/constants/routes';
-import { Table, Popconfirm } from 'antd';
+import { Table, Popconfirm, Space, Button } from 'antd';
 import { Input } from 'antd';
 import { useEffect, useState } from 'react';
-import { BsThreeDotsVertical } from 'react-icons/bs';
-import ReactStars from "react-rating-stars-component";
+import Highlighter from 'react-highlight-words';
+import { SearchOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import { performDelete, performGetAll } from 'src/redux/actions/apiActionCreators';
 import { Rate } from 'antd';
@@ -27,6 +27,8 @@ const BusinessTable = () => {
   const [width, setWidth] = useState()
   const [data, setData] = useState()
   const [record, setRecord] = useState({})
+  const [searchText, setSearchText] = useState()
+  const [searchedColumn, setSearchedColumn] = useState()
   const dispatch = useDispatch()
   const router = useRouter()
   let { query:{id} } = router;
@@ -66,6 +68,80 @@ const BusinessTable = () => {
     setIsModalVisible(false);
   };
 
+  const getColumnSearchProps = dataIndex => ({
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+      <div style={{ padding: 8 }}>
+        <Input
+          // ref={node => {
+          //   props?.searchInput = node;
+          // }}
+          placeholder={`Search ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+          style={{ marginBottom: 8, display: 'block' }}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Search
+          </Button>
+          <Button onClick={() => handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+            Reset
+          </Button>
+          <Button
+            type="link"
+            size="small"
+            onClick={() => {
+              confirm({ closeDropdown: false });
+              setSearchText(selectedKeys[0])
+              setSearchedColumn(dataIndex)
+            }}
+          >
+            Filter
+          </Button>
+        </Space>
+      </div>
+    ),
+    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+    onFilter: (value, record) =>
+      record[dataIndex]
+        ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
+        : '',
+    onFilterDropdownVisibleChange: visible => {
+      // if (visible) {
+      //   setTimeout(() => searchInput.select(), 100);
+      // }
+    },
+    render: text =>
+      searchedColumn === dataIndex ? (
+        <Highlighter
+          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+          searchWords={[searchText]}
+          autoEscape
+          textToHighlight={text ? text.toString() : ''}
+        />
+      ) : (
+        text
+      ),
+  });
+
+  const handleSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm();
+    setSearchText(selectedKeys[0])
+    setSearchedColumn(dataIndex)
+  };
+
+  const handleReset = clearFilters => {
+    clearFilters();
+    setSearchText('')
+  };
+
 
 const handleDelete = (record) => {
   try {
@@ -91,12 +167,13 @@ const handleDelete = (record) => {
           dataIndex: 'name',
           key: 'name',
           render: text => <a>{text}</a>,
+          ...getColumnSearchProps('name')
         },
         {
           title: 'Category',
           dataIndex: 'category',
           key: 'category',
-        
+          ...getColumnSearchProps('category')
         },
         {
           title: 'Phone NUmner',
@@ -158,9 +235,9 @@ const handleDelete = (record) => {
 
     return (
         <>
-        <div className="d-flex justify-content-end px-3 pb-2 review">
+        {/* <div className="d-flex justify-content-end px-3 pb-2 review">
         <Search placeholder="Enter Name"  enterButton style={{ width: 400}} />
-        </div>
+        </div> */}
         <div className="">
           {/* <Spinner spinner={!isLoading}> */}
             <Table loading={dataLoading} columns={columns} dataSource={data} pagination={{ size: "default"}} />
