@@ -57,7 +57,7 @@ const onSearch = async value => {
         <div className="d-flex justify-content-between align-items-center">
           <p>
             {" "}
-            <GoLocation style={{ fontSize: 17, verticalAlign: "sub" }} /> 300+
+            <GoLocation style={{ fontSize: 17, verticalAlign: "sub" }} />
             Private Companies in Accra Central
           </p>
           <a onClick={handleClick}>

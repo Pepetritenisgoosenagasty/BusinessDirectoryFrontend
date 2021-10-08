@@ -4,10 +4,11 @@ import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { GOOGLE_MAP_API_KEY } from "@/constants/global";
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { DIRECTORIES_PAGE } from "@/constants/routes";
+import { DIRECTORIES_PAGE, URL_ADD_BUSINESSES } from "@/constants/routes";
 import { Input, AutoComplete } from 'antd';
 import { useDebounce } from "use-debounce";
 import axios from "axios";
+import authServices from "src/services/auth.services";
 
 
 
@@ -78,7 +79,7 @@ const SearchComponent = () => {
 
   const getListData = async (url) => {
     try {
-      const res = await axios.get(url);
+      const res = await authServices.requestGETBusiness(url);
       setrawData(res.data);
       setActualData([...res.data]);
     } catch (error) {
@@ -133,7 +134,7 @@ const SearchComponent = () => {
  
 
   useEffect(() => {
-    getListData("/Data/Data.json");
+    getListData(URL_ADD_BUSINESSES);
   }, []);
 
 
