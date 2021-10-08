@@ -87,8 +87,10 @@ const router = useRouter();
           
           if (data) {
            
-
+            
             uploadProfileImage(data)
+
+            router.push(PAGE_MSG)
           }
         })
         // .finally(() => {

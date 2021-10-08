@@ -1,4 +1,4 @@
-import { PAGE_ADD_BUSINESS, PAGE_DASHBOARD } from '@/constants/routes';
+import { PAGE_DASHBOARD } from '@/constants/routes';
 import { Result, Button } from 'antd';
 import Link from "next/link"
 
@@ -10,16 +10,12 @@ const SuccessMsg = () => {
     title="Business Registered Successfully"
     subTitle="Kindly wait for the admin to review your business information"
     extra={[
-    //    <Link href={PAGE_ADD_BUSINESS}>
+       <Link href={PAGE_DASHBOARD}>
       <Button type="primary">
-        Add Another Business 
+        Go to Dashboard
       </Button>
-    //    </Link>
-        ,
-        // <Link href={PAGE_DASHBOARD}>
-          <Button key="buy">Go to Dashboard</Button>,
-
-        {/* </Link> */}
+       </Link>
+        
     ]}
   />
         </div>
