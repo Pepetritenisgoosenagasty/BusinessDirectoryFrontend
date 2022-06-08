@@ -4,43 +4,38 @@
   // box-shadow: 0px 3px 6px #e1e9fd;
   box-shadow: rgb(0 0 0 / 8%) 0px 1px 12px;
 
-.navigation {
-  a {
-    color: #004ba8 !important;
-    text-decoration: none;
-  }
-
-  &__list {
+  .navigation {
     a {
-     
-        &:hover {
+      color: #004ba8 !important;
+      text-decoration: none;
+    }
 
+    &__list {
+      a {
+        &:hover {
           border-bottom: 2px solid #004ba8;
         }
-    
+      }
+
+      .activeClass {
+        border-bottom: 2px solid #004ba8;
+      }
     }
 
-    .activeClass {
-      border-bottom: 2px solid #004ba8;
-    }
-  }
-
-  &__btn {
-
-    a {
+    &__btn {
+      margin-left: 20px;
+      a {
         background-color: #004ba8 !important ;
         color: #fff !important;
         border: 1px solid transparent;
-      &:hover {
-        background-color: #fff !important ;
-        color:  #004ba8 !important;
-        border: 1px solid #004ba8;
+        &:hover {
+          background-color: #fff !important ;
+          color: #004ba8 !important;
+          border: 1px solid #004ba8;
+        }
       }
     }
   }
-}
-  
-
 }
 
 .nav-bar {
@@ -52,35 +47,31 @@
       color: #004ba8 !important;
       text-decoration: none;
     }
-  
+
     &__list {
       a {
         &:hover {
           &:hover {
-  
             border-bottom: 2px solid #004ba8;
           }
         }
       }
     }
-  
+
     &__btn {
-  
       a {
-          background-color: #004ba8 !important ;
-          color: #fff !important;
-          border: 1px solid transparent;
+        background-color: #004ba8 !important ;
+        color: #fff !important;
+        border: 1px solid transparent;
         &:hover {
           background-color: #fff !important ;
-          color:  #004ba8 !important;
+          color: #004ba8 !important;
           border: 1px solid #004ba8;
         }
       }
     }
   }
 }
-
-
 
 // Header Style
 .navigation {
@@ -116,6 +107,8 @@
   }
 
   &__list {
+    display: flex;
+    align-items: center;
     ul {
       display: flex;
       flex-wrap: wrap;
@@ -125,31 +118,30 @@
       margin-block: auto;
 
       li {
-        margin: 26px 20px;
+        margin: 26px 30px;
 
         a {
           padding: 10px 0;
           border-bottom: 2px solid transparent;
-          transition: all .3s ease-in-out;
+          transition: all 0.3s ease-in-out;
 
           &:hover {
-
             border-bottom: 2px solid #fff;
           }
         }
       }
     }
   }
-  
 
   &__btn {
+    margin-left: 40px;
     a {
       padding: 10px 20px;
       border: none;
       border-radius: 5px;
       background-color: #fff;
       color: #004ba8 !important;
-      transition: all .3s ease-in;
+      transition: all 0.3s ease-in;
 
       &:hover {
         background-color: #004ba8 !important ;
@@ -157,8 +149,6 @@
       }
     }
   }
-
-    
 }
 
 .content {
@@ -169,7 +159,7 @@
     // background-position: 50% 50%;
     background-size: cover;
     width: 100%;
-    height: 80vh ;
+    height: 80vh;
     text-align: center;
 
     .overlay {
@@ -183,7 +173,6 @@
     }
 
     .banner {
-     
       &__text {
         color: #fff;
         position: absolute;
@@ -219,16 +208,15 @@
           .search-container {
             // display: grid;
             // grid-template-columns: 170px 1fr;
-            .ant-select{
+            .ant-select {
               width: 100% !important;
 
-
-              .ant-input  {
+              .ant-input {
                 border: none !important;
                 font-size: 1rem;
 
                 &::placeholder {
-                  font-size: .7rem;
+                  font-size: 0.7rem;
                   border-right: 1px solid #004ba8 !important;
                   padding: 30px 0;
                 }
@@ -236,15 +224,16 @@
                 &:focus {
                   box-shadow: none;
                 }
-
               }
             }
 
-            .ant-input-search > .ant-input-group > .ant-input-group-addon:last-child .ant-input-search-button {
+            .ant-input-search
+              > .ant-input-group
+              > .ant-input-group-addon:last-child
+              .ant-input-search-button {
               background-color: #fff !important;
               border: none !important;
               box-shadow: none !important;
-
             }
             .ant-btn .anticon {
               color: #004ba8 !important;
@@ -290,10 +279,10 @@
                 border-radius: 5px;
                 background-color: #004ba8;
                 color: #fff;
-                transition: all .3s ease-in;
+                transition: all 0.3s ease-in;
 
                 &:hover {
-                  opacity: .8;
+                  opacity: 0.8;
                 }
               }
             }
@@ -314,7 +303,7 @@
     padding-top: 60px;
     text-align: center;
     h5 {
-      font-size: clamp(0.9rem, 1vw + 1rem,1.5rem);
+      font-size: clamp(0.9rem, 1vw + 1rem, 1.5rem);
       font-weight: 600;
       color: #000;
     }
@@ -347,7 +336,6 @@
       line-height: 1.22;
       font-weight: 700;
       letter-spacing: -0.9px;
-     
     }
 
     p {
@@ -409,7 +397,7 @@
       }
 
       p {
-        font-size: clamp(0.7rem, 1vw + 1rem, .8rem);
+        font-size: clamp(0.7rem, 1vw + 1rem, 0.8rem);
       }
     }
   }
@@ -447,7 +435,7 @@
     ul {
       list-style-type: none;
 
-      li a{
+      li a {
         padding: 10px 20px;
         background-color: #83858c;
         color: #fff;
@@ -474,6 +462,8 @@
     flex-grow: 1;
     // grid-template-columns: repeat(3, 1fr);
     gap: 30px;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -495,11 +485,10 @@
       font-weight: 700;
       letter-spacing: -0.9px;
       color: #000;
-      
     }
 
     p {
-      font-size: clamp(0.7rem, 1vw + 1rem, .9rem);
+      font-size: clamp(0.7rem, 1vw + 1rem, 0.9rem);
     }
   }
 }
@@ -509,13 +498,11 @@
   height: 40px !important;
   line-height: 43px !important;
   font-size: 1rem !important;
-  
 }
 
 .ant-pagination-item-active {
   box-shadow: rgb(0 0 0 / 15%) 0px 16px 32px, rgb(0 0 0 / 10%) 0px 3px 8px !important;
 }
-
 
 .ant-pagination-item-active {
   font-weight: 600 !important;
@@ -523,7 +510,6 @@
   border: none !important;
   border-radius: 20px !important;
 }
-
 
 // background-color: rgba(225,225,225,.2);
 // border-radius: 1.5em;

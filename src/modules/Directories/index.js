@@ -52,11 +52,7 @@ const index = () => {
   //   setActualData([...businessData?.details]);
   // }, [businessData])
 
-  const fetcher = url => authServices.requestGETBusiness(url).then(res => {
-    
-    setrawData(res.data);
-    setActualData([...res.data]);
-  })
+ 
 
   // set search value.
   const setSearchvalue = useCallback((value) => {
@@ -96,14 +92,8 @@ const index = () => {
     }
   }, [deboucedValue]);
 
-  const { data, error } = useSWR(URL_GET_BUSINESS, fetcher)
  
-  // console.log(data)
-  
 
-  // const handleSearchList = (value) => {
-
-  // }
   useEffect(() => {
     let result = rawData.slice(
       currentOffset * currentPage - currentOffset,

@@ -1,12 +1,14 @@
-import BusinessCategories from "@/components/BusinessCategories";
-import { NavLink } from "@/components/ButtonComponent";
-import { CardComponent } from "@/components/CardComponent";
-import NavigationMenu from "@/components/NavigationMenu";
-import SearchComponent from "@/components/SearchComponent";
-import { BiBuildings, BiCheckDouble, BiSearchAlt } from "react-icons/bi";
-import { useEffect, useState } from "react";
-import { DIRECTORIES_PAGE, URL_GET_BUSINESS } from "@/constants/routes";
-import axios from "axios";
+import BusinessCategories from '@/components/BusinessCategories'
+import { NavLink } from '@/components/ButtonComponent'
+import { CardComponent } from '@/components/CardComponent'
+import NavigationMenu from '@/components/NavigationMenu'
+import SearchComponent from '@/components/SearchComponent'
+import { BiBuildings, BiCheckDouble, BiSearchAlt } from 'react-icons/bi'
+import { useEffect, useState } from 'react'
+import { DIRECTORIES_PAGE, URL_GET_BUSINESS } from '@/constants/routes'
+import qs from 'qs'
+import companiesData from '@/constants/CompaniesData.json'
+import axios from 'axios'
 import {
   BrewyValues,
   BusinessValues,
@@ -18,101 +20,84 @@ import {
   SoftwareValues,
   SuppliesValues,
   WasteValues,
-} from "@/constants/global";
-import authServices from "src/services/auth.services";
+} from '@/constants/global'
+import authServices from 'src/services/auth.services'
+import { useGetEntity } from 'src/hooks/useGetEntity'
 
 const Categories = (props) => {
-  console.log(props)
+  // console.log(props)
   return (
     <ul>
-      <li >{props.children}</li>
+      <li>{props.children}</li>
     </ul>
-  );
-};
+  )
+}
 
 const index = () => {
-  const [show, setShow] = useState(false);
-  const [currentIndex, setcurrentIndex] = useState(2);
-  const [isActive, setIsActive] = useState(false);
-
-  const [businessList, setBusinessList] = useState([]);
-  const [rawData, setrawData] = useState([]);
+  const [show, setShow] = useState(false)
+  const [businessData, setbusinessData] = useState([])
+  const [categoryId, setCategoryId] = useState(0)
   // Pagination Settings
-  const [pageSize, setpageSize] = useState(6);
-  const [currentPage, setcurrentPage] = useState(1);
-  const [currentOffset, setCurrentOffset] = useState(6);
+  const [pageSize, setpageSize] = useState(6)
+  const [currentPage, setcurrentPage] = useState(1)
 
-  const [data, setData] = useState([]);
+  const query = qs.stringify(
+    {
+      pagination: {
+        page: currentPage,
+        pageSize: pageSize,
+      },
+      populate: '*',
+    },
+    {
+      encodeValuesOnly: true,
+    },
+  )
 
-  // Pagination Function
-  const onPageChange = (current, size) => {
-    setcurrentPage(current);
-  };
+  // Business data
+  const { data: results, meta } = useGetEntity(URL_GET_BUSINESS + `?${query}`)
 
-  const getListData = async (url) => {
-    try {
-      const res = await authServices.requestGETBusiness(url);
-        // console.log(res)
-      // do map change filter here
-      setrawData(res.data);
-      setData([...res.data]);
-      setcurrentPage(1);
-      return true;
-    } catch (error) {
-      console.log(error);
+  // categories
+  const { data: categories } = useGetEntity('categories')
+
+  useEffect(() => {
+    if (results) {
+      setbusinessData([...results])
     }
-  };
+  }, [results])
 
-  useEffect(() => {
-    let result = rawData.slice(
-      currentOffset * currentPage - currentOffset,
-      currentOffset * currentPage
-    );
-    setBusinessList([...result]);
-  }, [rawData, currentPage]);
-
-  useEffect(() => {
-    getListData(URL_GET_BUSINESS);
-  }, []);
-
-  // Filter Functions
-  const handleFilter = async (values) => {
-    let newData = [];
-
-    data.filter((data) => {
-      if (values.includes(data.category)) {
-        newData.push(data);
-      }
-      return data;
-    });
-    setcurrentPage(1);
-    setrawData([...newData]);
-    setIsActive(true);
-
-    // console.log(res);
-  };
-
-  // All Categories Function
   const handleAllCategories = () => {
-    setrawData([...data]);
-  };
+    setbusinessData([...results])
+    setCategoryId(0)
+  }
+
+  const handleFilter = async (value, id) => {
+    const data = await results.filter((p) =>
+      p.attributes.category.data.attributes.name
+        .toLowerCase()
+        .includes(value.toLowerCase()),
+    )
+    setbusinessData([...data])
+    setcurrentPage(1)
+    setCategoryId(id)
+  }
 
   // Header Animation
   useEffect(() => {
-    window.addEventListener("scroll", () => {
+    window.addEventListener('scroll', () => {
       if (window.scrollY > 100) {
-        setShow(true);
+        setShow(true)
       } else {
-        setShow(false);
+        setShow(false)
       }
-    });
+    })
 
     return () => {
-      window.removeEventListener("scroll", () => {
-        console.log("Removed");
-      });
-    };
-  }, []);
+      window.removeEventListener('scroll', () => {
+        console.log('Removed')
+      })
+    }
+  }, [])
 
   return (
     <div>
@@ -183,7 +168,8 @@ const index = () => {
                 <div className="content-text">
                   <h5>Search for private company</h5>
                   <p>
-                   Get Information of your desired private company just by searching by the name of the private company.
+                    Get Information of your desired private company just by
+                    searching by the name of the private company.
                   </p>
                 </div>
               </div>
@@ -194,7 +180,8 @@ const index = () => {
                 <div className="content-text">
                   <h5>Find private companies</h5>
                   <p>
-                   This paltform also provides you with locations and directions to your prefered private company.
+                    This paltform also provides you with locations and
+                    directions to your prefered private company.
                   </p>
                 </div>
               </div>
@@ -205,7 +192,8 @@ const index = () => {
                 <div className="content-text">
                   <h5>Register your private company</h5>
                   <p>
-                    Let your business reach a wider audience by registering it own this platform.
+                    Let your business reach a wider audience by registering it
+                    own this platform.
                   </p>
                 </div>
               </div>
@@ -215,89 +203,71 @@ const index = () => {
         <section className="categories">
           <div className="categories-title container d-flex justify-content-between align-items-center px-4">
             <h5>
-              Explore Various Private Businesses <br /> category
+              Explore Various Business <br /> Categories
             </h5>
             <NavLink href={DIRECTORIES_PAGE} name="View All" isBrowse />
           </div>
           <div className="categories-buttons container mt-4">
             <Categories>
               <a
-                // className="activeClass"
+                className={categoryId === 0 && 'activeClass'}
                 onClick={() => handleAllCategories()}
               >
                 All Categories
               </a>
             </Categories>
-            <Categories>
-              <a
-                onClick={() => handleFilter(BusinessValues)}
-              >
-                {" "}
-                Business & Finance
-              </a>
-            </Categories>
-            <Categories>
-              <a onClick={() => handleFilter(ManuValues)}>
-                Manufacturing Services
-              </a>
-            </Categories>
-            <Categories>
-              <a onClick={() => handleFilter(SoftwareValues)}>
-                Software Services
-              </a>
-            </Categories>
-            <Categories>
-              <a onClick={() => handleFilter(LegalValues)}>Legal Services</a>
-            </Categories>
-            <Categories>
-              <a onClick={() => handleFilter(BrewyValues)}>Brewery Agencies</a>
-            </Categories>
-            <Categories>
-              <a onClick={() => handleFilter(WasteValues)}>
-                Waste Managt. & Recycling{" "}
-              </a>
-            </Categories>
-            <Categories>
-              <a onClick={() => handleFilter(SecurityValues)}>
-                Security Services{" "}
-              </a>
-            </Categories>
-            <Categories>
-              <a onClick={() => handleFilter(SuppliesValues)}>
-                Equipment Supplies
-              </a>
-            </Categories>
-            <Categories>
-              <a onClick={() => handleFilter(ConstValues)}>
-                Construction Services
-              </a>
-            </Categories>
-            <Categories>
-              <a onClick={() => handleFilter(InsuranceValues)}>
-                Insurance Services
-              </a>
-            </Categories>
+            {categories.length > 0 &&
+              categories.map((item, i) => (
+                <Categories key={i}>
+                  <a
+                    className={categoryId === item?.id && 'activeClass'}
+                    onClick={() =>
+                      handleFilter(item?.attributes?.name, item?.id)
+                    }
+                  >
+                    {' '}
+                    {item?.attributes?.name}
+                  </a>
+                </Categories>
+              ))}
           </div>
           <div className=" max-container px-5 mt-5">
             <BusinessCategories
               currentPage={currentPage}
-              onPageChange={onPageChange}
-              list={rawData}
+              setcurrentPage={setcurrentPage}
+              list={meta}
               pageSize={pageSize}
-              businessList={businessList}
+              businessList={businessData}
             />
           </div>
         </section>
         <section className="service">
           <div className="service-content">
-            <h5>Connect with your desired private company <br /> in Accra Central</h5>
-            <p className="">
-              Be visible! Obtain new customers and generate more traffic. <br />{" "}
-              Improve social media shares. Get reviews and grow business
-              reputation online. Your company profile can include contacts and
-              description, products, photo gallery and your business location on
-              the map.
-            </p>
+            <div className="desktop_text">
+              <h5>
+                Connect with your desired private company <br /> in Accra
+                Central
+              </h5>
+              <p>
+                Be visible! Obtain new customers and generate more traffic.{' '}
+                <br /> Improve social media shares. Get reviews and grow
+                business reputation online. Your company profile can include
+                contacts and description, products, photo gallery and your
+                business location on the map.
+              </p>
+            </div>
+            <div className="mobile_text d-none">
+              <h5>
+                Connect with your desired private company in Accra Central
+              </h5>
+              <p>
+                Be visible! Obtain new customers and generate more traffic.
+                Improve social media shares. Get reviews and grow business
+                reputation online. Your company profile can include contacts and
+                description, products, photo gallery and your business location
+                on the map.
+              </p>
+            </div>
             <div className="mt-5">
               <NavLink
                 href={DIRECTORIES_PAGE}
@@ -309,7 +279,7 @@ const index = () => {
         </section>
       </main>
     </div>
-  );
-};
+  )
+}
 
-export default index;
+export default index

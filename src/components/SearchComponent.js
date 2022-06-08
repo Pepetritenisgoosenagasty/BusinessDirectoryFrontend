@@ -4,11 +4,12 @@ import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { GOOGLE_MAP_API_KEY } from "@/constants/global";
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { DIRECTORIES_PAGE, URL_ADD_BUSINESSES } from "@/constants/routes";
+import { DIRECTORIES_PAGE, URL_ADD_BUSINESSES, URL_GET_BUSINESS } from "@/constants/routes";
 import { Input, AutoComplete } from 'antd';
 import { useDebounce } from "use-debounce";
 import axios from "axios";
 import authServices from "src/services/auth.services";
+import { useGetEntity } from "src/hooks/useGetEntity";
 
 
 
@@ -36,6 +37,7 @@ const SearchComponent = () => {
 
   const handleSearchResults = (list) => {
 
+
     try {
 
       let results = []
@@ -45,8 +47,8 @@ const SearchComponent = () => {
 
         list.map((business) => {
           results.push({
-            value: business?.place_id,
-            label: business?.name,
+            value: business?.attributes?.place_id,
+            label: business?.attributes?.name,
           })
           return business
         })
@@ -66,6 +68,13 @@ const SearchComponent = () => {
     
    
   } 
+
+  useEffect(() => {
+    if(results) {
+       setrawData(results);
+      setActualData([...results]);
+    }
+  }, [results]);
   
 
   const handleSearch = (value) => {
@@ -76,17 +85,21 @@ const SearchComponent = () => {
         router.push(DIRECTORIES_PAGE + '/' + place_id)
   };
 
+    // Business data
+  const { data: results } = useGetEntity(URL_GET_BUSINESS)
 
-  const getListData = async (url) => {
-    try {
-      const res = await authServices.requestGETBusiness(url);
-      setrawData(res.data);
-      setActualData([...res.data]);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
+  // const getListData = async (url) => {
+  //   try {
+  //     const res = await authServices.requestGETBusiness(url);
+  //     setrawData(res.data);
+  //     setActualData([...res.data]);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  
   // // set search value.
   const setSearchvalue = useCallback((value) => {
     setsearchText(value);
@@ -98,12 +111,13 @@ const SearchComponent = () => {
       if (deboucedValue != "") {
         let results = [];
         actualData.filter((item) => {
+         
           if (
-            item.name
+            item.attributes.name
               .toLocaleLowerCase()
               .includes(deboucedValue.toLocaleLowerCase())
           ) {
-            console.log(item.name);
+            console.log(item.attributes.name);
 
             results.push(item);
           }
@@ -133,9 +147,7 @@ const SearchComponent = () => {
 
  
 
-  useEffect(() => {
-    getListData(URL_ADD_BUSINESSES);
-  }, []);
+  
 
 
   return (

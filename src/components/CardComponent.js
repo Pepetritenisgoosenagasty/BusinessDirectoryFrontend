@@ -141,7 +141,6 @@ left: 10px;
   font-weight: 500;
 `;
 export const CategoriesCard = (props) => {
-  console.log(props)
   return (
     <Wrapper>
       <div className="company-pic">
@@ -188,7 +187,7 @@ const OverviewWrapper = styled.div`
   cursor: pointer;
   background: #fff;
   margin: 40px 30px ;
-  width: 55vw;
+  width: 45vw;
   border-top: 1px solid #eef1f7;
   
   display: grid;
@@ -199,6 +198,11 @@ const OverviewWrapper = styled.div`
   box-shadow: rgb(0 0 0 / 15%) 0px 16px 32px, rgb(0 0 0 / 10%) 0px 3px 8px !important;
   z-index: -10;
 
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  width: 100%;
+  margin: 10px ;
+  grid-template-columns: 100% !important;
+}
   &:hover {
     background: aliceblue;
   }
@@ -212,6 +216,7 @@ const ImageContainer = styled.div`
     width: 100%;
     height: 100%;
     border-radius: 10px;
+    object-fit: cover;
   }
 `;
 const ContentContainer = styled.div`

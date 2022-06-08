@@ -3,6 +3,7 @@
 module.exports = {
   env: {
     googleApisKey: process.env.NEXT_GOOGLE_API_KEY,
+    mapboxApisKey: process.env.NEXT_APP_MAPBOX_TOKEN
   },
   async headers() {
     return [

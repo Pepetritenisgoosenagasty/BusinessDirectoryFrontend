@@ -1,14 +1,190 @@
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  /* Styles */
+  .navigation {
+    &__content {
+      display: none;
+    }
+  }
 
-/* Portrait and Landscape */
-@media only screen 
-  and (min-width: 375px) 
-  and (max-device-width: 812px) { 
+  /* Position and sizing of burger button */
+  .bm-burger-button {
+    position: fixed;
+    width: 24px;
+    height: 20px;
+    left: 36px;
+    top: 30px;
+    display: block;
+  }
 
+  .mobile_menu {
+    margin-top: 50px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    a {
+      padding-block: 20px;
+    }
+
+    .btn {
+      margin-top: 20px;
+      padding-block: 5px;
+      font-weight: 500;
+      background-color: #fff;
+      color: #004ba8 !important;
+    }
+  }
+
+  main {
+    // padding-inline: 30px;
+    .content__wrapper .banner__text {
+      width: 100%;
+    }
+
+    .companies {
+      height: 100%;
+      padding-block-end: 60px;
+      .logos {
+        justify-content: center;
+      }
+    }
+
+    .work_content {
+      height: 800px;
+      background: #0a2239 !important;
+
+      .mini-card {
+        height: 460px;
+
+        .col-sm-12 {
+          margin-top: 20px;
+        }
+      }
+    }
+
+    .categories {
+      height: 100%;
+      .categories-title {
+        flex-direction: column;
+        margin-bottom: 50px;
+
+        h5 {
+          text-align: center;
+        }
+
+        a {
+          width: 60%;
+          text-align: center;
+        }
+      }
+    }
+
+    .service {
+      .service-content {
+        .mobile_text {
+          display: block !important;
+        }
+        .desktop_text {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .directory {
+    height: 100%;
+    grid-template-columns: 100%;
+    grid-template-areas: "header header" "list list" "map map";
+
+    &-list {
+      grid-area: list;
+      width: 100%;
+    }
+
+    &-map {
+      grid-area: map;
+      position: relative;
+      background-color: rgb(200, 206, 206);
+      width: 100%;
+      height: 400px;
+    }
+  }
+
+  .searchBox-content {
+    width: 100%;
+
+    a {
+      margin-bottom: 30px;
+    }
+
+    .list-header {
+      .row {
+        margin-right: 0 !important;
+      }
+    }
+  }
+
+  .list-content {
+    height: 50%;
+  }
 }
 
-/* Portrait and Landscape */
-@media screen 
-  and (device-width: 360px) 
-  and (device-height: 640px) {
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: #373a47;
+}
 
+/* Color/shape of burger icon bars on hover*/
+.bm-burger-bars-hover {
+  background: #a90000;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #bdc3c7;
+}
+
+/*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+.bm-menu-wrap {
+  position: fixed;
+  height: 100%;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: #004ba8;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #373a47;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+  padding: 0.8em;
+}
+
+/* Individual item */
+.bm-item {
+  display: inline-block;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
 }

@@ -10,12 +10,13 @@ const fetcher = url => authServices.requestGETBusiness(url).then(res => res.data
 
 export function useGetEntity (ApiUrl) {
   const [isloading, setIsloading] = useState(true);
-  const [newData, setNewData] = useState();
-  const { data, error } = useSWR(ApiUrl, fetcher)
+  const [newData, setNewData] = useState([]);
+  const [meta, setMeta] = useState({})
+  // const { data, error } = useSWR(ApiUrl, fetcher)
    
-    useEffect(() => {
-      setNewData(data)
-    }, [data])
+  //   useEffect(() => {
+  //     setNewData(data)
+  //   }, [data])
 
 
     useEffect(() => {
@@ -26,8 +27,10 @@ export function useGetEntity (ApiUrl) {
       try {
         if(ApiUrl){
          authServices.requestGETBusiness(ApiUrl)
-         .then((data) => {
-          setNewData(data);
+         .then((res) => {
+          setNewData(res.data?.data);
+          setMeta(res.data?.meta);
+
         })
         .catch((err) => console.log(err))
         .finally((err) => setIsloading(false));
@@ -39,10 +42,10 @@ export function useGetEntity (ApiUrl) {
 
 
     return {
-      details: newData,
+      data: newData,
       isLoading: isloading,
-      isError: error,
-      refetchEntity
+      refetchEntity,
+      meta
     }
   }
 

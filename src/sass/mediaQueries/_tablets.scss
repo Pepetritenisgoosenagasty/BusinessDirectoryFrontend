@@ -1,15 +1,32 @@
-/* Portrait and Landscape */
-@media only screen 
-  and (min-width: 768px) 
-  and (max-width: 1024px) 
-  and (-webkit-min-device-pixel-ratio: 1) {
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  /* Styles */
+  .bm-burger-button {
+    display: none;
+  }
 
-}
+  .companies {
+    height: 100%;
+    padding-block-end: 60px;
+    .logos {
+      justify-content: center;
+    }
+  }
 
+  .work_content {
+    height: 710px;
+    // background: #0a2239 !important;
 
-/* Portrait and Landscape */
-@media 
-  (min-width: 800px) 
-  and (max-width: 1280px) {
+    .mini-card {
+      height: 400px;
 
+      .col-sm-12 {
+        margin-top: 20px;
+      }
+    }
+  }
+
+  .categories {
+    height: 100%;
+  }
 }

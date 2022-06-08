@@ -25,7 +25,7 @@ const defaultOptions = {
   streetViewControl: true,
   zoomControl: "true",
   gestureHandling: "greedy",
-  styles: MapStyle
+  // styles: MapStyle
 };
 
 
@@ -135,7 +135,6 @@ const MapComponent = (props) => {
 }
 
 export default MapComponent;
-
 
 
 

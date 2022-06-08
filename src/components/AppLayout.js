@@ -1,14 +1,20 @@
-const AppLayout = ({children}) => {
-    return (
-        <div>
-            {children}
-            <style global jsx>{`
+const AppLayout = ({ children }) => {
+  return (
+    <div>
+    <div>
+  {/* <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } /> */}
+  <main id="page-wrap">
+   {children}
+  </main>
+</div>
+      
+      <style global jsx>{`
         body {
-          font-family: "Montserrat", sans-serif;
+          font-family: 'Montserrat', sans-serif;
         }
       `}</style>
-        </div>
-    )
+    </div>
+  )
 }
 
 export default AppLayout
