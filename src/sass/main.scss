@@ -125,12 +125,15 @@ p {
 
 .ant-collapse {
   border: none !important;
-  // box-shadow: rgb(0 0 0 / 15%) 0px 16px 32px, rgb(0 0 0 / 10%) 0px 3px 8px !important;
-  box-shadow: 0 0 8px -4px rgb(0 0 0 / 50%);
-  border-radius: 20px !important;
-
-  //    -webkit-box-shadow: 0 0 6px rgb(0 0 0 / 20%);
-  // box-shadow: 0 0 6px rgb(0 0 0 / 20%);
+  //box-shadow: rgb(0 0 0 / 15%) 0px 16px 32px, rgb(0 0 0 / 10%) 0px 3px 8px !important;
+  box-shadow: rgb(33 33 52 / 10%) 0px 1px 4px;
+  border-radius: 5px !important;
+  //-webkit-box-shadow: 0 0 6px rgb(0 0 0 / 20%);
+  //box-shadow: 0 0 6px rgb(0 0 0 / 20%);
+  -webkit-border-radius: 5px !important;
+  -moz-border-radius: 5px !important;
+  -ms-border-radius: 5px !important;
+  -o-border-radius: 5px !important;
 
   .ant-collapse-header {
     background-color: #fff !important;

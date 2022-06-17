@@ -14,8 +14,8 @@ import { Empty } from 'antd';
 
 const CardContainer = styled.div`
 background: #fff;
-box-shadow: rgb(0 0 0 / 15%) 0px 16px 32px, rgb(0 0 0 / 10%) 0px 3px 8px !important;
-border-radius: 13px;
+box-shadow: rgb(33 33 52 / 10%) 0px 1px 4px !important;
+border-radius: 5px;
 padding: 20px;
 // height: 300px;
 text-align: center; 
@@ -60,7 +60,7 @@ const DetailsSidebar = (props) => {
         </div>
       </div>
 
-      <div className="mt-3">
+      <div className="my-3">
         <CardContainer>
           <h5>Working Hours</h5>
           <Divider />
