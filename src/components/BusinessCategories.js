@@ -28,21 +28,10 @@ const BusinessCategories = (props) => {
         )) : ("No data")}
       </div>
       <div className="text-center py-5 pagination-btn">
-        {/* <Pagination
-          current={props?.currentPage}
-          onChange={""}
-          pageSize={props?.pageSize}
-          showSizeChanger={false}
-          size="small"
-          // total={props.list.length}
-          defaultPageSize="10"
-          hideOnSinglePage={true}
-          defaultCurrent="1"
-        /> */}
 
         <button className={props?.currentPage === 1 && 'disabled-btn'} disabled={props?.currentPage === 1} onClick={() => props?.setcurrentPage(props?.currentPage - 1)}>Previous</button>
         <button className={props?.currentPage === props?.list?.pagination?.pageCount && 'disabled-btn'} disabled={props?.currentPage === props?.list?.pagination?.pageCount} onClick={() => props?.setcurrentPage(props?.currentPage + 1)}>Next</button>
-        <span>`{props?.currentPage} of {props?.list?.pagination?.pageCount}`</span>
+        <span>{props?.currentPage} of {props?.list?.pagination?.pageCount}</span>
       </div>
     </>
   );

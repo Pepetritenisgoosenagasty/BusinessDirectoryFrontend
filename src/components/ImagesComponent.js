@@ -9,7 +9,9 @@ const [imageData, setimageData] = useState()
 //   setimageData(props?.galleries)
 // }, [props?.galleries])
 
-// console.log(imageData)
+
+
+// console.log(props)
   const settings = {
     dots: true,
     infinite: true,
@@ -23,15 +25,17 @@ const [imageData, setimageData] = useState()
          <div className="">
         <div>
           <SRLWrapper>
+          
         <Slider {...settings}>
         {
-            props?.details?.galleries?.length > 0 && props?.details?.galleries?.map((photo, i) => (
+            props?.details?.attributes?.galleries?.data?.map((photo, i) => (
               // <img  src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${photo?.photo_reference}&key=${API_KEY}`} />
               <>
               <img
+              width="100%"
                 height="400px"
                 key={i}
-                src={photo.url}
+                src={photo.attributes.url}
               />
             </>
             ))

@@ -116,7 +116,7 @@
     width: 100%;
 
     a {
-      margin-bottom: 30px;
+      margin-bottom: 30px !important;
     }
 
     .list-header {
@@ -128,6 +128,12 @@
 
   .list-content {
     height: 50%;
+    width: 100% !important;
+    // padding-right: 10px;
+  }
+
+  .pagination-btn {
+    width: 100% !important;
   }
 }
 

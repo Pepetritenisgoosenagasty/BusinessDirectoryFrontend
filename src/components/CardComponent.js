@@ -199,7 +199,7 @@ const OverviewWrapper = styled.div`
   z-index: -10;
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
-  width: 100%;
+  width: 95%;
   margin: 10px ;
   grid-template-columns: 100% !important;
 }
@@ -217,6 +217,8 @@ const ImageContainer = styled.div`
     height: 100%;
     border-radius: 10px;
     object-fit: cover;
+
+   
   }
 `;
 const ContentContainer = styled.div`

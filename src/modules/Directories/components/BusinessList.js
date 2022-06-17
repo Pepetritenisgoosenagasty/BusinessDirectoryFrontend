@@ -26,6 +26,8 @@ const BusinessList = (props) => {
     router.back();
   };
 
+  
+
   useEffect(() => {
     setListData(props.businessList)
   }, [props.businessList])
@@ -54,7 +56,7 @@ const onSearch = async value => {
     <div className="">
    <div className="searchBox-content">
    <div className="list-header container px-5 pt-5 pb-3">
-        <div className="d-flex justify-content-between align-items-center">
+        <div className="d-flex justify-content-between flex-wrap-reverse align-items-center">
           <p>
             {" "}
             <GoLocation style={{ fontSize: 17, verticalAlign: "sub" }} />
@@ -81,17 +83,17 @@ const onSearch = async value => {
           hoverId={props.hoverId}
           key={index}
           handleMouseOver={() => props.handleIndex(index)}
-          name={result.name}
-          services={result.category}
+          name={result.attributes.name}
+          services={result.attributes.category.data.attributes.name}
           // category={result.business_status.toLowerCase()}
-          email={result.email}
-          phone={result.phone_number}
-          star={result.rate}
-          location={result.address}
-          imgUrl={result.image ?? result.galleries[0]?.url}
-          total_ratings={result.user_rating}
-          href={DIRECTORIES_PAGE + "/" + result.place_id}
-          data={result.galleries}
+          email={result.attributes.email}
+          phone={"+" + result.attributes.phone_number}
+          star={result.attributes.rate}
+          location={result.attributes.address}
+          imgUrl={result.attributes.image ?? result.attributes.galleries[0]?.url}
+          total_ratings={result.attributes.user_rating}
+          href={DIRECTORIES_PAGE + "/" + result.attributes.place_id}
+          data={result.attributes.galleries}
         />
       ))}
     </div>
@@ -102,9 +104,12 @@ const onSearch = async value => {
      )
    }
      
-     <div className="text-center py-5" style={{ width: '60vw'}}>
-      <Pagination current={props.currentPage} onChange={props.onPageChange} pageSize={props.pageSize} showSizeChanger={false} size="small" total={props.list.length} defaultPageSize="10"  hideOnSinglePage={true}  defaultCurrent="1"  />
+     <div className="text-center py-5 pagination-btn"  style={{ width: '60vw'}}>
+       <button className={props?.currentPage === 1 && 'disabled-btn'} disabled={props?.currentPage === 1} onClick={() => props?.setcurrentPage(props?.currentPage - 1)}>Previous</button>
+        <button className={props?.currentPage === props?.list?.pagination?.pageCount && 'disabled-btn'} disabled={props?.currentPage === props?.list?.pagination?.pageCount} onClick={() => props?.setcurrentPage(props?.currentPage + 1)}>Next</button>
+        <span className="ml-5">{props?.currentPage} of {props?.list?.pagination?.pageCount}</span>
      </div>
+     
     </div>
   );
 };

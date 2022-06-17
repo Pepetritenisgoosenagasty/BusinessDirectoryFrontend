@@ -37,7 +37,6 @@ const SearchComponent = () => {
 
   const handleSearchResults = (list) => {
 
-
     try {
 
       let results = []
@@ -68,13 +67,6 @@ const SearchComponent = () => {
     
    
   } 
-
-  useEffect(() => {
-    if(results) {
-       setrawData(results);
-      setActualData([...results]);
-    }
-  }, [results]);
   
 
   const handleSearch = (value) => {
@@ -85,21 +77,10 @@ const SearchComponent = () => {
         router.push(DIRECTORIES_PAGE + '/' + place_id)
   };
 
-    // Business data
-  const { data: results } = useGetEntity(URL_GET_BUSINESS)
 
+  // Business data
+  const { data } = useGetEntity(URL_GET_BUSINESS)
 
-  // const getListData = async (url) => {
-  //   try {
-  //     const res = await authServices.requestGETBusiness(url);
-  //     setrawData(res.data);
-  //     setActualData([...res.data]);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  
   // // set search value.
   const setSearchvalue = useCallback((value) => {
     setsearchText(value);
@@ -110,8 +91,7 @@ const SearchComponent = () => {
       setisloading(true)
       if (deboucedValue != "") {
         let results = [];
-        actualData.filter((item) => {
-         
+        data.filter((item) => {
           if (
             item.attributes.name
               .toLocaleLowerCase()
@@ -147,7 +127,9 @@ const SearchComponent = () => {
 
  
 
-  
+  // useEffect(() => {
+  //   getListData(URL_ADD_BUSINESSES);
+  // }, []);
 
 
   return (

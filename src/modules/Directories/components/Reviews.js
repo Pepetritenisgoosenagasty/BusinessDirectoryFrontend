@@ -9,28 +9,28 @@ const Reviews = (props) => {
   const [listData, setListData] = useState([]);
 
   useEffect(() => {
-    setListData(props?.data?.data);
+    setListData(props?.data);
   }, [props?.data]);
 
   // console.log(props)
 
   return (
     <div>
-      {props?.data?.data?.length > 0 ? (
+      {props?.data?.length > 0 ? (
         <List
           className="comment-list"
-          header={`${props.data?.data?.length} reviews`}
+          header={`${props.data.length} ${props.data.length > 1 ? 'reviews': 'review'}`}
           itemLayout="horizontal"
           dataSource={listData}
           renderItem={(item) => (
             <li>
               <Comment
                 actions={<span key="comment-list-reply-to-0">Reply to</span>}
-                author={<a>{item.name}</a>}
+                author={<a>{item.attributes.name}</a>}
                 avatar={
                   <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}> 
-                     {item.name.charAt(0)}
-              {item.name.charAt(0)}
+                     {item.attributes.name.charAt(0)}
+              {item.attributes.name.charAt(0)}
                   </Avatar>
                 }
                 content={
@@ -38,7 +38,7 @@ const Reviews = (props) => {
                     <ReactStars
                       count={5}
                       // onChange={ratingChanged}
-                      value={item.rate}
+                      value={item.attributes.rate}
                       size={20}
                       isHalf={true}
                       emptyIcon={<i className="far fa-star"></i>}
@@ -47,12 +47,12 @@ const Reviews = (props) => {
                       activeColor="#ffd700"
                       edit={false}
                     />
-                    <p>{item.message}</p>
+                    <p>{item.attributes.message}</p>
                   </>
                 }
                 datetime={
                   <Tooltip title="">
-                    <span>{formatDateHuman(item.created_at)}</span>
+                    <span>{formatDateHuman(item.attributes.created_at)}</span>
                   </Tooltip>
                 }
               />

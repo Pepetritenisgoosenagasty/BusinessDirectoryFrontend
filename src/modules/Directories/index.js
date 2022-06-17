@@ -1,6 +1,6 @@
 import NavigationMenu from "@/components/NavigationMenu";
 import axios from "axios";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import BusinessList from "./components/BusinessList";
 import MapContent from "./components/MapContent";
 import { useDebounce } from "use-debounce";
@@ -8,113 +8,60 @@ import useSWR from 'swr'
 import { useGetEntity } from "src/hooks/useGetEntity";
 import { URL_GET_BUSINESS } from "@/constants/routes";
 import authServices from "src/services/auth.services";
+import qs from "qs"
 
 const index = () => {
   const [currentIndex, setcurrentIndex] = useState(2);
   const [searchText, setsearchText] = useState("");
 
-  const [deboucedValue] = useDebounce(searchText, 500);
-  const [businessList, setBusinessList] = useState([]);
   const [rawData, setrawData] = useState([]);
 
-  //contains actual data from api.
-  const [actualData, setActualData] = useState([]);
-
   //
-  const [pageSize, setpageSize] = useState(20);
+  const [pageSize, setpageSize] = useState(10);
   const [currentPage, setcurrentPage] = useState(1);
-  const [currentOffset, setCurrentOffset] = useState(20);
 
-  const onPageChange = (current, size) => {
-    setcurrentPage(current);
-  };
+
 
   const handleCenterChange = (cord) => {
     console.log(cord);
   };
 
-  // const getListData = async (url) => {
-  //   try {
-  //     const res = await axios.get(url);
+   const query = qs.stringify(
+    {
+      pagination: {
+        page: currentPage,
+        pageSize: pageSize,
+      },
+      populate: '*',
+    },
+    {
+      encodeValuesOnly: true,
+    },
+  )
 
-  //     // do map change filter here
-  //     setrawData(res.data);
-  //     setActualData([...res.data]);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // const businessData = useGetEntity(URL_GET_BUSINESS)
-  //  console.log(businessData)
-  // useEffect(() => {
-  //   setrawData(businessData?.details);
-  //   setActualData([...businessData?.details]);
-  // }, [businessData])
-
- 
+  const { data, meta } = useGetEntity(URL_GET_BUSINESS + `?${query}`)
 
   // set search value.
   const setSearchvalue = useCallback((value) => {
     setsearchText(value);
-    console.log(value);
   }, []);
 
-  useEffect(() => {
-    try {
-      if (deboucedValue != "") {
-        let results = [];
-        actualData.filter((item) => {
-          if (
-            item.name
-              .toLocaleLowerCase()
-              .includes(deboucedValue.toLocaleLowerCase())
-          ) {
-            console.log(item.name);
 
-            results.push(item);
-          }
+   useMemo(() => {
+    ;(async () => {
+      const results = await data.filter((p) =>
+        p.attributes.name.toLowerCase().includes(searchText.toLowerCase()),
+      )
+      setrawData([...results])
+      setcurrentPage(1)
+    })()
+  }, [searchText, data])
 
-          return item;
-        });
 
-        setcurrentPage(1);
-        setrawData([...results]);
 
-        console.log(results);
-      } else {
-        setcurrentPage(1);
-        setrawData([...actualData]);
-        
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }, [deboucedValue]);
-
- 
-
-  useEffect(() => {
-    let result = rawData.slice(
-      currentOffset * currentPage - currentOffset,
-      currentOffset * currentPage
-    );
-    setBusinessList([...result]);
-  }, [rawData, currentPage]);
-
-  // useEffect(() => {
-  //   // getListData("/Data/Data.json");
-   
-  //   // setrawData(res.data);
-  //   // setActualData([...res.data]);
-   
-  // }, []);
   const callIndex = useCallback((index) => setcurrentIndex(index), 0);
 
-  const handleIndex = (index) => {
-    console.log(index);
-    setcurrentIndex(index);
-  };
+
   return (
     <div>
       <NavigationMenu directory />
@@ -122,18 +69,18 @@ const index = () => {
         <div className="directory-list">
           <BusinessList
             currentPage={currentPage}
-            onPageChange={onPageChange}
-            list={rawData}
+            list={meta}
             pageSize={pageSize}
-            businessList={businessList}
+            businessList={rawData}
             handleIndex={callIndex}
             setSearchvalue={setSearchvalue}
+            setcurrentPage={setcurrentPage}
           />
         </div>
         <div className="directory-map">
           <MapContent
             handleCenterChange={handleCenterChange}
-            businessList={businessList}
+            businessList={rawData}
             currentIndex={currentIndex}
           />
         </div>

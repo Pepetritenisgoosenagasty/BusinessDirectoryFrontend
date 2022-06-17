@@ -40,6 +40,7 @@ import CustomPagingSlider from "@/components/ImagesComponent"
 import authServices from "src/services/auth.services";
 import { useGetEntity } from "src/hooks/useGetEntity";
 import { phoneNumberFormatter } from "src/utils/filterKeyCodes";
+import qs from "qs"
 
 const Company = () => {
   const router = useRouter();
@@ -49,15 +50,37 @@ const Company = () => {
 
   const placeId = router.query.id;
 
-  const { details, isLoading, isError } = useData(URL_GET_BUSINESS + `?_where[place_id]=`+placeId);
+  const detailsQuery = qs.stringify({
+   filters: {
+        place_id: {
+          $eq: placeId,
+        },
+      },
+       populate: '*',
+}, {
+  encodeValuesOnly: true,
+});
+
+const reviewsQuery = qs.stringify({
+   filters: {
+        business_id: {
+          $eq: placeId,
+        },
+      },
+       populate: '*',
+}, {
+  encodeValuesOnly: true,
+});
+
+  const { data: details, isLoading, isError  } = useGetEntity(URL_GET_BUSINESS + `?${detailsQuery}`);
   const [visible, setVisible] = useState(false);
 
-  const reviews = useGetEntity(URL_REVIEWS + `?_where[business_id]=`+placeId);
+  const {data: reviews, refetchEntity} = useGetEntity(URL_REVIEWS + `?${reviewsQuery}`);
   
   // console.log(reviews)
 
 
-
+// console.log(details[0])
 
 
   if (isLoading) return <Spinner />;
@@ -72,8 +95,8 @@ const Company = () => {
   //    Marker
   const MarkerContent = () => {
     const position = {
-      lat: details?.geometry?.lat,
-      lng: details?.geometry?.lng,
+      lat: details[0]?.attributes?.geometry?.lat,
+      lng: details[0]?.attributes?.geometry?.lng,
     };
 
     return (
@@ -82,7 +105,7 @@ const Company = () => {
           position={position}
           animation={google.maps.Animation.BOUNCE}
           icon={{
-            url: "https://img.icons8.com/glyph-neue/64/000000/marker.png",
+            url: "/assets/marker.svg",
             scaledSize: new window.google.maps.Size(80, 80),
           }}
         />
@@ -108,19 +131,19 @@ const Company = () => {
                 <div className="row">
                   <div className="col-lg-12 ">
                     <div className="info-container">
-                      <h1>{details?.name}</h1>
+                      <h1>{details[0]?.attributes?.name}</h1>
                     </div>
                     <div>
-                      <span> <BiMap style={{ color: "#004ba8", fontSize: 20}} /> {details?.address}</span>
+                      <span> <BiMap style={{ color: "#004ba8", fontSize: 20}} /> {details[0]?.attributes?.address}</span>
                     </div>
                     <div>
-                      <span> <BiPhoneCall style={{ color: "#004ba8", fontSize: 20}}/> {details?.phone_number}</span>
+                      <span> <BiPhoneCall style={{ color: "#004ba8", fontSize: 20}}/> {details[0]?.attributes?.phone_number}</span>
                     </div>
                     <div>
-                      <span> <BiEnvelope style={{ color: "#004ba8", fontSize: 20}}/> {details?.email}</span>
+                      <span> <BiEnvelope style={{ color: "#004ba8", fontSize: 20}}/> {details[0]?.attributes?.email}</span>
                     </div>
                     <div>
-                      <span> <Rate disabled value={details?.rate} /></span>
+                      <span> <Rate disabled value={details[0]?.attributes?.rate} /></span>
                     </div>
                     <div className="mb-5">
                       {details?.result?.opening_hours?.open_now ? (<Tag color="green">Open Now</Tag>) : ( <Tag color="volcano">Closed</Tag>)}
@@ -134,7 +157,7 @@ const Company = () => {
                      {/* <h5><strong>About {details?.name}</strong></h5> */}
                       <article className="text-muted">
                       {/* {details?.description} */}
-                      <div style={{ fontSize: '.8rem'}} dangerouslySetInnerHTML={{ __html: details?.description }} />
+                      <div style={{ fontSize: '.8rem'}} dangerouslySetInnerHTML={{ __html: details[0]?.attributes?.description }} />
                       </article>
 
                      </div>
@@ -147,14 +170,14 @@ const Company = () => {
                     <InfomationCard title="Listing Features">
                       <div>
                       
-                        {details?.amenities?.length > 0 ? details?.amenities?.join(", ") : (<Empty description="Not Provided "/>)}
+                        {details[0]?.attributes?.amenities?.length > 0 ? details[0]?.attributes?.amenities?.join(", ") : (<Empty description="Not Provided "/>)}
                       </div>
                     </InfomationCard>
                   </div>
                   <div className="col-12 my-2">
                     <InfomationCard title="Galleries/Photos">
                     <div className="pb-4">
-                     {details?.galleries?.length > 0 && (<CustomPagingSlider details={details}/>)}
+                     {details[0]?.attributes?.galleries?.data?.length > 0 ? (<CustomPagingSlider details={details[0]}/>) : (<Empty description="Not Provided "/>)}
                     </div>
                     </InfomationCard>
                    
@@ -162,10 +185,10 @@ const Company = () => {
                   <div className="col-12 my-2 mt-4">
                     <InfomationCard title="Reviews">
                       <div>
-                        {reviews?.details?.data?.length > 0 ? (
-                          <Reviews data={reviews?.details} />
+                        {reviews.length > 0 ? (
+                          <Reviews data={reviews} />
                         ) : (
-                          <h5>No Reviews</h5>
+                         <Empty description="No reviews found"/>
                         )}
                       </div>
                     </InfomationCard>
@@ -175,7 +198,7 @@ const Company = () => {
               <div className="col-lg-4 col-md-12 col-sm-12">
                 <div className="row">
                   <div className="col-12">
-                    <DetailsSidebar data={details} reviews={reviews} placeId={placeId}/>
+                    <DetailsSidebar data={details} reviews={refetchEntity} placeId={placeId}/>
                   </div>
                 </div>
               </div>

@@ -25,7 +25,7 @@ const defaultOptions = {
   streetViewControl: true,
   zoomControl: "true",
   gestureHandling: "greedy",
-  // styles: MapStyle
+  styles: MapStyle
 };
 
 
@@ -76,15 +76,15 @@ const MapComponent = (props) => {
                 <Marker
                   key={index}
                   position={{
-                    lat: data.geometry.lat,
-                    lng: data.geometry.lng,
+                    lat: data.attributes.geometry.lat,
+                    lng: data.attributes.geometry.lng,
                   }}
                   onClick={(event) => {
                     setSelectedCompany(data);
                   }}
                   animation={2}
                   icon={{
-                    url: "/assets/marker.png",
+                    url: "/assets/marker.svg",
 
                     scaledSize: setMapSize(index)
                   }}
@@ -95,24 +95,24 @@ const MapComponent = (props) => {
             <div className="infoBox">
             <InfoWindow
               position={{
-                lat: selectedCompany.geometry.lat,
-                lng: selectedCompany.geometry.lng,
+                lat: selectedCompany.attributes.geometry.lat,
+                lng: selectedCompany.attributes.geometry.lng,
               }}
               onCloseClick={() => setSelectedCompany(null)}
             >
               <div className="infoContent">
                 <div className="infoContent__img">
-                <img src={selectedCompany.image} width="100%" height="100" />
+                <img src={selectedCompany.attributes.image} width="100%" height="100" />
                 </div>
                 <div className="infoContent__text">
-                <Link href={DIRECTORIES_PAGE + "/" + selectedCompany.place_id}>
-                  <h5 className="mt-3">{selectedCompany.name}</h5>
+                <Link href={DIRECTORIES_PAGE + "/" + selectedCompany.attributes.place_id}>
+                  <h5 className="mt-3">{selectedCompany.attributes.name}</h5>
                 </Link>
                 <p>
                 <ReactStars
                       count={5}
                       // onChange={ratingChanged}
-                      value={selectedCompany.rate}
+                      value={selectedCompany.attributes.rate}
                       size={15}
                       isHalf={true}
                       emptyIcon={<i className="far fa-star"></i>}
@@ -122,7 +122,7 @@ const MapComponent = (props) => {
                       edit={false}
                     />
                 </p>
-                <p><FaMapMarkerAlt /> {selectedCompany.address}</p>
+                <p><FaMapMarkerAlt /> {selectedCompany.attributes.address}</p>
                 </div>
               </div>
             </InfoWindow>

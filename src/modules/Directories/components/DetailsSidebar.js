@@ -24,8 +24,10 @@ text-align: center;
 const DetailsSidebar = (props) => {
   const [listData, setListData] = useState()
 
+  // console.log(props)
+
   useEffect(() => {
-    setListData(props?.data)
+    setListData(props?.data[0])
   }, [props, props?.data, props?.reviews])
 
   // console.log(props)
@@ -33,10 +35,10 @@ const DetailsSidebar = (props) => {
   return (
     <div className="list-content py-2">
       <div>
-        {listData?.website ? (<a id="website" href={listData?.website} target="_blank">Vist website</a>) : (<h5>Website: N/A</h5>)}
+        {listData?.attributes?.website ? (<a id="website" href={listData?.attributes?.website} target="_blank">Vist website</a>) : (<h5>Website: N/A</h5>)}
       </div>
       <div className="mt-3">
-        <Link href={PAGE_DIRECTIONS + '/' + listData?.place_id}>
+        <Link href={PAGE_DIRECTIONS + '/' + listData?.attributes?.place_id}>
           <a id="direction" target="_blank">Get Directions</a>
 
         </Link>
@@ -46,13 +48,13 @@ const DetailsSidebar = (props) => {
         <div className=" my-2">
           <InfomationCard title="Social Media">
             <div className="d-flex justify-content-center px-3">
-              {!listData?.social_media_handles && (<Empty description="Not Provided "/>)}
-              {listData?.social_media_handles?.facebook && (<a href={listData?.social_media_handles?.facebook} target="_blank" className="mr-4"><SiFacebook style={{ fontSize: 30 }} /></a>)}
-              {listData?.social_media_handles?.twitter && (<a href={listData?.social_media_handles?.twitter} target="_blank" className="mr-4"><SiTwitter style={{ fontSize: 30 }} /></a>)}
-              {listData?.social_media_handles?.instagram && (<a href={listData?.social_media_handles?.instagram} target="_blank" className="mr-4"><SiInstagram style={{ fontSize: 30 }} /></a>)}
-              {listData?.social_media_handles?.youtube && (<a href={listData?.social_media_handles?.youtube} target="_blank" className="mr-4"><SiYoutube style={{ fontSize: 30 }} /></a>)}
-              {listData?.social_media_handles?.linkedIn && (<a href={listData?.social_media_handles?.linkedin} target="_blank" className="mr-4"><SiLinkedin style={{ fontSize: 30 }} /></a>)}
-              {listData?.social_media_handles?.whatsapp && (<a href={listData?.social_media_handles?.whatsapp} target="_blank"><SiWhatsapp style={{ fontSize: 30 }} /></a>)}
+              {!listData?.attributes?.social_media_handles && (<Empty description="Not Provided "/>)}
+              {listData?.attributes?.social_media_handles?.facebook && (<a href={listData?.attributes?.social_media_handles?.facebook} target="_blank" className="mr-4"><SiFacebook style={{ fontSize: 30 }} /></a>)}
+              {listData?.attributes?.social_media_handles?.twitter && (<a href={listData?.attributes?.social_media_handles?.twitter} target="_blank" className="mr-4"><SiTwitter style={{ fontSize: 30 }} /></a>)}
+              {listData?.attributes?.social_media_handles?.instagram && (<a href={listData?.attributes?.social_media_handles?.instagram} target="_blank" className="mr-4"><SiInstagram style={{ fontSize: 30 }} /></a>)}
+              {listData?.attributes?.social_media_handles?.youtube && (<a href={listData?.attributes?.social_media_handles?.youtube} target="_blank" className="mr-4"><SiYoutube style={{ fontSize: 30 }} /></a>)}
+              {listData?.attributes?.social_media_handles?.linkedIn && (<a href={listData?.attributes?.social_media_handles?.linkedin} target="_blank" className="mr-4"><SiLinkedin style={{ fontSize: 30 }} /></a>)}
+              {listData?.attributes?.social_media_handles?.whatsapp && (<a href={listData?.attributes?.social_media_handles?.whatsapp} target="_blank"><SiWhatsapp style={{ fontSize: 30 }} /></a>)}
             </div>
           </InfomationCard>
         </div>
@@ -62,54 +64,60 @@ const DetailsSidebar = (props) => {
         <CardContainer>
           <h5>Working Hours</h5>
           <Divider />
-          <p>Modays:  {listData?.working_hours?.Mondays?.length > 0
-            ? formatTime(listData?.working_hours?.Mondays[0]) +
+           {listData?.attributes?.working_hours > 0 ? (
+            <>
+               <p>Modays:  {listData?.attributes?.working_hours?.Mondays?.length > 0
+            ? formatTime(listData?.attributes?.working_hours?.Mondays[0]) +
             " - " +
-            formatTime(listData?.working_hours?.Mondays[1])
+            formatTime(listData?.attributes?.working_hours?.Mondays[1])
             : "Closed"}
           </p>
           <Divider />
-          <p>Tuesdays:  {listData?.working_hours?.Tuesdays?.length > 0
-            ? formatTime(listData?.working_hours?.Tuesdays[0]) +
+          <p>Tuesdays:  {listData?.attributes?.working_hours?.Tuesdays?.length > 0
+            ? formatTime(listData?.attributes?.working_hours?.Tuesdays[0]) +
             " - " +
-            formatTime(listData?.working_hours?.Tuesdays[1])
+            formatTime(listData?.attributes?.working_hours?.Tuesdays[1])
             : "Closed"}
           </p>
           <Divider />
-          <p>Wednesdays:  {listData?.working_hours?.Wednesdays?.length > 0
-            ? formatTime(listData?.working_hours?.Wednesdays[0]) +
+          <p>Wednesdays:  {listData?.attributes?.working_hours?.Wednesdays?.length > 0
+            ? formatTime(listData?.attributes?.working_hours?.Wednesdays[0]) +
             " - " +
-            formatTime(listData?.working_hours?.Wednesdays[1])
+            formatTime(listData?.attributes?.working_hours?.Wednesdays[1])
             : "Closed"}
           </p>
           <Divider />
-          <p>Thursdays:  {listData?.working_hours?.Thursdays?.length > 0
-            ? formatTime(listData?.working_hours?.Thursdays[0]) +
+          <p>Thursdays:  {listData?.attributes?.working_hours?.Thursdays?.length > 0
+            ? formatTime(listData?.attributes?.working_hours?.Thursdays[0]) +
             " - " +
-            formatTime(listData?.working_hours?.Thursdays[1])
+            formatTime(listData?.attributes?.working_hours?.Thursdays[1])
             : "Closed"}
           </p>
           <Divider />
-          <p>Fridays:  {listData?.working_hours?.Fridays?.length > 0
-            ? formatTime(listData?.working_hours?.Fridays[0]) +
+          <p>Fridays:  {listData?.attributes?.working_hours?.Fridays?.length > 0
+            ? formatTime(listData?.attributes?.working_hours?.Fridays[0]) +
             " - " +
-            formatTime(listData?.working_hours?.Fridays[1])
+            formatTime(listData?.attributes?.working_hours?.Fridays[1])
             : "Closed"}
           </p>
           <Divider />
-          <p>Saturdays:  {listData?.working_hours?.Saturdays?.length > 0
-            ? formatTime(listData?.working_hours?.Saturdays[0]) +
+          <p>Saturdays:  {listData?.attributes?.working_hours?.Saturdays?.length > 0
+            ? formatTime(listData?.attributes?.working_hours?.Saturdays[0]) +
             " - " +
-            formatTime(listData?.working_hours?.Saturdays[1])
+            formatTime(listData?.attributes?.working_hours?.Saturdays[1])
             : "Closed"}
           </p>
           <Divider />
-          <p>Sundays:  {listData?.working_hours?.Sundays?.length > 0
-            ? formatTime(listData?.working_hours?.Sundays[0]) +
+          <p>Sundays:  {listData?.attributes?.working_hours?.Sundays?.length > 0
+            ? formatTime(listData?.attributes?.working_hours?.Sundays[0]) +
             " - " +
-            formatTime(listData?.working_hours?.Sundays[1])
+            formatTime(listData?.attributes?.working_hours?.Sundays[1])
             : "Closed"}
           </p>
+            </>
+           ): (
+           <Empty description="Not Provided "/>
+           )}
           {/* {
            
            listData?.working_hours?.map(

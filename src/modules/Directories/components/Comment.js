@@ -16,20 +16,22 @@ const CommentComponent = (props) => {
 // console.log(props)
   const [form] = Form.useForm()
 
+  console.log(props)
+
   const onFinish= (values) => {
-   
+   console.log(values)
     try {
       
       dispatch(
-        performCreateReviews(URL_REVIEWS, {
+        performCreateReviews(URL_REVIEWS, {data: {
           name: values.name,
           rate: values.rate,
           message: values.message,
           business_id: props.placeId
-        })
+        }})
       ).finally(() => {
         setSubmitting(false)
-        props?.reviews?.refetchEntity()
+        props?.reviews()
         form.resetFields()
       });
       
