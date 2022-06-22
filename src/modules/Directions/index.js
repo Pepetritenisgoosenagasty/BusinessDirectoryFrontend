@@ -45,6 +45,9 @@ const index = () => {
     setDirectionResponse(value);
   };
 
+
+ 
+
   if (isLoading) return <Spinner />;
   if (isError) return  <Results status="500" title="500" subTitle="Sorry, something went wrong." url={PAGE_HOME}/>;
   return (
@@ -52,7 +55,7 @@ const index = () => {
       <NavigationMenu directory />
       <section style={{ height: "100vh", marginTop: 70 }}>
         <div className="">
-          <GetDirectionCard directions={directions} origin={origin} />
+          <GetDirectionCard directions={directions} origin={origin} mode={window?.google !== undefined ? window?.google.maps.TravelMode : ''}/>
         </div>
         <MapComponent
           centerPin={origin}

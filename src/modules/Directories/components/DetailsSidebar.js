@@ -16,9 +16,9 @@ const CardContainer = styled.div`
 background: #fff;
 box-shadow: rgb(33 33 52 / 10%) 0px 1px 4px !important;
 border-radius: 5px;
-padding: 20px;
+padding: 20px 40px;
 // height: 300px;
-text-align: center; 
+text-align: left; 
 `
 
 const DetailsSidebar = (props) => {
@@ -64,55 +64,27 @@ const DetailsSidebar = (props) => {
         <CardContainer>
           <h5>Working Hours</h5>
           <Divider />
-           {listData?.attributes?.working_hours > 0 ? (
+           {JSON.stringify(listData?.attributes?.working_hours)  !== '{}' ? (
             <>
-               <p>Modays:  {listData?.attributes?.working_hours?.Mondays?.length > 0
-            ? formatTime(listData?.attributes?.working_hours?.Mondays[0]) +
-            " - " +
-            formatTime(listData?.attributes?.working_hours?.Mondays[1])
-            : "Closed"}
+               <p>Modays:  {listData?.attributes?.working_hours?.Monday}
           </p>
           <Divider />
-          <p>Tuesdays:  {listData?.attributes?.working_hours?.Tuesdays?.length > 0
-            ? formatTime(listData?.attributes?.working_hours?.Tuesdays[0]) +
-            " - " +
-            formatTime(listData?.attributes?.working_hours?.Tuesdays[1])
-            : "Closed"}
+          <p>Tuesdays:  {listData?.attributes?.working_hours?.Tuesday}
           </p>
           <Divider />
-          <p>Wednesdays:  {listData?.attributes?.working_hours?.Wednesdays?.length > 0
-            ? formatTime(listData?.attributes?.working_hours?.Wednesdays[0]) +
-            " - " +
-            formatTime(listData?.attributes?.working_hours?.Wednesdays[1])
-            : "Closed"}
+          <p>Wednesdays:  {listData?.attributes?.working_hours?.Wednesday}
           </p>
           <Divider />
-          <p>Thursdays:  {listData?.attributes?.working_hours?.Thursdays?.length > 0
-            ? formatTime(listData?.attributes?.working_hours?.Thursdays[0]) +
-            " - " +
-            formatTime(listData?.attributes?.working_hours?.Thursdays[1])
-            : "Closed"}
+          <p>Thursdays:  {listData?.attributes?.working_hours?.Thursday}
           </p>
           <Divider />
-          <p>Fridays:  {listData?.attributes?.working_hours?.Fridays?.length > 0
-            ? formatTime(listData?.attributes?.working_hours?.Fridays[0]) +
-            " - " +
-            formatTime(listData?.attributes?.working_hours?.Fridays[1])
-            : "Closed"}
+          <p>Fridays:  {listData?.attributes?.working_hours?.Friday}
           </p>
           <Divider />
-          <p>Saturdays:  {listData?.attributes?.working_hours?.Saturdays?.length > 0
-            ? formatTime(listData?.attributes?.working_hours?.Saturdays[0]) +
-            " - " +
-            formatTime(listData?.attributes?.working_hours?.Saturdays[1])
-            : "Closed"}
+          <p>Saturdays:  {listData?.attributes?.working_hours?.Saturday}
           </p>
           <Divider />
-          <p>Sundays:  {listData?.attributes?.working_hours?.Sundays?.length > 0
-            ? formatTime(listData?.attributes?.working_hours?.Sundays[0]) +
-            " - " +
-            formatTime(listData?.attributes?.working_hours?.Sundays[1])
-            : "Closed"}
+          <p>Sundays:  {listData?.attributes?.working_hours?.Sunday}
           </p>
             </>
            ): (

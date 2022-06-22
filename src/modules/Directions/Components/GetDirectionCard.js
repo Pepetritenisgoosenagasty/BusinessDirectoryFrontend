@@ -156,7 +156,8 @@ export const GetDirectionCard = (props) => {
     originId: props?.origin?.lat + "," + props?.origin?.lng,
     destinationId: props?.directions?.geometry?.location.lat + "," + props?.directions?.geometry?.location.lng,
   });
-  
+
+
 
   // useEffect(() => {
   //   setData(getDirections);
@@ -170,8 +171,8 @@ export const GetDirectionCard = (props) => {
       <div className="pt-3">
         <h1>Directions </h1>
       </div>
-      {/* <div className="travelMode">
-        <a>
+      <div className="travelMode">
+        {/* <a>
           <AiOutlineCar />
         </a>
         <a>
@@ -182,8 +183,8 @@ export const GetDirectionCard = (props) => {
         </a>
         <a>
           <FaBicycle />
-        </a>
-      </div> */}
+        </a> */}
+      </div>
 
       <div className="startingRoute mt-3">
         <h5>Starting Point</h5>

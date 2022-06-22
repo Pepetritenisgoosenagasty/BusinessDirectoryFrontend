@@ -30,7 +30,7 @@ const Reviews = (props) => {
                 avatar={
                   <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}> 
                      {item.attributes.name.charAt(0)}
-              {item.attributes.name.charAt(0)}
+              {item.attributes.name.charAt(1)}
                   </Avatar>
                 }
                 content={

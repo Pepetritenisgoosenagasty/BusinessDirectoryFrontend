@@ -119,7 +119,7 @@ const reviewsQuery = qs.stringify({
       <NavigationMenu directory />
       <main className="company">
         <section className="map-section">
-          <Map zoom={12} apiKey={API_KEY}>
+          <Map zoom={10} apiKey={API_KEY}>
             <MarkerContent />
           </Map>
         </section>
@@ -145,12 +145,12 @@ const reviewsQuery = qs.stringify({
                     <div>
                       <span> <Rate disabled value={details[0]?.attributes?.rate} /></span>
                     </div>
-                    <div className="mb-5">
+                    {/* <div className="mb-5">
                       {details?.result?.opening_hours?.open_now ? (<Tag color="green">Open Now</Tag>) : ( <Tag color="volcano">Closed</Tag>)}
-                    </div>
+                    </div> */}
                   </div>
                 </div>
-                <div className="row">
+                <div className="row mt-4">
                   <div className="col-12 my-2">
                     <InfomationCard title="Description">
                      <div className="text-muted">
