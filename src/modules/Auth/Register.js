@@ -64,7 +64,15 @@ const Register = () => {
     if(values.cpassword === values.password) {
       try {
     
-        dispatch(performUserRegistration(URL_REGISTER, values))
+        dispatch(performUserRegistration(URL_REGISTER, { 
+          username: values.username,
+          email: values.email,
+          password: values.password,
+          firstName: values.firstname,
+          lastName: values.lastname,
+          phoneNumber: values.phone_number,
+          gender: values.gender,
+        }))
         .finally(() => {
           setIsSubmitting(false);
   
@@ -131,7 +139,7 @@ const Register = () => {
       </div> */}
       <div className="login-form container">
         <AuthCard>
-          <div className="login-form-content">
+          <div className="login-form-content" >
             <div>{/* <h1>1</h1> */}</div>
             <div>
               <div className="d-flex align-items-center justify-content-between signin-link">
@@ -282,7 +290,7 @@ const Register = () => {
                             },
                           ]}
                         >
-                          <Input type="password" />
+                          <Input.Password type="password" />
                         </Form.Item>
                       </div>
                       <div className="col-lg-6 col-md-6 col-sm-12">
@@ -296,7 +304,7 @@ const Register = () => {
                             },
                           ]}
                         >
-                          <Input type="password" />
+                          <Input.Password type="password" />
                         </Form.Item>
                       </div>
                     </div>

@@ -69,6 +69,8 @@ export const  performUserRegistration = (path, data) => (dispatch) => {
       .requestRegister(path, data)
       .then((res) => {
         const { user, jwt, message } = res.data;
+
+        console.log(res)
         dispatch(setUser(user));
         dispatch(loginUser());
         dispatch(

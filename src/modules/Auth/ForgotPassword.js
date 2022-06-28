@@ -41,7 +41,7 @@ const ForgotPassword = () => {
                   </div>
                 </div>
               </div> */}
-              <div className="login-form">
+              <div className="login-form" style={{width: 500}}ss>
                 <AuthCard>
                   <div className="login-form-content py-5">
                     <div>{/* <h1>1</h1> */}</div>
@@ -110,7 +110,7 @@ const ForgotPassword = () => {
                              <Form.Item
                              
                             >
-                              <Button loading={isSubmitting} type="primary" htmlType="submit">
+                              <Button loading={isSubmitting} type="primary" htmlType="submit" height="10px">
                                 Reset Password
                               </Button>
                             </Form.Item>

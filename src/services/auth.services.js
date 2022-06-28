@@ -18,10 +18,12 @@ class AuthService {
   }
 
   requestRegister(path,data) {
+     console.log(data)
     return axios.post(this.domain + path, data, {
       headers: {
         "Content-Type": "application/json"
-      }
+      },
+      body: JSON.stringify(data)
     });
   }
 
