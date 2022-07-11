@@ -9,12 +9,18 @@ jobs:
     name: Lint 
     runs-on: ubuntu-latest
     steps:
-     - name: Clone Repository
+     - name: Checkout
        uses: actions/checkout@v3
-     - name: Install Dependencies
-       run: | 
-          echo "Installing dependencies..."
-          yarn install 
+
+     - name: Setup node
+       uses: actions/setup-node@v3
+       with:
+        node-version: 16.13.x
+        cache: npm
+
+     - name: Install
+       run: npm ci 
+
      - name: Run Linting  
        run: |    
          echo "Running Linting tests..."
