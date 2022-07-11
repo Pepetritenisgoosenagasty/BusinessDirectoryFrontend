@@ -3,6 +3,8 @@ import { useState } from "react";
 import OpeningDays from "./OpeningDays";
 
 const HoursComponent = (props) => {
+
+  console.log(props)
   const Days = [
     "Monday",
     "Tuesday",

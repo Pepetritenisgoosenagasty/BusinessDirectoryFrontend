@@ -15,6 +15,7 @@ import { formatDateHuman, formatTime } from '@/constants/DateFormat';
 import { userData } from 'src/hooks/useLoggInUser';
 import { useGetEntity } from 'src/hooks/useGetEntity';
 import { useRouter } from 'next/router';
+import qs from 'qs';
 
 
 const { Search } = Input;
@@ -35,15 +36,43 @@ const ReviewTable = () => {
   let { query:{id} } = router;
   const { user } = userData(id);
 
+      const businessQuery = qs.stringify({
+   filters: {
+        user_id: {
+          $eq: user?.id,
+        },
+      },
+       populate: '*',
+}, {
+  encodeValuesOnly: true,
+});
+
+
+   const { data: busData } = useGetEntity(URL_GET_BUSINESS + `?${businessQuery}`)
+
   const fetchBusinessId = async () => {
-    let businessData = await  dispatch(performGetAll(URL_GET_BUSINESS + '?_where[user_id]='+user?.id))
-    setBusinessData(businessData[0]?.place_id)
+    // let businessData = await  dispatch(performGetAll(URL_GET_BUSINESS + '?_where[user_id]='+user?.id))
+    setBusinessData(busData[0]?.attributes?.place_id)
     // console.log(reviews)
   }
 
   // console.log(businessData)
 
-  const reviews = useGetEntity(URL_REVIEWS + '?_where[business_id]='+ businessData);
+  // const reviews = useGetEntity(URL_REVIEWS + '?_where[business_id]='+ businessData);
+
+    const dataQuery = qs.stringify({
+   filters: {
+        business_id: {
+          $eq: businessData,
+        },
+      },
+       populate: '*',
+}, {
+  encodeValuesOnly: true,
+});
+
+  // Business data
+  const { data: reviews } = useGetEntity(URL_REVIEWS + `?${dataQuery}`)
   
   
 
@@ -54,8 +83,8 @@ const ReviewTable = () => {
   }, [user])
 
   useEffect(() => {
-    setData(reviews?.details?.data)
-  }, [reviews?.details?.data])
+    setData(reviews)
+  }, [reviews])
   
  
 //   const objData = useGetEntity(URL_GET_BUSINESS  + `?_where[user_id]=${user?.id}`)
@@ -178,60 +207,60 @@ const handleDelete = (record) => {
 }
 
     const columns = [
-      {
-        title: '#',
-        dataIndex: 'id',
-        key: 'id'
-      },
+      // {
+      //   title: '#',
+      //   dataIndex: 'id',
+      //   key: 'id',
+      // },
         {
           title: 'Name',
           dataIndex: 'name',
           key: 'name',
-          ...getColumnSearchProps('name')
-          // render: text => <a>{text}</a>,
+        render: (text, record) => record.attributes.name,
         },
         {
           title: 'Date & Time',
           dataIndex: 'created_at',
           key: 'time',
-          render: (text, record) => formatDateHuman(record.created_at) + "   " + formatTime(record.created_at) ,
+          render: (text, record) => formatDateHuman(record.attributes.createdAt) + "   " + formatTime(record.attributes.createdAt) ,
         },
 
         {
           title: 'Rating',
           dataIndex: 'rating',
           key: 'rating',
-          render: (text, record) => (<Ratings value={record.rate}/>),
+          render: (text, record) => (<Ratings value={record.attributes.rate}/>),
         },
         {
           title: 'Message',
           key: 'message',
           dataIndex: 'message',
-          width: 600
+          width: 600,
+          render: (text, record) => record.attributes.message,
         },
-        {
-          title: 'Action',
-          key: 'action',
-          render: (text, record) => (
-           <>
-             <div className="d-flex">
-             <div className="viewBtn">
-              <a onClick={() => showModal(record)}  style={{ color: '#40a9ff'}}>View</a>
+        // {
+        //   title: 'Action',
+        //   key: 'action',
+        //   render: (text, record) => (
+        //    <>
+        //      <div className="d-flex">
+        //      <div className="viewBtn">
+        //       <a onClick={() => showModal(record)}  style={{ color: '#40a9ff'}}>View</a>
 
-            </div>
-             <div className="ml-3">
-             <Popconfirm
-               className="delete"
-               title="Are you sure?"
-               onConfirm={() => handleDelete(record)}
-             >
-             <a className="text-danger">Delete</a>
-             </Popconfirm>
-             </div>
-             </div>
-           </>
-          ),
-        },
+        //     </div>
+        //      <div className="ml-3">
+        //      <Popconfirm
+        //        className="delete"
+        //        title="Are you sure?"
+        //        onConfirm={() => handleDelete(record)}
+        //      >
+        //      <a className="text-danger">Delete</a>
+        //      </Popconfirm>
+        //      </div>
+        //      </div>
+        //    </>
+        //   ),
+        // },
       ];
 
       

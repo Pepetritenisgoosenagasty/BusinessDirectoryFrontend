@@ -22,9 +22,11 @@ import useGetUserLocation from "src/hooks/useGetUserLocation";
 import EditGalleryComponent from "../../components/EditGalleryComponent";
 import _ from "lodash";
 import authServices from "src/services/auth.services";
+import qs from "qs"
+import { useGetEntity } from "src/hooks/useGetEntity";
 
 const Edit = () => {
-  const [businessData, setBusinessData] = useState();
+  const [businessData, setBusinessData] = useState(null);
   const [isLoading, setisLoading] = useState(false);
   const [images, setImages] = useState([]);
   const [initialImages, setInitialImages] = useState([]);
@@ -36,18 +38,28 @@ const [description, setDescription] = useState('')
   const useLocation = useGetUserLocation();
   let business_id = router.query.id;
 
-  const fetchBusiness = async () => {
-    const business = await dispatch(
-      performGetAll(URL_GET_BUSINESS + `?_where[id]=` + business_id)
-    );
-    setBusinessData(business[0]);
-  };
+  // const fetchBusiness = async () => {
+  //   const business = await dispatch(
+  //     performGetAll(URL_GET_BUSINESS + `?_where[id]=` + business_id)
+  //   );
+  //   setBusinessData(business[0]);
+  // };
 
-  useEffect(() => {
-    if (business_id) {
-      fetchBusiness();
-    }
-  }, [business_id]);
+  const dataQuery = qs.stringify({
+   filters: {
+        id: {
+          $eq: business_id,
+        },
+      },
+       populate: '*',
+}, {
+  encodeValuesOnly: true,
+});
+
+  // Business data
+  const { data } = useGetEntity(URL_GET_BUSINESS + `?${dataQuery}`)
+
+
 
   useEffect(() => {
     form.setFieldsValue({
@@ -56,29 +68,31 @@ const [description, setDescription] = useState('')
     });
   }, [useLocation]);
 
-  useEffect(() => {
-    form.setFieldsValue({
-      name: businessData?.name,
-      category: businessData?.category,
-      amenities: businessData?.amenities,
-      city: businessData?.city,
-      address: businessData?.address,
-      phone_number: businessData?.phone_number,
-      email: businessData?.email,
-      website: businessData?.website,
-      linkedin: businessData?.social_media_handles?.linkedIn,
-      facebook: businessData?.social_media_handles?.facebook,
-      twitter: businessData?.social_media_handles?.twitter,
-      youtube: businessData?.social_media_handles?.youtube,
-    });
-    if (!_.isEmpty(businessData)) {
-      setGalleryImage(businessData);
-    }
-  }, [businessData]);
+
 
   useEffect(() => {
-    setDescription(businessData?.description)
-  }, [businessData]);
+    form.setFieldsValue({
+      name: data[0]?.attributes?.name,
+      category: data[0]?.attributes?.category?.data?.attributes?.name,
+      amenities: data[0]?.attributes?.amenities,
+      city: data[0]?.attributes?.city,
+      address: data[0]?.attributes?.address,
+      phone_number: data[0]?.attributes?.phone_number,
+      email: data[0]?.attributes?.email,
+      website: data[0]?.attributes?.website,
+      linkedin: data[0]?.attributes?.social_media_handles?.linkedIn,
+      facebook: data[0]?.attributes?.social_media_handles?.facebook,
+      twitter: data[0]?.attributes?.social_media_handles?.twitter,
+      youtube: data[0]?.attributes?.social_media_handles?.youtube,
+    });
+    // if (!_.isEmpty(data)) {
+    //   setGalleryImage(data);
+    // }
+  }, [data]);
+
+  useEffect(() => {
+    setDescription(data[0]?.attributes?.description)
+  }, [data]);
 
   const setGalleryImage = (data) => {
     let { galleries } = data;
@@ -97,7 +111,14 @@ const [description, setDescription] = useState('')
       values['description'] = description
       dispatch(
         performUpdate(URL_GET_BUSINESS + "/" + business_id, {
-          ...values,
+                data: {
+          name: values.name,
+          description: values.description,
+          amenities: values.amenities,
+          city: values.city,
+          address: values.address,
+          email: values.email,
+          website: values.website,
           geometry: {
             lat: values.lat,
             lng: values.lng,
@@ -114,9 +135,15 @@ const [description, setDescription] = useState('')
           social_media_handles: {
             linkedIn: values.linkedin,
             facebook: values.facebook,
-            twitter: values.twitter,
+            twitter:  values.twitter,
             youtube: values.youtube,
           },
+         
+          category: values.category,
+          video: values.video,
+          phone_number: values.phone_number,
+          published_at: null
+         }
         })
       ).then(() => {
         uploadProfileImage(businessData);
@@ -240,7 +267,7 @@ const [description, setDescription] = useState('')
           <div className="row px-4 mt-4">
             <div className="col-lg-7 mx-auto col-md-12 col-sm-12">
               <Button
-                loading={isLoading}
+                // loading={isLoading}
                 htmlType="submit"
                 style={{
                   background: "#379634 ",
@@ -250,7 +277,7 @@ const [description, setDescription] = useState('')
                   fontSize: ".8rem",
                 }}
                 type="primary"
-                onClick={() => message.success("Processing complete!")}
+                // onClick={() => message.success("Processing complete!")}
               >
                 Update
               </Button>

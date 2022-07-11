@@ -71,7 +71,7 @@ const Register = () => {
           firstName: values.firstname,
           lastName: values.lastname,
           phoneNumber: values.phone_number,
-          gender: values.gender,
+          Gender: values.gender,
         }))
         .finally(() => {
           setIsSubmitting(false);

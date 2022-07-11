@@ -37,9 +37,8 @@ const index = () => {
                       
                     </div>
                   </div>
-                      </DashboardCustomCard>
+                </DashboardCustomCard>
            </div>
-
        </div>
  
 

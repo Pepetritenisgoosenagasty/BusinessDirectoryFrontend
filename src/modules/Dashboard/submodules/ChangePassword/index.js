@@ -57,7 +57,7 @@ const index = () => {
    } else {
     setIsloadingSubmit(false);
     dispatch(
-      performUpdate(URL_UPDATE_USER +`${user.id}`, {
+      performUpdate(URL_UPDATE_USER + `/${user.id}`, {
         password: values.password
       })
     ).finally(() => {

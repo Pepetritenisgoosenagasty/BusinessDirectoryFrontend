@@ -51,14 +51,25 @@ const router = useRouter();
     
    }, [useLocation])
 
+
+   console.log(user?.id)
   const onFinish = (values) => {
+
+    console.log(values)
     try {
-      values['description'] = description
+      // values['description'] = description
       
       setIsloadingSubmit(true);
       dispatch(
         performCreate(URL_ADD_BUSINESSES, {
-          ...values,
+         data: {
+          name: values.name,
+          description: values.description,
+          amenities: values.amenities,
+          city: values.city,
+          address: values.address,
+          email: values.email,
+          website: values.website,
           user_id: user?.id,
           geometry: {
             lat: values.lat,
@@ -80,7 +91,11 @@ const router = useRouter();
             youtube: values.youtube,
           },
           place_id: nanoid(50),
+          category: values.category,
+          video: values.video,
+          phone_number: values.phone_number,
           published_at: null
+         }
         })
       )
         .then((data) => {
@@ -93,9 +108,9 @@ const router = useRouter();
             router.push(PAGE_MSG)
           }
         })
-        // .finally(() => {
-        //   setIsloadingSubmit(false);
-        // });
+        .finally(() => {
+          setIsloadingSubmit(false);
+        });
     } catch (error) {
       console.log(error);
     }
@@ -119,7 +134,7 @@ const router = useRouter();
 
       setIsloadingSubmit(true);
       authServices
-        .requestUPLOAD("upload", new_formdata)
+        .requestUPLOAD("upload", {new_formdata})
         .then((res) => {
           router.push(PAGE_MSG);
         })

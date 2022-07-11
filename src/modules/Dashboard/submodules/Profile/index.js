@@ -45,12 +45,12 @@ const dispatch = useDispatch()
 useEffect(() => {
   form.setFieldsValue({
     picture: user?.picture,
-   firstname: user?.firstname,
-   lastname: user?.lastname,
-   gender: user?.gender,
+   firstname: user?.firstName,
+   lastname: user?.lastName,
+   gender: user?.Gender,
    email: user?.email,
    username: user?.username,
-   phone_number: user?.phone_number
+   phone_number: user?.phoneNumber
   })
 }, [user])
  
@@ -66,17 +66,27 @@ useEffect(() => {
         setIsloadingSubmit(true);
         values["picture"] = fileObject;
         let new_formdata = new FormData();
-    
+        
+        
     
         for (const key in values) {
           new_formdata.append(key, values[key]);
+          console.log(new_formdata)
         }
     
     
         dispatch(
-          performUpdate(URL_UPDATE_USER + '/' +`${user.id}`, new_formdata)
-        ).then(data =>  uploadProfileImage(data) )
-        
+          performUpdate(URL_UPDATE_USER + '/' +`${user.id}`, {
+            username: values.username,
+            firstName: values.firstName,
+            lastName: values.lastName,
+            email: values.email,
+            phoneNumber: values.phoneNumber,
+            Gender: values.gender,
+          })
+          
+        ).then(data =>  {uploadProfileImage(data)} )
+
     } catch (error) {
         console.log(error)
     }
@@ -212,7 +222,7 @@ const uploadProfileImage = (data) => {
                         ]}
                       >
                         <Radio.Group>
-                          <Radio value="Male">Male</Radio>
+                          <Radio checked value="Male">Male</Radio>
                           <Radio value="Female">Female</Radio>
                         </Radio.Group>
                       </Form.Item>

@@ -11,7 +11,7 @@ export const handleError = (error,dispatch) => {
       }else{
         
         dispatch(enqueueSnackbar({
-          message: error.response.data.message,
+          message: error.message,
           options: {
             variant: 'error' 
           }

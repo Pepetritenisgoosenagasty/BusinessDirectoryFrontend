@@ -64,15 +64,18 @@ class AuthService {
   }
 
   requestPOST(path, data) {
+    console.log(data)
     return axios.post(this.domain + path, data, {
       headers: this.getHeaders(),
+      body: JSON.stringify(data)
     });
   }
 
   requestPOSTReviews(path, data) {
     return axios.post(this.domain + path, data, {
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+         body: JSON.stringify(data)
       }
     });
   }

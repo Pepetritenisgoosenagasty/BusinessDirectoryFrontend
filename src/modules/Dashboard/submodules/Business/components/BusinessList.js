@@ -16,6 +16,7 @@ import View from './View';
 import { Spinner } from '@/components/Spinner';
 import { useRouter } from 'next/router';
 import { phoneNumberFormatter } from 'src/utils/filterKeyCodes';
+import qs from "qs";
 
 
 const { Search } = Input;
@@ -34,26 +35,29 @@ const BusinessTable = () => {
   let { query:{id} } = router;
   
   const { user } = userData(id);
-  // const fetchBusiness = async () => {
-  //   let business = await  dispatch(performGetAll(URL_GET_BUSINESS + `?_where[user_id]=`+ user?.id))
-  //    setData(business)
-  //   // console.log(business
-  // }
+
+const dataQuery = qs.stringify({
+   filters: {
+        user_id: {
+          $eq: user?.id,
+        },
+      },
+       populate: '*',
+}, {
+  encodeValuesOnly: true,
+});
+
+  // Business data
+  const { data: BD, refetchEntity } = useGetEntity(URL_GET_BUSINESS + `?${dataQuery}`)
 
 
-
-  // useEffect(() => {
-  //   if(user) {
-  //     fetchBusiness()
-  //   }
-  // }, [user?.id])
-
-
-  const BD = useGetEntity(URL_GET_BUSINESS + `?_where[user_id]=`+ user?.id);
+  // const BD = useGetEntity(URL_GET_BUSINESS + `?_where[user_id]=`+ user?.id);
 
   useEffect(() => {
-    setData(BD?.details?.data)
-  }, [BD?.details?.data])
+    setData(BD)
+  }, [BD])
+
+
 
   const showModal = (record) => {
     setIsModalVisible(true);
@@ -148,7 +152,7 @@ const handleDelete = (record) => {
     setDataLoading(true)
     dispatch(performDelete(URL_GET_BUSINESS + `/${record?.id}`)).finally(() => {
       setDataLoading(false)
-      BD?.refetchEntity()
+      refetchEntity()
     });
    } catch (error) {
      console.log(error)
@@ -166,38 +170,38 @@ const handleDelete = (record) => {
           title: 'Name',
           dataIndex: 'name',
           key: 'name',
-          render: text => <a>{text}</a>,
-          ...getColumnSearchProps('name')
+         render: (text, record) => record?.attributes?.name
         },
         {
           title: 'Category',
           dataIndex: 'category',
           key: 'category',
-          ...getColumnSearchProps('category')
+          render: (text, record) => record?.attributes?.category?.data?.attributes?.name
         },
         {
-          title: 'Phone NUmner',
+          title: 'Phone Number',
           dataIndex: 'phone_number',
           key: 'phone_number',
-          render: (text, record) => phoneNumberFormatter(record?.phone_number)
+          render: (text, record) => phoneNumberFormatter(record?.attributes?.phone_number)
          
         },
         {
-          title: 'Phone Email',
+          title: 'Email',
           dataIndex: 'email',
           key: 'email',
-         
+         render: (text, record) => record?.attributes?.email
         },
         {
           title: 'City',
           dataIndex: 'city',
           key: 'city',
-         
+          render: (text, record) => record?.attributes?.city
         },
         {
           title: 'Address',
           key: 'address',
-          dataIndex: 'address'
+          dataIndex: 'address',
+           render: (text, record) => record?.attributes?.address
         },
         // {
         //   title: 'Description',

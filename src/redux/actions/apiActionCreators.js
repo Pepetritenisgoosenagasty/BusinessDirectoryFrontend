@@ -98,7 +98,7 @@ export const performUpdate = (path,data) => dispatch => {
     return authServices.requestPUT(path,data).then(res => {
         let {data} = res
         dispatch(enqueueSnackbar({
-            message: data?.name + " Update Successful",
+            message: "Update was successful",
             options: {
               variant: 'success' 
             }

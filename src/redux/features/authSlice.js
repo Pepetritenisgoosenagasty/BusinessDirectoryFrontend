@@ -51,7 +51,7 @@ export const performUserLogin = (path, data) => (dispatch) => {
     }).catch(error => {
       if(error.response){
         dispatch(enqueueSnackbar({
-          message: error.response.data.message[0].messages[0].message,
+          message: error.message,
           options: {
             variant: 'error' 
           }

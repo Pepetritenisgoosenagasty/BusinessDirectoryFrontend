@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import 'suneditor/dist/css/suneditor.min.css'; // Import Sun Editor's CSS File
 import { handleKeyDown } from "src/utils/filterKeyCodes";
 import { keyCodeValues } from "@/constants/ConstantValues";
+import { useGetEntity } from "src/hooks/useGetEntity";
 
 const SunEditor = dynamic(() => import("suneditor-react"), {
   ssr: false,
@@ -15,8 +16,15 @@ const SunEditor = dynamic(() => import("suneditor-react"), {
 const { Option } = Select;
 const { TextArea } = Input;
 
+
+
 const AboutContent = (props) => {
   const { details } = useCategories();
+
+    // categories
+  const { data: categories } = useGetEntity('categories')
+
+  console.log(props)
 
   return (
     <div className="addForm container-fluid">
@@ -57,9 +65,9 @@ const AboutContent = (props) => {
                 ]}
               >
                 <Select allowClear style={{ width: "100%", borderRadius: 7 }}>
-                  {details?.map((item, index) => (
-                    <Option key={index + 1} value={item.category}>
-                      {item.category}
+                  {categories?.map((item, index) => (
+                    <Option key={index} value={item.attributes.id}>
+                      {item.attributes.name}
                     </Option>
                   ))}
                 </Select>
