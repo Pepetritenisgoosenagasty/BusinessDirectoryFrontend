@@ -7,14 +7,14 @@ on:
 jobs:
   lintTest:
     name: Lint 
-    runs-on: ${{ fromJSON('["ubuntu-latest", "self-hosted"]')[github.repository == 'github/docs-internal'] }} 
+    runs-on: ubuntu-latest
     steps:
      - name: Clone Repository
        uses: actions/checkout@v3
      - name: Install Dependencies
        run: | 
           echo "Installing dependencies..."
-          npm install 
+          yarn install 
      - name: Run Linting  
        run: |    
          echo "Running Linting tests..."
